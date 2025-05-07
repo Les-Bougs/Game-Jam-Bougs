@@ -7,6 +7,8 @@
 size = Vector2(128, 128)
 
 [node name="Rectangle" instance=ExtResource("1_wckwp")]
+shape_type = "Rectangle"
+spawnable = true
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(0.25, 0.25)

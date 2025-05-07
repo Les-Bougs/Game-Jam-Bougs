@@ -8,6 +8,7 @@ radius = 64.0
 
 [node name="Circle" instance=ExtResource("1_5y4bp")]
 shape_type = "Circle"
+spawnable = true
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(0.25, 0.25)
