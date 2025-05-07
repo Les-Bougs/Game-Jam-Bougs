@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://28bgg3ql5j44"]
+
+[ext_resource type="PackedScene" uid="uid://c02wvxx3vbm3" path="res://scenes/platform.tscn" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://dbh6iod422alp" path="res://scenes/circle_obj.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://ck7cmcywrxg2q" path="res://scenes/rectangle.tscn" id="4_k0juu"]
+
+[node name="world" type="Node2D"]
+
+[node name="background" type="ColorRect" parent="."]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.586504, 0.000253938, 0.587592, 1)
+
+[node name="LeftPanel" type="Panel" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 576.0
+mouse_filter = 2
+
+[node name="CenterPanel" type="Panel" parent="."]
+offset_left = 320.0
+offset_top = 64.0
+offset_right = 1088.0
+offset_bottom = 576.0
+mouse_filter = 2
+
+[node name="platform" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
+position = Vector2(640, 128)
+
+[node name="platform2" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
+position = Vector2(128, 128)
+
+[node name="platform3" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
+position = Vector2(400, 128)
+
+[node name="platform4" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
+position = Vector2(400, 376)
+
+[node name="Circle" parent="CenterPanel" instance=ExtResource("3_4wyf3")]
+position = Vector2(-160, 128)
+
+[node name="Rectangle" parent="CenterPanel" instance=ExtResource("4_k0juu")]
+position = Vector2(-152, 384)
