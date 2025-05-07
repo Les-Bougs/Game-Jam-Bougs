@@ -27,16 +27,22 @@ offset_bottom = 576.0
 mouse_filter = 2
 
 [node name="platform" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(640, 128)
-
-[node name="platform2" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
 position = Vector2(128, 128)
 
+[node name="platform2" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
+position = Vector2(384, 128)
+
 [node name="platform3" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(400, 128)
+position = Vector2(640, 128)
 
 [node name="platform4" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(400, 376)
+position = Vector2(128, 384)
+
+[node name="platform5" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
+position = Vector2(384, 384)
+
+[node name="platform6" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
+position = Vector2(640, 384)
 
 [node name="Circle" parent="CenterPanel" instance=ExtResource("3_4wyf3")]
 position = Vector2(-160, 128)
