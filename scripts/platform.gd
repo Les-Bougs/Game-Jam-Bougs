@@ -2,6 +2,7 @@ extends StaticBody2D
 
 var contained_objects = []
 @onready var label = $Label
+@export var accepted_types: Array[String] = ["Rectangle", "Circle", "Triangle", "Star", "Face"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,7 +36,11 @@ func update_label():
 	label.text = str(shapes)
 
 func is_valid_placement(obj) -> bool:
-	# Si la zone est vide, le placement est toujours valide
+	# Vérifier si le type d'objet est accepté dans cette case
+	if not obj.shape_type in accepted_types:
+		return false
+		
+	# Si la zone est vide, le placement est valide si le type est accepté
 	if contained_objects.size() == 0:
 		return true
 	
