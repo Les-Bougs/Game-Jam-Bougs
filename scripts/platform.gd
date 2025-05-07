@@ -11,8 +11,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	visible = global.is_dragging
 	update_label()
+	visible = global.is_dragging
 
 func add_object(obj):
 	if obj not in contained_objects:

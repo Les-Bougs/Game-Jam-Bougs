@@ -16,40 +16,55 @@ color = Color(0.586504, 0.000253938, 0.587592, 1)
 [node name="LeftPanel" type="Panel" parent="."]
 offset_left = 64.0
 offset_top = 64.0
-offset_right = 256.0
-offset_bottom = 576.0
+offset_right = 384.0
+offset_bottom = 1024.0
 mouse_filter = 2
 
 [node name="CenterPanel" type="Panel" parent="."]
-offset_left = 320.0
+offset_left = 448.0
 offset_top = 64.0
-offset_right = 1088.0
-offset_bottom = 576.0
+offset_right = 1536.0
+offset_bottom = 1024.0
 mouse_filter = 2
 
 [node name="platform" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(128, 128)
+position = Vector2(184, 248)
+scale = Vector2(1.5, 1.5)
 
 [node name="platform2" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(384, 128)
+position = Vector2(560, 248)
+scale = Vector2(1.5, 1.5)
 
 [node name="platform3" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(640, 128)
+position = Vector2(888, 248)
+scale = Vector2(1.5, 1.5)
 
 [node name="platform4" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(128, 384)
+position = Vector2(184, 712)
+scale = Vector2(1.5, 1.5)
 
 [node name="platform5" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(384, 384)
+position = Vector2(560, 712)
+scale = Vector2(1.5, 1.5)
 
 [node name="platform6" parent="CenterPanel" instance=ExtResource("1_rwgxs")]
-position = Vector2(640, 384)
+position = Vector2(892, 712)
+scale = Vector2(1.5, 1.5)
 
 [node name="Circle" parent="CenterPanel" instance=ExtResource("3_4wyf3")]
-position = Vector2(-160, 80)
+position = Vector2(-224, 192)
 
 [node name="Rectangle" parent="CenterPanel" instance=ExtResource("4_k0juu")]
-position = Vector2(-152, 384)
+position = Vector2(-216, 768)
 
 [node name="Triangle" parent="CenterPanel" instance=ExtResource("4_71j4m")]
-position = Vector2(-152, 232)
+position = Vector2(-224, 464)
+
+[node name="RightPanel" type="Panel" parent="."]
+offset_left = 1600.0
+offset_top = 64.0
+offset_right = 1856.0
+offset_bottom = 1024.0
+
+[node name="platform" parent="RightPanel" instance=ExtResource("1_rwgxs")]
+position = Vector2(132, 520)
