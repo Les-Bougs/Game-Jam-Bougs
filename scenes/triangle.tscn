@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b575xdrv2305c"]
+
+[ext_resource type="PackedScene" uid="uid://dwlr8vuhwolcl" path="res://scenes/face.tscn" id="1_h7xi0"]
+[ext_resource type="Texture2D" uid="uid://b0esegyi5xwg" path="res://assets/Triangle.png" id="2_u1wel"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0nj1"]
+size = Vector2(512, 448)
+
+[node name="Triangle" instance=ExtResource("1_h7xi0")]
+shape_type = "Triangle"
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_u1wel")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+scale = Vector2(0.25, 0.25)
+shape = SubResource("RectangleShape2D_l0nj1")

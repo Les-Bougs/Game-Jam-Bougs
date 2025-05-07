@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dufu6s4cwgycm"]
+
+[ext_resource type="PackedScene" uid="uid://dwlr8vuhwolcl" path="res://scenes/face.tscn" id="1_mcqwg"]
+[ext_resource type="Texture2D" uid="uid://bwnnnewbnj1rw" path="res://assets/Star.png" id="2_j6vao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ef0hr"]
+size = Vector2(128, 128)
+
+[node name="Star" instance=ExtResource("1_mcqwg")]
+shape_type = "Star"
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_j6vao")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_ef0hr")

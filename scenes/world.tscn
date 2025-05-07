@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://28bgg3ql5j44"]
+[gd_scene load_steps=5 format=3 uid="uid://28bgg3ql5j44"]
 
 [ext_resource type="PackedScene" uid="uid://c02wvxx3vbm3" path="res://scenes/platform.tscn" id="1_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://dbh6iod422alp" path="res://scenes/circle_obj.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://dbh6iod422alp" path="res://scenes/circle.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://b575xdrv2305c" path="res://scenes/triangle.tscn" id="4_71j4m"]
 [ext_resource type="PackedScene" uid="uid://ck7cmcywrxg2q" path="res://scenes/rectangle.tscn" id="4_k0juu"]
 
 [node name="world" type="Node2D"]
@@ -45,7 +46,11 @@ position = Vector2(384, 384)
 position = Vector2(640, 384)
 
 [node name="Circle" parent="CenterPanel" instance=ExtResource("3_4wyf3")]
-position = Vector2(-160, 128)
+position = Vector2(-160, 80)
 
 [node name="Rectangle" parent="CenterPanel" instance=ExtResource("4_k0juu")]
 position = Vector2(-152, 384)
+shape_type = "Rectangle"
+
+[node name="Triangle" parent="CenterPanel" instance=ExtResource("4_71j4m")]
+position = Vector2(-152, 232)

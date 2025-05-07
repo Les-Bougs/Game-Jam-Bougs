@@ -1,7 +1,10 @@
 extends Node2D
 
 # Préchargez la scène "Object"
-const ObjectScene = preload("res://scenes/pnj_obj.tscn")
+const GodotPnjScene = preload("res://scenes/face.tscn")
+var combination_data = {}
+
+@export_enum("Rectangle", "Circle", "Triangle", "Star", "Face") var shape_type: String = "Rectangle"
 
 var is_dragging = false
 var draggable = false
@@ -16,6 +19,13 @@ var current_dropable = null
 
 func _ready():
 	add_to_group("draggable")
+	var file = FileAccess.open("res://scripts/combinations.json", FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		combination_data = JSON.parse_string(content)
+		#print(combination_data)
+	else:
+		print("Erreur de chargement du fichier de combinaisons.")
 
 func _process(delta):
 	if draggable:
@@ -30,28 +40,36 @@ func _process(delta):
 			var tween = get_tree().create_tween()
 			if is_inside_dropable:
 				tween.tween_property(self, "position", body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
-
-				# Vérifiez si d'autres objets sont déjà dans cette zone
-				for obj in get_tree().get_nodes_in_group("draggable"):
-					if obj != self and obj.current_dropable == body_ref:
-						if obj not in objects_in_same_dropable:
-							objects_in_same_dropable.append(obj)
-							print("fusion des objets: %s et %s" % [self.name, obj.name])
-
-							# Vérifiez si les objets sont un Circle et un Rectangle
-							if (self.name == "Circle" and obj.name == "Rectangle") or (self.name == "Rectangle" and obj.name == "Circle"):
-								# Créez un nouvel objet "Object"
-								var new_object = ObjectScene.instantiate()
-								new_object.position = body_ref.position
-								get_parent().add_child(new_object)
-
-								# Détruisez les objets actuels
-								self.queue_free()
-								obj.queue_free()
-								break
+				check_other_shape()
+				
 			else:
 				tween.tween_property(self, "global_position", initialPos, 0.2).set_ease(Tween.EASE_OUT)
 
+func check_other_shape():
+	for obj in get_tree().get_nodes_in_group("draggable"):
+		if obj != self and obj.current_dropable == body_ref:
+			if obj not in objects_in_same_dropable:
+				objects_in_same_dropable.append(obj)
+				#print("fusion des objets: %s et %s" % [self.name, obj.name])
+
+				var types = [self.shape_type, obj.shape_type]
+				types.sort()
+				var combo_key = types[0] + "+" + types[1]
+				print(combo_key)
+
+				if combo_key in combination_data:
+					var result_scene_name = combination_data[combo_key]
+					print(result_scene_name)
+					var result_scene = load("res://scenes/%s.tscn" % result_scene_name)
+					if result_scene:
+						var new_object = result_scene.instantiate()
+						new_object.position = body_ref.position
+						get_parent().add_child(new_object)
+
+						self.queue_free()
+						obj.queue_free()
+						break
+					
 func _on_area_2d_mouse_entered() -> void:
 	if not global.is_dragging:
 		draggable = true
