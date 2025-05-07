@@ -17,6 +17,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 global="*res://global.gd"
+CombinationManager="*res://scripts/combination_manager.gd"
 
 [editor]
 

@@ -12,36 +12,45 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	visible = global.is_dragging
-	clean_invalid_objects()
+	update_label()
 
 func add_object(obj):
-	print('adding')
 	if obj not in contained_objects:
 		contained_objects.append(obj)
-		print("Objets dans la case: ", contained_objects)
-	label.text = str(get_list_shape(contained_objects))
+		update_label()
 
 func remove_object(obj):
-	print('removing')
 	if obj in contained_objects:
 		contained_objects.erase(obj)
-		print("Objets dans la case: ", contained_objects)
-		label.text = str(get_list_shape(contained_objects))
+		update_label()
 
 func get_contained_objects():
 	return contained_objects
 
-func get_list_shape(objects):
-	var list_shape = []
-	for obj in objects:
-		if is_instance_valid(obj):
-			list_shape.append(obj.shape_type)
-	return list_shape
-
-func clean_invalid_objects():
-	var valid_objects = []
+func update_label():
+	var shapes = []
 	for obj in contained_objects:
 		if is_instance_valid(obj):
-			valid_objects.append(obj)
-	contained_objects = valid_objects
-	label.text = str(get_list_shape(contained_objects))
+			shapes.append(obj.shape_type)
+	label.text = str(shapes)
+
+func is_valid_placement(obj) -> bool:
+	# Si la zone est vide, le placement est toujours valide
+	if contained_objects.size() == 0:
+		return true
+	
+	# Si la zone contient des objets, on vérifie les conditions
+	for contained_obj in contained_objects:
+		if not is_instance_valid(contained_obj):
+			continue
+			
+		# Si on trouve un objet du même type, le placement est valide
+		if contained_obj.shape_type == obj.shape_type:
+			return true
+		
+		# Si on trouve un objet qui peut fusionner avec celui-ci, le placement est valide
+		var combination_manager = get_node("/root/CombinationManager")
+		if combination_manager.can_combine(contained_obj.shape_type, obj.shape_type):
+			return true
+	
+	return false
