@@ -11,10 +11,10 @@
 script = ExtResource("1_qfnet")
 
 [node name="background" type="ColorRect" parent="."]
-visible = false
-offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0.586504, 0.000253938, 0.587592, 1)
+offset_right = 1920.0
+offset_bottom = 1088.0
+mouse_filter = 2
+color = Color(0.375016, 9.73926e-05, 0.375745, 1)
 
 [node name="LeftPanel" type="Panel" parent="."]
 offset_left = 64.0
@@ -83,3 +83,38 @@ theme_override_font_sizes/font_size = 40
 text = "Counter"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TimerUI" type="Label" parent="."]
+offset_left = 832.0
+offset_top = 64.0
+offset_right = 1152.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 30
+text = "Time Left : XX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverPanel" type="Panel" parent="."]
+offset_left = 448.0
+offset_top = 320.0
+offset_right = 1536.0
+offset_bottom = 768.0
+
+[node name="FinalScoreLabel" type="Label" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 1024.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 100
+text = "Final Score : X Stars"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 320.0
+offset_right = 640.0
+offset_bottom = 424.0
+text = "Restart Button"
