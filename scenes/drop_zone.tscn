@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cxlc2dbb2suxx"]
 
 [ext_resource type="Texture2D" uid="uid://bk77n3xq8ta84" path="res://assets/Square2.png" id="1_5owwn"]
+[ext_resource type="Script" uid="uid://h637trs8hl5" path="res://scripts/drop_zone.gd" id="1_6m7pw"]
 [ext_resource type="Texture2D" uid="uid://bed0ueyyrvo4r" path="res://assets/Star 2.png" id="2_6m7pw"]
-[ext_resource type="Script" uid="uid://rtxm3upbmg6m" path="res://scripts/dropzone.gd" id="3_g1g82"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g1g82"]
 animations = [{
@@ -22,7 +22,7 @@ animations = [{
 size = Vector2(512, 512)
 
 [node name="DropZone" type="StaticBody2D" groups=["dropable"]]
-script = ExtResource("3_g1g82")
+script = ExtResource("1_6m7pw")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

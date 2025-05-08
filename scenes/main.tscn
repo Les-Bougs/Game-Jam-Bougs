@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq6sr8i223r47"]
+[gd_scene load_steps=4 format=3 uid="uid://cq6sr8i223r47"]
 
 [ext_resource type="Script" uid="uid://dskc4db7rm4h5" path="res://scripts/world_new.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://1ciqm8ow7hd6" path="res://scenes/object.tscn" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cxlc2dbb2suxx" path="res://scenes/drop_zone.tscn" id="3_tefeu"]
-[ext_resource type="PackedScene" uid="uid://rf2p5kgkynjc" path="res://scenes/dropzone_end.tscn" id="4_o6xl0"]
 
 [node name="world_new" type="Node2D"]
 script = ExtResource("1_jyhfs")
@@ -47,9 +46,10 @@ scale = Vector2(0.8, 0.8)
 position = Vector2(888, 336)
 scale = Vector2(0.8, 0.8)
 
-[node name="DropZoneEnd" parent="CenterPanel" instance=ExtResource("4_o6xl0")]
-position = Vector2(1512, 464)
+[node name="DropZoneEnd" parent="CenterPanel" instance=ExtResource("3_tefeu")]
+position = Vector2(1504, 528)
 scale = Vector2(0.8, 0.8)
+zone_type = "StarCollector"
 
 [node name="RightPanel" type="Panel" parent="."]
 show_behind_parent = true
