@@ -1,4 +1,4 @@
-extends  Node2D
+extends Node2D
 
 @export_enum("Rectangle", "Circle", "Triangle", "Star", "Hexagon") var object_type: String = "Rectangle"
 @export var spawnable: bool = false
@@ -7,19 +7,25 @@ var pilePos: Vector2
 var startPos: Vector2
 var initialScale: Vector2
 
-var template_scene = load("res://scenes/object.tscn")
-
 var draggable = false
 var is_inside_dropable = false
 var current_dropable = null
 var offset: Vector2
 var initialPos: Vector2
 
+# Références aux gestionnaires
+var object_factory: Node
+var object_combiner: Node
+
 func _ready():
 	pilePos = position
 	initialScale = scale
 	add_to_group("draggable")
 	$AnimatedSprite2D.frame = get_frame_id(object_type)
+	
+	# Récupère les références aux gestionnaires
+	object_factory = get_node("/root/ObjectFactory")
+	object_combiner = get_node("/root/ObjectCombiner")
 	
 func get_frame_id(object_type):
 	match object_type:
@@ -68,7 +74,7 @@ func place_in_zone(tween):
 	tween.tween_property(self, "position", current_dropable.position, 0.2).set_ease(Tween.EASE_OUT)
 	check_combinations()
 	if startPos == pilePos and spawnable:
-		spawn_new_instance(object_type)
+		object_factory.spawn_in_pile(object_type, pilePos, initialScale, get_parent())
 
 func return_to_initial_position(tween):
 	tween.tween_property(self, "global_position", initialPos, 0.2).set_ease(Tween.EASE_OUT)
@@ -78,42 +84,10 @@ func return_to_initial_position(tween):
 		is_inside_dropable = false
 
 func check_combinations():
-	var combination_manager = get_node("/root/CombinationManager")
 	for obj in get_tree().get_nodes_in_group("draggable"):
 		if obj != self and obj.current_dropable == current_dropable:
-			print(self.object_type, ' + ', obj.object_type)
-			if combination_manager.can_combine(self.object_type, obj.object_type):
-				var result_type = combination_manager.get_combination_result(self.object_type, obj.object_type)
-				print(result_type)
-				create_combination_result(result_type)
-				current_dropable.remove_object(self)
-				current_dropable.remove_object(obj)
-				self.queue_free()
-				obj.queue_free()
-				break
-
-func create_combination_result(result_type: String):
-	if template_scene:
-		var new_object = template_scene.instantiate()
-		new_object.position = current_dropable.position
-		new_object.object_type = result_type
-		new_object.get_node("AnimatedSprite2D").frame = get_frame_id(result_type)
-		new_object.scale = initialScale
-		new_object.spawnable = ["Rectangle", "Circle", "Triangle"].has(result_type)
-		get_parent().add_child(new_object)
-		print(result_type+' crée')
-
-func spawn_new_instance(object_type):
-	var scene = template_scene
-	if scene:
-		var new_instance = scene.instantiate()
-		new_instance.object_type = object_type
-		new_instance.get_node("AnimatedSprite2D").frame = get_frame_id(object_type)
-		new_instance.scale = initialScale
-		new_instance.global_position = pilePos
-		new_instance.spawnable = ["Rectangle", "Circle", "Triangle"].has(object_type)
-		get_parent().add_child(new_instance)
-		print("Nouvelle instance créée : ", object_type)
+			object_combiner.try_combine(self, obj, current_dropable)
+			break
 
 func _on_area_2d_mouse_entered() -> void:
 	#print('entered')

@@ -6,7 +6,7 @@ func _ready():
 	load_combinations()
 
 func load_combinations():
-	var file = FileAccess.open("res://scripts/combinations.json", FileAccess.READ)
+	var file = FileAccess.open("res://scripts/object_utils/combinations.json", FileAccess.READ)
 	if file:
 		var content = file.get_as_text()
 		combination_data = JSON.parse_string(content)

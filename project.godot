@@ -11,14 +11,16 @@ config_version=5
 [application]
 
 config/name="gamejam_v1"
-run/main_scene="uid://cq6sr8i223r47"
-config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://assets/icon.svg"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://icon.svg"
 
 [autoload]
 
 global="*res://global.gd"
-CombinationManager="*res://scripts/combination_manager.gd"
+CombinationManager="*res://scripts/object_utils/combination_manager.gd"
+ObjectFactory="*res://scripts/object_utils/object_factory.gd"
+ObjectCombiner="*res://scripts/object_utils/object_combiner.gd"
 
 [display]
 
@@ -33,7 +35,7 @@ version_control/autoload_on_startup=true
 [input]
 
 click={
-"deadzone": 0.2,
+"deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }

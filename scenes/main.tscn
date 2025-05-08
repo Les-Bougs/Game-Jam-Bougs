@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cq6sr8i223r47"]
 
 [ext_resource type="Script" uid="uid://dskc4db7rm4h5" path="res://scripts/world_new.gd" id="1_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://1ciqm8ow7hd6" path="res://scenes/object.tscn" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cs146wtlm5oqo" path="res://scenes/object.tscn" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cxlc2dbb2suxx" path="res://scenes/drop_zone.tscn" id="3_tefeu"]
 
 [node name="world_new" type="Node2D"]
