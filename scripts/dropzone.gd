@@ -2,14 +2,23 @@ extends StaticBody2D
 
 var contained_objects = []
 @onready var label = $Label
+@export_enum("All", "Star") var accepted_types: String = "All"
 
-func _ready() -> void:
+
+func _ready():
+	match accepted_types:
+		"All":
+			$AnimatedSprite2D.frame = 0
+		"Star":
+			$AnimatedSprite2D.frame = 1
 	modulate = Color(Color.MEDIUM_PURPLE, 0.7)
 	add_to_group("dropable")
 
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	visible = global.is_dragging
 	update_label()
+	#visible = global.is_dragging
 
 func add_object(obj):
 	if obj not in contained_objects:
@@ -28,11 +37,15 @@ func update_label():
 	var shapes = []
 	for obj in contained_objects:
 		if is_instance_valid(obj):
-			shapes.append(obj.shape_type)
+			shapes.append(obj.object_type)
 	label.text = str(shapes)
 
 func is_valid_placement(obj) -> bool:
-	# Si la zone est vide, le placement est toujours valide
+	# Vérifier si le type d'objet est accepté dans cette case
+	if accepted_types == "Star" and obj.object_type != "Star":
+		return false
+		
+	# Si la zone est vide, le placement est valide si le type est accepté
 	if contained_objects.size() == 0:
 		return true
 	
@@ -42,11 +55,12 @@ func is_valid_placement(obj) -> bool:
 			continue
 			
 		# Si on trouve un objet du même type, le placement est valide
-		if contained_obj.shape_type == obj.shape_type:
+		if contained_obj.object_type == obj.object_type:
 			return true
+		
 		# Si on trouve un objet qui peut fusionner avec celui-ci, le placement est valide
 		var combination_manager = get_node("/root/CombinationManager")
-		if combination_manager.can_combine(contained_obj.shape_type, obj.shape_type):
+		if combination_manager.can_combine(contained_obj.object_type, obj.object_type):
 			return true
 	
-	return false 
+	return false

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://rf2p5kgkynjc"]
+
+[ext_resource type="Script" uid="uid://cvg66ht8v0cip" path="res://scripts/dropzone_end.gd" id="1_s8h05"]
+[ext_resource type="Texture2D" uid="uid://bk77n3xq8ta84" path="res://assets/Square2.png" id="2_or6ci"]
+[ext_resource type="Texture2D" uid="uid://bed0ueyyrvo4r" path="res://assets/Star 2.png" id="3_0lmfa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g1g82"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_or6ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0lmfa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iymyj"]
+size = Vector2(512, 512)
+
+[node name="DropZoneEnd" type="StaticBody2D" groups=["dropable"]]
+script = ExtResource("1_s8h05")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g1g82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iymyj")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -256.0
+offset_top = 256.0
+offset_right = 256.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 30
+text = "Zone Content"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true
