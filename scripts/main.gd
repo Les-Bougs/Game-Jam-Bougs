@@ -6,11 +6,19 @@ extends Node2D
 @onready var final_score_label = $GameOverPanel/FinalScoreLabel
 @onready var restart_button = $GameOverPanel/RestartButton
 @onready var star_platform = $CenterPanel/DropZoneEnd
+@onready var center_panel = $CenterPanel
 
 @export var time_max: float = 10
 var time_left: float = time_max
 var timer_active: bool = true
 var current_score: int = 0
+
+# Positions initiales des objets spawnables
+var spawnable_positions = {
+	"Rectangle": Vector2(960, 768),
+	"Circle": Vector2(256, 768),
+	"Triangle": Vector2(616, 768)
+}
 
 func _ready():
 	# Connecter les signaux
@@ -41,7 +49,7 @@ func game_over():
 	
 	global.is_dragging = false
 	
-	$CenterPanel.modulate = Color(0.5, 0.5, 0.5, 1)
+	center_panel.modulate = Color(0.5, 0.5, 0.5, 1)
 	$RightPanel.modulate = Color(0.5, 0.5, 0.5, 1)
 
 func _on_star_count_changed(count: int):
@@ -56,15 +64,23 @@ func _on_restart_button_pressed():
 	
 	game_over_panel.hide()
 	
-	$CenterPanel.modulate = Color(1, 1, 1, 1)
+	center_panel.modulate = Color(1, 1, 1, 1)
 	$RightPanel.modulate = Color(1, 1, 1, 1)
 	
+	# Nettoyer les objets existants
 	for obj in get_tree().get_nodes_in_group("draggable"):
 		obj.queue_free()
 	
+	# Nettoyer les zones de dépôt
 	for platform in get_tree().get_nodes_in_group("dropable"):
 		platform.contained_objects.clear()
 		platform.update_label()
 		# Forcer une mise à jour du compteur d'étoiles
 		if platform == star_platform and platform.has_method("update_star_counter"):
-			platform.update_star_counter() 
+			platform.update_star_counter()
+	
+	# Recréer les objets spawnables
+	var object_factory = get_node("/root/ObjectFactory")
+	for type in spawnable_positions:
+		var position = spawnable_positions[type]
+		object_factory.spawn_in_pile(type, position, Vector2(0.5, 0.5), center_panel) 
