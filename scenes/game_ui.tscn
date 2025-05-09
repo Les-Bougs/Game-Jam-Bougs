@@ -1,0 +1,158 @@
+[gd_scene load_steps=18 format=3 uid="uid://oglixf7nir7t"]
+
+[ext_resource type="Script" uid="uid://bfynbvnolanfn" path="res://scripts/game_ui.gd" id="1_bt76a"]
+[ext_resource type="FontFile" uid="uid://d34pe4pfktgk6" path="res://assets/fonts/PixelOperator8.ttf" id="1_rns2u"]
+[ext_resource type="Texture2D" uid="uid://byuo6n6sos4u" path="res://assets/sprites/UI_top_background.png" id="1_u2dgd"]
+[ext_resource type="Texture2D" uid="uid://cq3b6565yeiwb" path="res://assets/sprites/loadingbar.png" id="1_yubou"]
+[ext_resource type="Texture2D" uid="uid://byfew1yl5t8fv" path="res://assets/sprites/Gold.png" id="3_u001w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rns2u"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u001w"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 10, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2dgd"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 20, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt76a"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 30, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djwj0"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 40, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0pfi"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 50, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3bws"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 60, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3huio"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 70, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjwyb"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 80, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kh4o"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 90, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2npe"]
+atlas = ExtResource("1_yubou")
+region = Rect2(0, 100, 100, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g2v8e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rns2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u001w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2dgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt76a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djwj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0pfi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3bws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3huio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjwyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kh4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2npe")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_bt76a")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 40)
+scale = Vector2(4, 4)
+texture = ExtResource("1_u2dgd")
+
+[node name="Union" type="Node" parent="."]
+
+[node name="UnionLabel" type="Label" parent="Union"]
+z_index = 10
+offset_left = 10.0
+offset_top = 24.0
+offset_right = 382.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_rns2u")
+theme_override_font_sizes/font_size = 32
+text = "Union pressure"
+
+[node name="UnionGauge" type="AnimatedSprite2D" parent="Union"]
+z_index = 10
+position = Vector2(590, 40)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_g2v8e")
+
+[node name="Happy" type="Node" parent="."]
+
+[node name="HappyLabel" type="Label" parent="Happy"]
+z_index = 10
+offset_left = 840.0
+offset_top = 24.0
+offset_right = 1084.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_rns2u")
+theme_override_font_sizes/font_size = 32
+text = "Happiness"
+
+[node name="HappyGauge" type="AnimatedSprite2D" parent="Happy"]
+z_index = 10
+position = Vector2(1290, 40)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_g2v8e")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="MoneyLabel" type="Label" parent="Node"]
+z_index = 10
+offset_left = 1533.0
+offset_top = 24.0
+offset_right = 1867.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_rns2u")
+theme_override_font_sizes/font_size = 32
+text = "Money 000000"
+horizontal_alignment = 2
+
+[node name="MoneySprite" type="Sprite2D" parent="Node"]
+z_index = 10
+position = Vector2(1890, 37)
+scale = Vector2(3, 3)
+texture = ExtResource("3_u001w")
