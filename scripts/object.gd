@@ -41,7 +41,7 @@ func get_frame_id(object_type):
 			return 4
 
 ###########
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	if not draggable:
 		return
 		
@@ -72,6 +72,17 @@ func end_drag():
 
 func place_in_zone(tween):
 	tween.tween_property(self, "position", current_dropable.position, 0.2).set_ease(Tween.EASE_OUT)
+	
+	# Si c'est une zone de suppression, on attend la fin de l'animation avant de supprimer
+	if current_dropable.zone_type == "Trash":
+		await tween.finished
+		# Si l'objet est spawnable, on en crée un nouveau avant de le supprimer
+		if spawnable:
+			object_factory.spawn_in_pile(object_type, pilePos, initialScale, get_parent())
+		queue_free()
+		return
+	
+	# Si c'est une autre zone pas trash
 	check_combinations()
 	if startPos == pilePos and spawnable:
 		object_factory.spawn_in_pile(object_type, pilePos, initialScale, get_parent())
