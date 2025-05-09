@@ -16,7 +16,6 @@ func _ready() -> void:
 		update_star_counter()
 
 func _process(delta: float) -> void:
-	visible = global.is_dragging
 	update_label()
 
 func add_object(obj):
