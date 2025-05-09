@@ -23,24 +23,25 @@ texture = ExtResource("2_cxcf7")
 
 [node name="Rectangle" parent="." instance=ExtResource("4_esw31")]
 position = Vector2(232, 952)
-scale = Vector2(0.4, 0.4)
 spawnable = true
 
 [node name="Circle" parent="." instance=ExtResource("4_esw31")]
 position = Vector2(552, 952)
-scale = Vector2(0.4, 0.4)
 object_type = "Circle"
 spawnable = true
 
 [node name="Triangle" parent="." instance=ExtResource("4_esw31")]
 position = Vector2(872, 952)
-scale = Vector2(0.4, 0.4)
 object_type = "Triangle"
 spawnable = true
 
 [node name="Star" parent="." instance=ExtResource("4_esw31")]
 position = Vector2(1192, 952)
-scale = Vector2(0.4, 0.4)
+object_type = "Star"
+spawnable = true
+
+[node name="Star2" parent="." instance=ExtResource("4_esw31")]
+position = Vector2(1512, 952)
 object_type = "Star"
 spawnable = true
 
