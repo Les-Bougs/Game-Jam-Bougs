@@ -137,9 +137,9 @@ position = Vector2(1290, 40)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g2v8e")
 
-[node name="Node" type="Node" parent="."]
+[node name="Money" type="Node" parent="."]
 
-[node name="MoneyLabel" type="Label" parent="Node"]
+[node name="MoneyLabel" type="Label" parent="Money"]
 z_index = 10
 offset_left = 1533.0
 offset_top = 24.0
@@ -151,7 +151,7 @@ theme_override_font_sizes/font_size = 32
 text = "Money 000000"
 horizontal_alignment = 2
 
-[node name="MoneySprite" type="Sprite2D" parent="Node"]
+[node name="MoneySprite" type="Sprite2D" parent="Money"]
 z_index = 10
 position = Vector2(1890, 37)
 scale = Vector2(3, 3)

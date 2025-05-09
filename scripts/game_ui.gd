@@ -3,7 +3,7 @@ extends CanvasLayer
 
 @onready var union_gauge: AnimatedSprite2D = $Union/UnionGauge
 @onready var happy_gauge: AnimatedSprite2D = $Happy/HappyGauge
-@onready var money_label: Label = $Node/MoneyLabel
+@onready var money_label: Label = $Money/MoneyLabel
 
 var union_level = 0
 var happy_level = 0
