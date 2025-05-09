@@ -76,8 +76,8 @@ func place_in_zone(tween):
 	# Si c'est une zone de suppression, on attend la fin de l'animation avant de supprimer
 	if current_dropable.zone_type == "Trash":
 		await tween.finished
-		# Si l'objet est spawnable, on en crée un nouveau avant de le supprimer
-		if spawnable:
+		# Si l'objet est spawnable et vient de la pile, on en crée un nouveau avant de le supprimer
+		if spawnable and startPos == pilePos:
 			object_factory.spawn_in_pile(object_type, pilePos, initialScale, get_parent())
 		queue_free()
 		return

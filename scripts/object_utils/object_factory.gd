@@ -18,7 +18,7 @@ const TYPE_TO_FRAME = {
 	"Hexagon": 4
 }
 
-const SPAWNABLE_TYPES = ["Rectangle", "Circle", "Triangle"]
+const SPAWNABLE_TYPES = ["Rectangle", "Circle", "Triangle", "Star"]
 
 func create_object(type: String, position: Vector2, scale: Vector2, parent: Node, spawnable: bool = false) -> Node2D:
 	var object = OBJECT_SCENE.instantiate()
@@ -37,4 +37,5 @@ func spawn_in_pile(type: String, pile_position: Vector2, scale: Vector2, parent:
 	return create_object(type, pile_position, scale, parent, true)
 
 func create_combination_result(type: String, position: Vector2, scale: Vector2, parent: Node) -> Node2D:
-	return create_object(type, position, scale, parent, SPAWNABLE_TYPES.has(type))
+	# Les résultats de fusion ne sont jamais spawnables
+	return create_object(type, position, scale, parent, false)
