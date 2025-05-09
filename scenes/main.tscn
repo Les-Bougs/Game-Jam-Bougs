@@ -61,7 +61,7 @@ zone_type = "StarCollector"
 
 [node name="DropZoneEnd2" parent="CenterPanel" instance=ExtResource("3_tefeu")]
 position = Vector2(1504, 800)
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.1, 0.1)
 zone_type = "Trash"
 
 [node name="StarCounterUI" type="Label" parent="."]
@@ -109,3 +109,11 @@ offset_top = 320.0
 offset_right = 640.0
 offset_bottom = 424.0
 text = "Restart Button"
+
+[node name="ValidateStarsButton" type="Button" parent="."]
+offset_left = 1408.0
+offset_top = 656.0
+offset_right = 1856.0
+offset_bottom = 736.0
+theme_override_font_sizes/font_size = 30
+text = "Validate Stars"

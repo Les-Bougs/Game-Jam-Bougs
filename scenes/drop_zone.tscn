@@ -27,13 +27,6 @@ size = Vector2(512, 512)
 
 [node name="DropZone" type="StaticBody2D" groups=["dropable"]]
 script = ExtResource("1_6m7pw")
-metadata/_edit_group_ = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_g1g82")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_iymyj")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -256.0
@@ -45,3 +38,9 @@ text = "Zone Content"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g1g82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iymyj")

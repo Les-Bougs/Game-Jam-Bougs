@@ -6,6 +6,7 @@ signal star_count_changed(count: int)
 @export var accepted_types: Array[String] = []
 
 var contained_objects = []
+var validated_objects = []  # Nouvelle liste pour les objets validés
 @onready var label = $Label
 @onready var sprite = $AnimatedSprite2D
 
@@ -19,6 +20,29 @@ func _ready() -> void:
 		update_star_counter()
 	elif zone_type == "Trash":
 		modulate = Color(Color.RED, 0.7)
+
+func validate_stars():
+	if zone_type != "StarCollector":
+		return
+		
+	var new_stars = 0
+	# D'abord, compter les nouvelles étoiles à valider
+	for obj in contained_objects:
+		if is_instance_valid(obj) and obj.object_type == "Star":
+			new_stars += 1
+			validated_objects.append(obj)
+	
+	# Mettre à jour le compteur avec le nouveau nombre total
+	update_star_counter()
+	
+	# Ensuite, supprimer visuellement les objets
+	for obj in contained_objects:
+		if is_instance_valid(obj) and obj.object_type == "Star":
+			obj.queue_free()
+	
+	# Enfin, vider la liste des objets contenus
+	contained_objects.clear()
+	update_label()
 
 func get_frame_id(zone_type: String) -> int:
 	match zone_type:
@@ -38,15 +62,11 @@ func add_object(obj):
 	if obj not in contained_objects:
 		contained_objects.append(obj)
 		update_label()
-		if zone_type == "StarCollector":
-			update_star_counter()
 
 func remove_object(obj):
 	if obj in contained_objects:
 		contained_objects.erase(obj)
 		update_label()
-		if zone_type == "StarCollector":
-			update_star_counter()
 
 func get_contained_objects():
 	return contained_objects
@@ -62,10 +82,7 @@ func update_star_counter():
 	if zone_type != "StarCollector":
 		return
 		
-	var star_count = 0
-	for obj in contained_objects:
-		if is_instance_valid(obj) and obj.object_type == "Star":
-			star_count += 1
+	var star_count = validated_objects.size()
 	emit_signal("star_count_changed", star_count)
 
 func is_valid_placement(obj) -> bool:

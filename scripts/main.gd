@@ -7,8 +7,9 @@ extends Node2D
 @onready var restart_button = $GameOverPanel/RestartButton
 @onready var star_platform = $CenterPanel/DropZoneEnd
 @onready var center_panel = $CenterPanel
+@onready var validate_stars_button = $ValidateStarsButton
 
-@export var time_max: float = 10
+@export var time_max: float = 20
 var time_left: float = time_max
 var timer_active: bool = true
 var current_score: int = 0
@@ -24,6 +25,7 @@ func _ready():
 	# Connecter les signaux
 	star_platform.star_count_changed.connect(_on_star_count_changed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
+	validate_stars_button.pressed.connect(_on_validate_stars_button_pressed)
 	game_over_panel.hide()
 	
 	# Forcer une mise à jour initiale du compteur
@@ -74,6 +76,8 @@ func _on_restart_button_pressed():
 	# Nettoyer les zones de dépôt
 	for platform in get_tree().get_nodes_in_group("dropable"):
 		platform.contained_objects.clear()
+		if platform.zone_type == "StarCollector":
+			platform.validated_objects.clear()  # Réinitialiser la liste des étoiles validées
 		platform.update_label()
 		# Forcer une mise à jour du compteur d'étoiles
 		if platform == star_platform and platform.has_method("update_star_counter"):
@@ -83,4 +87,7 @@ func _on_restart_button_pressed():
 	var object_factory = get_node("/root/ObjectFactory")
 	for type in spawnable_positions:
 		var position = spawnable_positions[type]
-		object_factory.spawn_in_pile(type, position, Vector2(0.5, 0.5), center_panel) 
+		object_factory.spawn_in_pile(type, position, Vector2(0.5, 0.5), center_panel)
+
+func _on_validate_stars_button_pressed():
+	star_platform.validate_stars() 
