@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn2vtsm6rvki4"]
+
+[ext_resource type="Texture2D" uid="uid://dyuwvh1w7wo1t" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
+[ext_resource type="Texture2D" uid="uid://bdncrn0sdmmv7" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
+[ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="3_esw31"]
+
+[node name="WorkshopLevel" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_vj33k")
+
+[node name="PickUpBackground" type="Sprite2D" parent="."]
+position = Vector2(960, 952)
+scale = Vector2(4, 4)
+texture = ExtResource("2_cxcf7")
+
+[node name="GameUI" parent="." instance=ExtResource("3_esw31")]
