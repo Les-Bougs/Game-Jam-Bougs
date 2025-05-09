@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn2vtsm6rvki4"]
+[gd_scene load_steps=7 format=3 uid="uid://cw00jaxijqhb2"]
 
-[ext_resource type="Texture2D" uid="uid://dyuwvh1w7wo1t" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
-[ext_resource type="Texture2D" uid="uid://bdncrn0sdmmv7" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
+[ext_resource type="Texture2D" uid="uid://eg6yyxareysc" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
+[ext_resource type="Texture2D" uid="uid://cbw1q2fh0taau" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
 [ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="3_esw31"]
+[ext_resource type="PackedScene" uid="uid://cs146wtlm5oqo" path="res://scenes/object.tscn" id="4_esw31"]
+[ext_resource type="PackedScene" uid="uid://cxlc2dbb2suxx" path="res://scenes/drop_zone.tscn" id="5_f56wo"]
+[ext_resource type="Script" uid="uid://bsrc1vw01yhvg" path="res://scripts/workshop.gd" id="6_f56wo"]
 
 [node name="WorkshopLevel" type="Node2D"]
+script = ExtResource("6_f56wo")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
@@ -16,3 +20,61 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_cxcf7")
 
 [node name="GameUI" parent="." instance=ExtResource("3_esw31")]
+
+[node name="Rectangle" parent="." instance=ExtResource("4_esw31")]
+position = Vector2(232, 952)
+scale = Vector2(0.4, 0.4)
+spawnable = true
+
+[node name="Circle" parent="." instance=ExtResource("4_esw31")]
+position = Vector2(552, 952)
+scale = Vector2(0.4, 0.4)
+object_type = "Circle"
+spawnable = true
+
+[node name="Triangle" parent="." instance=ExtResource("4_esw31")]
+position = Vector2(872, 952)
+scale = Vector2(0.4, 0.4)
+object_type = "Triangle"
+spawnable = true
+
+[node name="Star" parent="." instance=ExtResource("4_esw31")]
+position = Vector2(1192, 952)
+scale = Vector2(0.4, 0.4)
+object_type = "Star"
+spawnable = true
+
+[node name="Zone1" parent="." instance=ExtResource("5_f56wo")]
+position = Vector2(240, 368)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zone2" parent="." instance=ExtResource("5_f56wo")]
+position = Vector2(632, 368)
+scale = Vector2(0.5, 0.5)
+
+[node name="ZoneFinal" parent="." instance=ExtResource("5_f56wo")]
+position = Vector2(1760, 440)
+scale = Vector2(0.55, 0.55)
+zone_type = "StarCollector"
+
+[node name="Trash" parent="." instance=ExtResource("5_f56wo")]
+position = Vector2(936, 720)
+scale = Vector2(0.1, 0.1)
+zone_type = "Trash"
+
+[node name="Validate" type="Button" parent="."]
+offset_left = 1664.0
+offset_top = 704.0
+offset_right = 1856.0
+offset_bottom = 808.0
+text = "Validate"
+
+[node name="StarCounterUI" type="Label" parent="."]
+offset_left = 1472.0
+offset_top = 80.0
+offset_right = 1920.0
+offset_bottom = 208.0
+theme_override_font_sizes/font_size = 40
+text = "Counter"
+horizontal_alignment = 1
+vertical_alignment = 1
