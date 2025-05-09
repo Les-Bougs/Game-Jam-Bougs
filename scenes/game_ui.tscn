@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://oglixf7nir7t"]
+[gd_scene load_steps=18 format=3 uid="uid://oglixf7nir7t"]
 
+[ext_resource type="Script" uid="uid://bfynbvnolanfn" path="res://scripts/game_ui.gd" id="1_bt76a"]
 [ext_resource type="FontFile" uid="uid://d34pe4pfktgk6" path="res://assets/fonts/PixelOperator8.ttf" id="1_rns2u"]
 [ext_resource type="Texture2D" uid="uid://byuo6n6sos4u" path="res://assets/sprites/UI_top_background.png" id="1_u2dgd"]
 [ext_resource type="Texture2D" uid="uid://cq3b6565yeiwb" path="res://assets/sprites/loadingbar.png" id="1_yubou"]
@@ -85,12 +86,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s2npe")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 10.0
 }]
 
 [node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_bt76a")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 40)
@@ -102,9 +104,9 @@ texture = ExtResource("1_u2dgd")
 [node name="UnionLabel" type="Label" parent="Union"]
 z_index = 10
 offset_left = 10.0
-offset_top = 27.0
+offset_top = 24.0
 offset_right = 382.0
-offset_bottom = 59.0
+offset_bottom = 56.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_rns2u")
 theme_override_font_sizes/font_size = 32
@@ -115,18 +117,15 @@ z_index = 10
 position = Vector2(590, 40)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g2v8e")
-autoplay = "default"
-frame = 10
-frame_progress = 1.0
 
 [node name="Happy" type="Node" parent="."]
 
 [node name="HappyLabel" type="Label" parent="Happy"]
 z_index = 10
 offset_left = 840.0
-offset_top = 27.0
+offset_top = 24.0
 offset_right = 1084.0
-offset_bottom = 59.0
+offset_bottom = 56.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_rns2u")
 theme_override_font_sizes/font_size = 32
@@ -137,26 +136,23 @@ z_index = 10
 position = Vector2(1290, 40)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g2v8e")
-autoplay = "default"
-frame = 10
-frame_progress = 1.0
 
 [node name="Node" type="Node" parent="."]
 
 [node name="MoneyLabel" type="Label" parent="Node"]
 z_index = 10
 offset_left = 1533.0
-offset_top = 27.0
+offset_top = 24.0
 offset_right = 1867.0
-offset_bottom = 59.0
+offset_bottom = 56.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_rns2u")
 theme_override_font_sizes/font_size = 32
-text = "Money 00000"
+text = "Money 000000"
 horizontal_alignment = 2
 
 [node name="MoneySprite" type="Sprite2D" parent="Node"]
 z_index = 10
-position = Vector2(1890, 40)
+position = Vector2(1890, 37)
 scale = Vector2(3, 3)
 texture = ExtResource("3_u001w")
