@@ -98,22 +98,17 @@ func is_valid_placement(obj) -> bool:
 	if accepted_types.size() > 0 and not obj.object_type in accepted_types:
 		return false
 	
-	# Si la zone est vide, le placement est valide
-	if contained_objects.size() == 0:
-		return true
+	# Si la zone contient déjà un objet, vérifier si on peut fusionner
+	if contained_objects.size() > 0:
+		for contained_obj in contained_objects:
+			# Si c'est le même objet, on le laisse
+			if contained_obj == obj:
+				return true
+			# Si les objets peuvent fusionner, on autorise
+			var combination_manager = get_node("/root/CombinationManager")
+			if combination_manager.can_combine(contained_obj.object_type, obj.object_type):
+				return true
+		return false
 	
-	# Vérifier les conditions pour les objets déjà présents
-	for contained_obj in contained_objects:
-		if not is_instance_valid(contained_obj):
-			continue
-			
-		# Si on trouve un objet du même type, le placement est valide
-		if contained_obj.object_type == obj.object_type:
-			return true
-			
-		# Si on trouve un objet qui peut fusionner avec celui-ci, le placement est valide
-		var combination_manager = get_node("/root/CombinationManager")
-		if combination_manager.can_combine(contained_obj.object_type, obj.object_type):
-			return true
-	
-	return false 
+	# Si on arrive ici, la zone est vide et le type est valide
+	return true 
