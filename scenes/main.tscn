@@ -14,6 +14,14 @@ offset_bottom = 1088.0
 mouse_filter = 2
 color = Color(0.375016, 9.73926e-05, 0.375745, 1)
 
+[node name="RightPanel" type="Panel" parent="."]
+show_behind_parent = true
+offset_left = 1408.0
+offset_top = 64.0
+offset_right = 1856.0
+offset_bottom = 1024.0
+mouse_filter = 2
+
 [node name="CenterPanel" type="Panel" parent="."]
 offset_left = 128.0
 offset_top = 64.0
@@ -47,17 +55,14 @@ position = Vector2(888, 336)
 scale = Vector2(0.8, 0.8)
 
 [node name="DropZoneEnd" parent="CenterPanel" instance=ExtResource("3_tefeu")]
-position = Vector2(1504, 528)
+position = Vector2(1504, 336)
 scale = Vector2(0.8, 0.8)
 zone_type = "StarCollector"
 
-[node name="RightPanel" type="Panel" parent="."]
-show_behind_parent = true
-offset_left = 1408.0
-offset_top = 64.0
-offset_right = 1856.0
-offset_bottom = 1024.0
-mouse_filter = 2
+[node name="DropZoneEnd2" parent="CenterPanel" instance=ExtResource("3_tefeu")]
+position = Vector2(1504, 800)
+scale = Vector2(0.2, 0.2)
+zone_type = "Trash"
 
 [node name="StarCounterUI" type="Label" parent="."]
 offset_left = 1408.0

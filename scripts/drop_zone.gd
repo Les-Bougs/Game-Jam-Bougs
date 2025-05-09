@@ -2,18 +2,34 @@ extends StaticBody2D
 
 signal star_count_changed(count: int)
 
-@export_enum("Normal", "StarCollector") var zone_type: String = "Normal"
+@export_enum("Normal", "StarCollector", "Trash") var zone_type: String = "Normal"
 @export var accepted_types: Array[String] = []
 
 var contained_objects = []
 @onready var label = $Label
+@onready var sprite = $AnimatedSprite2D
 
 func _ready() -> void:
 	modulate = Color(Color.MEDIUM_PURPLE, 0.7)
 	add_to_group("dropable")
+	sprite.frame = get_frame_id(zone_type)
+	
 	if zone_type == "StarCollector":
 		accepted_types = ["Star"]
 		update_star_counter()
+	elif zone_type == "Trash":
+		modulate = Color(Color.RED, 0.7)
+
+func get_frame_id(zone_type: String) -> int:
+	match zone_type:
+		"Normal":
+			return 0
+		"StarCollector":
+			return 1
+		"Trash":
+			return 2
+		_:
+			return 0
 
 func _process(delta: float) -> void:
 	update_label()
@@ -56,6 +72,10 @@ func is_valid_placement(obj) -> bool:
 	# Si c'est une zone de collecte d'étoiles, vérifier le type
 	if zone_type == "StarCollector" and obj.object_type != "Star":
 		return false
+		
+	# Si c'est une zone de suppression, tout est accepté
+	if zone_type == "Trash":
+		return true
 		
 	# Si des types spécifiques sont acceptés, vérifier
 	if accepted_types.size() > 0 and not obj.object_type in accepted_types:

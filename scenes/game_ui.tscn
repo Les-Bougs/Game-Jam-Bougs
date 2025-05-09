@@ -1,10 +1,10 @@
 [gd_scene load_steps=18 format=3 uid="uid://oglixf7nir7t"]
 
-[ext_resource type="Script" uid="uid://bfynbvnolanfn" path="res://scripts/game_ui.gd" id="1_bt76a"]
-[ext_resource type="FontFile" uid="uid://d34pe4pfktgk6" path="res://assets/fonts/PixelOperator8.ttf" id="1_rns2u"]
-[ext_resource type="Texture2D" uid="uid://byuo6n6sos4u" path="res://assets/sprites/UI_top_background.png" id="1_u2dgd"]
-[ext_resource type="Texture2D" uid="uid://cq3b6565yeiwb" path="res://assets/sprites/loadingbar.png" id="1_yubou"]
-[ext_resource type="Texture2D" uid="uid://byfew1yl5t8fv" path="res://assets/sprites/Gold.png" id="3_u001w"]
+[ext_resource type="Script" uid="uid://dwbm3vye25s1j" path="res://scripts/game_ui.gd" id="1_bt76a"]
+[ext_resource type="FontFile" uid="uid://da0ps0dh4sbv7" path="res://assets/fonts/PixelOperator8.ttf" id="1_rns2u"]
+[ext_resource type="Texture2D" uid="uid://c2s2ayvjqcxdd" path="res://assets/sprites/UI_top_background.png" id="1_u2dgd"]
+[ext_resource type="Texture2D" uid="uid://cvov4hf1a41wc" path="res://assets/sprites/loadingbar.png" id="1_yubou"]
+[ext_resource type="Texture2D" uid="uid://b1smbsdw1ne4d" path="res://assets/sprites/Gold.png" id="3_u001w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rns2u"]
 atlas = ExtResource("1_yubou")
