@@ -1,9 +1,10 @@
 extends StaticBody2D
 
 signal star_count_changed(count: int)
+signal star_validated(shape_type: String)
 
-@export_enum("Normal", "StarCollector", "Trash") var zone_type: String = "Normal"
-@export var accepted_types: Array[String] = []
+@export_enum("Normal", "Collector", "Trash") var zone_type: String = "Normal"
+@export var accepted_types: Array = []
 
 var contained_objects = []
 var validated_objects = []
@@ -15,44 +16,36 @@ func _ready() -> void:
 	add_to_group("dropable")
 	sprite.frame = get_frame_id(zone_type)
 	
-	if zone_type == "StarCollector":
-		accepted_types = ["Star"]
+	if zone_type == "Collector":
+		var order_scene = get_node("../Order")
+		if order_scene and order_scene.has_method("get_accepted_types"):
+			accepted_types = order_scene.get_accepted_types()
 	elif zone_type == "Trash":
 		modulate = Color(Color.RED, 0.7)
 
 func validate_stars():
-	if zone_type != "StarCollector":
+	if zone_type != "Collector":
 		return 0
 		
 	var new_stars = 0
-	# Compter les nouvelles étoiles à valider
 	for obj in contained_objects:
-		if is_instance_valid(obj) and obj.object_type == "Star":
+		if is_instance_valid(obj) and obj.object_type in accepted_types:
 			new_stars += 1
-	
-	# Supprimer visuellement les objets
-	for obj in contained_objects:
-		if is_instance_valid(obj) and obj.object_type == "Star":
+			emit_signal("star_validated", obj.object_type)
 			obj.queue_free()
 	
-	# Vider la liste des objets contenus
 	contained_objects.clear()
 	update_label()
-	
 	return new_stars
 
 func get_frame_id(zone_type: String) -> int:
 	match zone_type:
-		"Normal":
-			return 0
-		"StarCollector":
-			return 1
-		"Trash":
-			return 2
-		_:
-			return 0
+		"Normal": return 0
+		"Collector": return 1
+		"Trash": return 2
+		_: return 0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_label()
 
 func add_object(obj):
@@ -76,29 +69,23 @@ func update_label():
 	label.text = str(shapes)
 
 func is_valid_placement(obj) -> bool:
-	# Si c'est une zone de collecte d'étoiles, vérifier le type
-	if zone_type == "StarCollector" and obj.object_type != "Star":
-		return false
+	if zone_type == "Collector":
+		if not obj.object_type in accepted_types:
+			return false
 		
-	# Si c'est une zone de suppression, tout est accepté
 	if zone_type == "Trash":
 		return true
 		
-	# Si des types spécifiques sont acceptés, vérifier
 	if accepted_types.size() > 0 and not obj.object_type in accepted_types:
 		return false
 	
-	# Si la zone contient déjà un objet, vérifier si on peut fusionner
 	if contained_objects.size() > 0:
 		for contained_obj in contained_objects:
-			# Si c'est le même objet, on le laisse
 			if contained_obj == obj:
 				return true
-			# Si les objets peuvent fusionner, on autorise
 			var combination_manager = get_node("/root/CombinationManager")
 			if combination_manager.can_combine(contained_obj.object_type, obj.object_type):
 				return true
 		return false
 	
-	# Si on arrive ici, la zone est vide et le type est valide
 	return true 
