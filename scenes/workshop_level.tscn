@@ -71,21 +71,18 @@ offset_right = 1856.0
 offset_bottom = 808.0
 text = "Validate"
 
-[node name="OrderCounterUI" type="Label" parent="."]
-offset_left = 1472.0
-offset_top = 80.0
-offset_right = 1920.0
-offset_bottom = 208.0
-theme_override_font_sizes/font_size = 40
-text = "Counter"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ListOrderIn" parent="." instance=ExtResource("7_medaf")]
 offset_left = 79.0
 offset_top = 104.0
 offset_right = 528.0
 offset_bottom = 215.0
+
+[node name="ListOrderOut" parent="." instance=ExtResource("7_medaf")]
+offset_left = 1619.0
+offset_top = 640.0
+offset_right = 1888.0
+offset_bottom = 688.0
+zone_type = "Outbound"
 
 [node name="GameOverPanel" type="Panel" parent="."]
 offset_left = 448.0

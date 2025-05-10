@@ -10,6 +10,11 @@ signal order_completed
 
 func _ready():
 	initialize_orders()
+	if zone_type == 'Outbound':
+		for order in orders:
+			order.count = 0
+			order.update_display()
+		
 
 # Configuration initiale des commandes
 func initialize_orders():

@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var validate_orders_button = $Validate
 @onready var order_platform = $ZoneFinal
-@onready var order_counter_label = $OrderCounterUI
 @onready var order_scene = $Order
 @onready var game_over_panel = $GameOverPanel
 @onready var final_score_label = $GameOverPanel/FinalScoreLabel
@@ -39,6 +38,15 @@ func _on_shape_validated(shape_type: String):
 		
 		# Vérifier si la commande est complétée
 		var list_order = get_node("ListOrderIn")
+		var list_order_out = get_node("ListOrderOut")
+		
+		# Incrémenter le compteur dans ListOrderOut
+		if list_order_out:
+			for order in list_order_out.orders:
+				if order.shape_type == shape_type:
+					order.count += 1
+					order.update_display()
+		
 		if list_order and list_order.is_all_completed():
 			show_completion_message()
 
@@ -62,6 +70,13 @@ func _on_restart_button_pressed():
 		list_order.clear_orders()
 		list_order.add_order("Star", 3)
 		list_order.add_order("Hexagon", 2)
+		
+	# Réinitialiser la ListOrderOut
+	var list_order_out = get_node("ListOrderOut") 
+	if list_order_out:
+		list_order_out.clear_orders()
+		list_order_out.add_order("Star", 0)
+		list_order_out.add_order("Hexagon", 0)
 	
 	# Réactiver les interactions
 	validate_orders_button.disabled = false
@@ -74,7 +89,6 @@ func update_counter_display():
 	var display_text = "Orders:\n"
 	for type in order_counts:
 		display_text += "%s: %d\n" % [type, order_counts[type]]
-	order_counter_label.text = display_text
 
 func _on_validate_orders_button_pressed():
 	if order_platform.has_method("validate_orders"):
