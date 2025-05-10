@@ -1,8 +1,7 @@
 extends Node2D
 
 @onready var validate_orders_button = $Validate
-@onready var order_platform = $ZoneFinal
-@onready var order_scene = $Order
+@onready var order_platform: StaticBody2D = $ZoneFinal
 @onready var game_over_panel = $GameOverPanel
 @onready var final_score_label = $GameOverPanel/FinalScoreLabel
 @onready var restart_button = $GameOverPanel/RestartButton
@@ -93,7 +92,3 @@ func update_counter_display():
 func _on_validate_orders_button_pressed():
 	if order_platform.has_method("validate_orders"):
 		var new_orders = order_platform.validate_orders()
-		
-		# Générer une nouvelle commande après validation
-		if order_scene and order_scene.has_method("generate_new_order"):
-			order_scene.generate_new_order() 
