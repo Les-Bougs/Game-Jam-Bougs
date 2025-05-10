@@ -100,4 +100,7 @@ func _on_validate_orders_button_pressed():
 
 func _input(event):
 	if event.is_action_pressed("validate_key"):
-		_on_validate_orders_button_pressed() 
+		if game_over_panel.visible:
+			_on_restart_button_pressed()
+		else:
+			_on_validate_orders_button_pressed()
