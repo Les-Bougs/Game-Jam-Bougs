@@ -5,22 +5,27 @@ extends Control
 
 var order_scene = preload("res://scenes/order.tscn")
 var orders = []
+var initial_orders = {}
 
 signal order_completed
 
 func _ready():
+	load_initial_orders()
 	initialize_orders()
 	if zone_type == 'Outbound':
 		for order in orders:
 			order.count = 0
 			order.update_display()
-		
 
-# Configuration initiale des commandes
+func load_initial_orders():
+	var file = FileAccess.open("res://scripts/object_utils/initial_orders.json", FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		initial_orders = JSON.parse_string(content)
+
 func initialize_orders():
-	add_order("Plank", 2)
-	add_order("NailPlank", 1)
-	add_order("Furniture", 1)
+	for type in initial_orders:
+		add_order(type, initial_orders[type])
 
 func add_order(shape_type: String, count: int):
 	var order_instance = order_scene.instantiate()
