@@ -38,7 +38,7 @@ func _on_shape_validated(shape_type: String):
 		update_counter_display()
 		
 		# Vérifier si la commande est complétée
-		var list_order = get_node("ListOrder")
+		var list_order = get_node("ListOrderIn")
 		if list_order and list_order.is_all_completed():
 			show_completion_message()
 
@@ -56,8 +56,8 @@ func _on_restart_button_pressed():
 		order_counts[type] = 0
 	update_counter_display()
 	
-	# Réinitialiser la ListOrder
-	var list_order = get_node("ListOrder")
+	# Réinitialiser la ListOrderIn
+	var list_order = get_node("ListOrderIn")
 	if list_order:
 		list_order.clear_orders()
 		list_order.add_order("Star", 3)

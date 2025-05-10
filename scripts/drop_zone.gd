@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 	update_label()
 
 func update_accepted_types():
-	var list_order = get_node("../ListOrder")
+	var list_order = get_node("../ListOrderIn")
 	if list_order and list_order.has_method("get_accepted_types"):
 		accepted_types = list_order.get_accepted_types()
 
@@ -37,7 +37,7 @@ func validate_orders():
 	var new_orders = 0
 	for obj in contained_objects:
 		if is_instance_valid(obj) and obj.object_type in accepted_types:
-			var list_order = get_node("../ListOrder")
+			var list_order = get_node("../ListOrderIn")
 			if list_order and list_order.check_order(obj.object_type):
 				new_orders += 1
 				emit_signal("order_validated", obj.object_type)
