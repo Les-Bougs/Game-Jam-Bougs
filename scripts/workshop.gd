@@ -97,3 +97,7 @@ func _on_validate_orders_button_pressed():
 		# Générer une nouvelle commande après validation
 		if order_scene and order_scene.has_method("generate_new_order"):
 			order_scene.generate_new_order() 
+
+func _input(event):
+	if event.is_action_pressed("validate_key"):
+		_on_validate_orders_button_pressed() 
