@@ -1,11 +1,12 @@
 extends Node2D
 
-@export_enum("Rectangle", "Circle", "Triangle", "Star", "Hexagon") var object_type: String = "Rectangle"
+@export_enum("Plank", "Hammer", "Nail", "NailPlank", "Furniture") var object_type: String = "Plank"
 @export var spawnable: bool = false
 
 var pilePos: Vector2
 var startPos: Vector2
 var initialScale: Vector2
+var frame_ids = {}
 
 var draggable = false
 var is_inside_dropable = false
@@ -18,6 +19,7 @@ var object_factory: Node
 var object_combiner: Node
 
 func _ready():
+	load_frame_ids()
 	pilePos = position
 	initialScale = scale
 	add_to_group("draggable")
@@ -26,19 +28,15 @@ func _ready():
 	# Récupère les références aux gestionnaires
 	object_factory = get_node("/root/ObjectFactory")
 	object_combiner = get_node("/root/ObjectCombiner")
+
+func load_frame_ids():
+	var file = FileAccess.open("res://scripts/object_utils/frame_ids.json", FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		frame_ids = JSON.parse_string(content)
 	
 func get_frame_id(object_type):
-	match object_type:
-		"Rectangle":
-			return 0
-		"Circle":
-			return 1
-		"Triangle":
-			return 2
-		"Star":
-			return 3
-		"Hexagon":
-			return 4
+	return frame_ids.get(object_type, 5)  # 5 est la valeur par défaut (Plank)
 
 ###########
 func _physics_process(delta: float) -> void:

@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 	update_label()
 
 func update_accepted_types():
-	var list_order = get_node("../ListOrderIn")
+	var list_order = get_parent().get_node("ListOrderIn")
 	if list_order and list_order.has_method("get_accepted_types"):
 		accepted_types = list_order.get_accepted_types()
 
@@ -37,7 +37,7 @@ func validate_orders():
 	var new_orders = 0
 	for obj in contained_objects:
 		if is_instance_valid(obj) and obj.object_type in accepted_types:
-			var list_order = get_node("../ListOrderIn")
+			var list_order = get_parent().get_node("ListOrderIn")
 			if list_order and list_order.check_order(obj.object_type):
 				new_orders += 1
 				emit_signal("order_validated", obj.object_type)
@@ -76,22 +76,17 @@ func update_label():
 
 func is_valid_placement(obj) -> bool:
 	if zone_type == "Collector":
-		if not obj.object_type in accepted_types:
-			return false
-		
+		return obj.object_type in accepted_types
 	if zone_type == "Trash":
 		return true
-		
-	if accepted_types.size() > 0 and not obj.object_type in accepted_types:
-		return false
-	
-	if contained_objects.size() > 0:
-		for contained_obj in contained_objects:
-			if contained_obj == obj:
-				return true
-			var combination_manager = get_node("/root/CombinationManager")
-			if combination_manager.can_combine(contained_obj.object_type, obj.object_type):
-				return true
-		return false
-	
-	return true 
+	# Zone normale
+	print(obj.object_type)
+	if contained_objects.size() == 0:
+		return true
+	for contained_obj in contained_objects:
+		if contained_obj == obj:
+			return true
+		var combination_manager = get_node("/root/CombinationManager")
+		if combination_manager.can_combine(contained_obj.object_type, obj.object_type):
+			return true
+	return false 

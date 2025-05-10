@@ -8,17 +8,17 @@ extends Node2D
 @onready var restart_button = $GameOverPanel/RestartButton
 
 var order_counts = {
-	"Star": 0,
-	"Hexagon": 0,
-	"Circle": 0
+	"Plank": 0,
+	"NailPlank": 0,
+	"Furniture": 0
 }
 
 # Positions initiales des objets spawnables
 var spawnable_positions = {
-	"Rectangle": Vector2(232, 768),
-	"Circle": Vector2(552, 768),
-	"Triangle": Vector2(872, 768),
-	"Star": Vector2(1192, 768)
+	"Plank": Vector2(232, 768),
+	"Hammer": Vector2(552, 768),
+	"NailPlank": Vector2(872, 768),
+	"Furniture": Vector2(1192, 768)
 }
 
 func _ready():
@@ -68,15 +68,15 @@ func _on_restart_button_pressed():
 	var list_order = get_node("ListOrderIn")
 	if list_order:
 		list_order.clear_orders()
-		list_order.add_order("Star", 3)
-		list_order.add_order("Hexagon", 2)
+		list_order.add_order("Plank", 3)
+		list_order.add_order("Furniture", 2)
 		
 	# Réinitialiser la ListOrderOut
 	var list_order_out = get_node("ListOrderOut") 
 	if list_order_out:
 		list_order_out.clear_orders()
-		list_order_out.add_order("Star", 0)
-		list_order_out.add_order("Hexagon", 0)
+		list_order_out.add_order("Plank", 0)
+		list_order_out.add_order("Furniture", 0)
 	
 	# Réactiver les interactions
 	validate_orders_button.disabled = false

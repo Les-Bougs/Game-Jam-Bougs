@@ -18,9 +18,9 @@ func _ready():
 
 # Configuration initiale des commandes
 func initialize_orders():
-	add_order("Star", 2)
-	add_order("Hexagon", 1)
-	add_order("Circle", 1)
+	add_order("Plank", 2)
+	add_order("NailPlank", 1)
+	add_order("Furniture", 1)
 
 func add_order(shape_type: String, count: int):
 	var order_instance = order_scene.instantiate()

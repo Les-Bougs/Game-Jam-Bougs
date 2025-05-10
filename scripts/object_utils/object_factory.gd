@@ -10,15 +10,17 @@ enum ObjectType {
 	HEXAGON
 }
 
-const TYPE_TO_FRAME = {
-	"Rectangle": 0,
-	"Circle": 1,
-	"Triangle": 2,
-	"Star": 3,
-	"Hexagon": 4
-}
+var frame_ids = {}
+const SPAWNABLE_TYPES = ["Plank", "Hammer", "Nail", "NailPlank"]
 
-const SPAWNABLE_TYPES = ["Rectangle", "Circle", "Triangle", "Star"]
+func _ready():
+	load_frame_ids()
+
+func load_frame_ids():
+	var file = FileAccess.open("res://scripts/object_utils/frame_ids.json", FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		frame_ids = JSON.parse_string(content)
 
 func create_object(type: String, position: Vector2, scale: Vector2, parent: Node, spawnable: bool = false) -> Node2D:
 	var object = OBJECT_SCENE.instantiate()
@@ -27,8 +29,8 @@ func create_object(type: String, position: Vector2, scale: Vector2, parent: Node
 	object.scale = scale
 	object.spawnable = spawnable and SPAWNABLE_TYPES.has(type)
 	
-	if TYPE_TO_FRAME.has(type):
-		object.get_node("AnimatedSprite2D").frame = TYPE_TO_FRAME[type]
+	if frame_ids.has(type):
+		object.get_node("AnimatedSprite2D").frame = frame_ids[type]
 	
 	parent.add_child(object)
 	return object

@@ -5,11 +5,19 @@ extends PanelContainer
 
 var shape_type: String = "Star"
 var count: int = 5
+var frame_ids = {}
 
 signal order_completed
 
 func _ready():
+	load_frame_ids()
 	call_deferred("update_display")
+
+func load_frame_ids():
+	var file = FileAccess.open("res://scripts/object_utils/frame_ids.json", FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		frame_ids = JSON.parse_string(content)
 
 func setup(type: String, initial_count: int):
 	shape_type = type
@@ -24,19 +32,7 @@ func update_display():
 	count_label.text = "x%d" % count
 
 func get_frame_id(object_type):
-	match object_type:
-		"Rectangle":
-			return 0
-		"Circle":
-			return 1
-		"Triangle":
-			return 2
-		"Star":
-			return 3
-		"Hexagon":
-			return 4
-		_:
-			return 0
+	return frame_ids.get(object_type, 5)  # 5 est la valeur par défaut (Plank)
 
 func check_order() -> bool:
 	if count > 0:
