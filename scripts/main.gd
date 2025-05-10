@@ -1,18 +1,18 @@
 extends Node2D
 
+@onready var star_platform = $StarPlatform
+@onready var validate_orders_button = $ValidateOrdersButton
 @onready var star_counter_label = $StarCounterUI
 @onready var timer_label = $TimerUI
 @onready var game_over_panel = $GameOverPanel
 @onready var final_score_label = $GameOverPanel/FinalScoreLabel
 @onready var restart_button = $GameOverPanel/RestartButton
-@onready var star_platform = $CenterPanel/DropZoneEnd
 @onready var center_panel = $CenterPanel
-@onready var validate_stars_button = $ValidateStarsButton
 
 @export var time_max: float = 20
 var time_left: float = time_max
 var timer_active: bool = true
-var current_score: int = 0
+var current_score = 0
 
 # Positions initiales des objets spawnables
 var spawnable_positions = {
@@ -23,14 +23,15 @@ var spawnable_positions = {
 
 func _ready():
 	# Connecter les signaux
-	star_platform.star_count_changed.connect(_on_star_count_changed)
+	if star_platform:
+		star_platform.order_count_changed.connect(_on_order_count_changed)
+	
+	validate_orders_button.pressed.connect(_on_validate_orders_button_pressed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
-	validate_stars_button.pressed.connect(_on_validate_stars_button_pressed)
 	game_over_panel.hide()
 	
-	# Forcer une mise à jour initiale du compteur
-	if star_platform.has_method("update_star_counter"):
-		star_platform.update_star_counter()
+	# Initialiser le compteur
+	star_counter_label.text = "Orders: 0"
 
 func _process(delta):
 	if timer_active:
@@ -47,22 +48,22 @@ func update_timer_display():
 
 func game_over():
 	game_over_panel.show()
-	final_score_label.text = "Final Score: %d Stars" % current_score
+	final_score_label.text = "Final Score: %d Orders" % current_score
 	
 	global.is_dragging = false
 	
 	center_panel.modulate = Color(0.5, 0.5, 0.5, 1)
 	$RightPanel.modulate = Color(0.5, 0.5, 0.5, 1)
 
-func _on_star_count_changed(count: int):
+func _on_order_count_changed(count: int):
 	current_score = count
-	star_counter_label.text = "Stars: " + str(count)
+	star_counter_label.text = "Orders: " + str(current_score)
 
 func _on_restart_button_pressed():
 	time_left = time_max
 	timer_active = true
 	current_score = 0
-	star_counter_label.text = "Stars: 0"
+	star_counter_label.text = "Orders: 0"
 	
 	game_over_panel.hide()
 	
@@ -89,5 +90,5 @@ func _on_restart_button_pressed():
 		var position = spawnable_positions[type]
 		object_factory.spawn_in_pile(type, position, Vector2(0.5, 0.5), center_panel)
 
-func _on_validate_stars_button_pressed():
-	star_platform.validate_stars() 
+func _on_validate_orders_button_pressed():
+	star_platform.validate_orders() 

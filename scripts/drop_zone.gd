@@ -1,13 +1,12 @@
 extends StaticBody2D
 
-signal star_count_changed(count: int)
-signal star_validated(shape_type: String)
+signal order_count_changed(count: int)
+signal order_validated(shape_type: String)
 
 @export_enum("Normal", "Collector", "Trash") var zone_type: String = "Normal"
 @export var accepted_types: Array = []
 
 var contained_objects = []
-var validated_objects = []
 @onready var label = $Label
 @onready var sprite = $AnimatedSprite2D
 
@@ -17,26 +16,36 @@ func _ready() -> void:
 	sprite.frame = get_frame_id(zone_type)
 	
 	if zone_type == "Collector":
-		var order_scene = get_node("../Order")
-		if order_scene and order_scene.has_method("get_accepted_types"):
-			accepted_types = order_scene.get_accepted_types()
+		update_accepted_types()
 	elif zone_type == "Trash":
 		modulate = Color(Color.RED, 0.7)
 
-func validate_stars():
+func _process(_delta: float) -> void:
+	if zone_type == "Collector":
+		update_accepted_types()
+	update_label()
+
+func update_accepted_types():
+	var list_order = get_node("../ListOrder")
+	if list_order and list_order.has_method("get_accepted_types"):
+		accepted_types = list_order.get_accepted_types()
+
+func validate_orders():
 	if zone_type != "Collector":
 		return 0
 		
-	var new_stars = 0
+	var new_orders = 0
 	for obj in contained_objects:
 		if is_instance_valid(obj) and obj.object_type in accepted_types:
-			new_stars += 1
-			emit_signal("star_validated", obj.object_type)
-			obj.queue_free()
+			var list_order = get_node("../ListOrder")
+			if list_order and list_order.check_order(obj.object_type):
+				new_orders += 1
+				emit_signal("order_validated", obj.object_type)
+				obj.queue_free()
 	
 	contained_objects.clear()
 	update_label()
-	return new_stars
+	return new_orders
 
 func get_frame_id(zone_type: String) -> int:
 	match zone_type:
@@ -44,9 +53,6 @@ func get_frame_id(zone_type: String) -> int:
 		"Collector": return 1
 		"Trash": return 2
 		_: return 0
-
-func _process(_delta: float) -> void:
-	update_label()
 
 func add_object(obj):
 	if obj not in contained_objects:

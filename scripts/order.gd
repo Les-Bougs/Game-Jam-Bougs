@@ -1,78 +1,44 @@
-extends Control
+extends PanelContainer
 
-@onready var order_container = $OrderContainer
+@onready var texture_rect = $MarginContainer/VBoxContainer/TextureRect
+@onready var count_label = $MarginContainer/VBoxContainer/CountLabel
 
-var current_order: Dictionary = {
-	"Star": 5,
-	"Hexagon": 5
-}
+var shape_type: String = "Star"
+var count: int = 5
 
 var shape_textures = {
-	"Star": preload("res://assets/star.png"),
-	"Hexagon": preload("res://assets/hexagon.png")
+	"Star": preload("res://assets/Star.png"),
+	"Hexagon": preload("res://assets/Hexagon.png"),
+	"Circle": preload("res://assets/Circle.png")
 }
 
 func _ready():
-	if not order_container:
-		push_error("OrderContainer non trouvé dans la scène!")
+	call_deferred("update_display")
+
+func setup(type: String, initial_count: int):
+	shape_type = type
+	count = initial_count
+	call_deferred("update_display")
+
+func update_display():
+	if not is_instance_valid(texture_rect) or not is_instance_valid(count_label):
 		return
 		
-	order_container.custom_minimum_size = Vector2(200, 100)
-	order_container.alignment = BoxContainer.ALIGNMENT_CENTER
-	update_order_display()
-	print("Order initialisé avec les types : ", current_order.keys())  # Debug
+	if shape_type in shape_textures:
+		texture_rect.texture = shape_textures[shape_type]
+	count_label.text = "x%d" % count
 
-func update_order_display():
-	if not order_container:
-		return
-		
-	# Nettoyer le conteneur existant
-	for child in order_container.get_children():
-		child.queue_free()
-	
-	# Créer un nouveau conteneur pour chaque forme
-	for shape in current_order:
-		var shape_container = HBoxContainer.new()
-		shape_container.custom_minimum_size = Vector2(150, 40)
-		shape_container.alignment = BoxContainer.ALIGNMENT_CENTER
-		shape_container.add_theme_constant_override("separation", 10)
-		
-		# Ajouter l'image
-		var texture_rect = TextureRect.new()
-		texture_rect.texture = shape_textures[shape]
-		texture_rect.custom_minimum_size = Vector2(32, 32)
-		texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-		texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		
-		# Ajouter le texte
-		var label = Label.new()
-		label.text = "x%d" % current_order[shape]
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		
-		shape_container.add_child(texture_rect)
-		shape_container.add_child(label)
-		order_container.add_child(shape_container)
-
-func check_order(shape_type: String) -> bool:
-	if current_order.has(shape_type):
-		current_order[shape_type] -= 1
-		if current_order[shape_type] <= 0:
-			current_order.erase(shape_type)
-		
-		update_order_display()
-		print("Commande mise à jour : ", current_order)  # Debug
+func check_order() -> bool:
+	if count > 0:
+		count -= 1
+		call_deferred("update_display")
 		return true
-	
 	return false
 
-func is_order_completed() -> bool:
-	return current_order.is_empty()
+func is_completed() -> bool:
+	return count <= 0
 
-# Retourne la liste des types acceptés dans la commande
-func get_accepted_types() -> Array:
-	var types = current_order.keys()
-	print("Types acceptés demandés : ", types)  # Debug
-	return types
+func get_shape_type() -> String:
+	return shape_type
 
-signal order_finished 
+signal order_completed 

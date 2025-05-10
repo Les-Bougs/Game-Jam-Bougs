@@ -1,8 +1,8 @@
 extends Node2D
 
-@onready var star_platform = $ZoneFinal
-@onready var validate_stars_button = $Validate
-@onready var star_counter_label = $StarCounterUI
+@onready var validate_orders_button = $Validate
+@onready var order_platform = $ZoneFinal
+@onready var order_counter_label = $OrderCounterUI
 @onready var order_scene = $Order
 
 var current_score: int = 0
@@ -16,22 +16,21 @@ var spawnable_positions = {
 }
 
 func _ready():
-	validate_stars_button.pressed.connect(_on_validate_stars_button_pressed)
-	star_counter_label.text = "Stars: 0"
+	validate_orders_button.pressed.connect(_on_validate_orders_button_pressed)
+	order_counter_label.text = "Orders: 0"
 	
 	# Connecter le signal de validation des formes à la scène Order
-	if star_platform.has_method("validate_stars"):
-		star_platform.star_validated.connect(_on_shape_validated)
+	if order_platform.has_method("validate_orders"):
+		order_platform.order_validated.connect(_on_shape_validated)
 
 func _on_shape_validated(shape_type: String):
-	if order_scene and order_scene.has_method("check_order"):
-		order_scene.check_order(shape_type)
+	print("Forme validée : ", shape_type)
 
-func _on_validate_stars_button_pressed():
-	if star_platform.has_method("validate_stars"):
-		var new_stars = star_platform.validate_stars()
-		current_score += new_stars
-		star_counter_label.text = "Stars: " + str(current_score)
+func _on_validate_orders_button_pressed():
+	if order_platform.has_method("validate_orders"):
+		var new_orders = order_platform.validate_orders()
+		current_score += new_orders
+		order_counter_label.text = "Orders: " + str(current_score)
 		
 		# Générer une nouvelle commande après validation
 		if order_scene and order_scene.has_method("generate_new_order"):

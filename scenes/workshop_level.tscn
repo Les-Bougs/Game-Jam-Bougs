@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cs146wtlm5oqo" path="res://scenes/object.tscn" id="4_esw31"]
 [ext_resource type="PackedScene" uid="uid://cxlc2dbb2suxx" path="res://scenes/drop_zone.tscn" id="5_f56wo"]
 [ext_resource type="Script" uid="uid://bni4heufncr5o" path="res://scripts/workshop.gd" id="6_f56wo"]
-[ext_resource type="PackedScene" uid="uid://bi78743x683s3" path="res://scenes/order.tscn" id="7_medaf"]
+[ext_resource type="PackedScene" uid="uid://cdaijjs3sd0fh" path="res://scenes/list_order.tscn" id="7_medaf"]
 
 [node name="WorkshopLevel" type="Node2D"]
 script = ExtResource("6_f56wo")
@@ -71,7 +71,7 @@ offset_right = 1856.0
 offset_bottom = 808.0
 text = "Validate"
 
-[node name="StarCounterUI" type="Label" parent="."]
+[node name="OrderCounterUI" type="Label" parent="."]
 offset_left = 1472.0
 offset_top = 80.0
 offset_right = 1920.0
@@ -81,8 +81,8 @@ text = "Counter"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Order" parent="." instance=ExtResource("7_medaf")]
-offset_left = 66.0
-offset_top = 108.0
-offset_right = 197.0
-offset_bottom = 214.0
+[node name="ListOrder" parent="." instance=ExtResource("7_medaf")]
+offset_left = 24.0
+offset_top = 88.0
+offset_right = 444.0
+offset_bottom = 199.0
