@@ -1,6 +1,7 @@
 extends Control
 
 @onready var orders_container = $MarginContainer/HBoxContainer
+@export_enum("Inbound", "Outbound") var zone_type: String = "Inbound"
 
 var order_scene = preload("res://scenes/order.tscn")
 var orders = []
