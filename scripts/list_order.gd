@@ -8,7 +8,10 @@ var orders = []
 signal order_completed
 
 func _ready():
-	# Exemple d'initialisation avec quelques commandes
+	initialize_orders()
+
+# Configuration initiale des commandes
+func initialize_orders():
 	add_order("Star", 2)
 	add_order("Hexagon", 1)
 	add_order("Circle", 1)
@@ -25,13 +28,7 @@ func clear_orders():
 		order.queue_free()
 	orders.clear()
 
-func get_accepted_types() -> Array:
-	var types = []
-	for order in orders:
-		if not order.is_completed():
-			types.append(order.get_shape_type())
-	return types
-
+# Vérification des commandes
 func check_order(shape_type: String) -> bool:
 	for order in orders:
 		if not order.is_completed() and order.get_shape_type() == shape_type:
@@ -45,6 +42,13 @@ func is_all_completed() -> bool:
 		if not order.is_completed():
 			return false
 	return true
+
+func get_accepted_types() -> Array:
+	var types = []
+	for order in orders:
+		if not order.is_completed():
+			types.append(order.get_shape_type())
+	return types
 
 func _on_order_completed():
 	emit_signal("order_completed") 

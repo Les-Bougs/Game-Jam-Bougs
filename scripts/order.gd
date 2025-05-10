@@ -1,16 +1,10 @@
 extends PanelContainer
 
-@onready var texture_rect = $MarginContainer/VBoxContainer/TextureRect
-@onready var count_label = $MarginContainer/VBoxContainer/CountLabel
+@onready var texture_rect = $MarginContainer/Control/TextureRect
+@onready var count_label = $MarginContainer/Control/CountLabel
 
 var shape_type: String = "Star"
 var count: int = 5
-
-var shape_textures = {
-	"Star": preload("res://assets/Star.png"),
-	"Hexagon": preload("res://assets/Hexagon.png"),
-	"Circle": preload("res://assets/Circle.png")
-}
 
 signal order_completed
 
@@ -26,9 +20,23 @@ func update_display():
 	if not is_instance_valid(texture_rect) or not is_instance_valid(count_label):
 		return
 		
-	if shape_type in shape_textures:
-		texture_rect.texture = shape_textures[shape_type]
+	texture_rect.frame = get_frame_id(shape_type)
 	count_label.text = "x%d" % count
+
+func get_frame_id(object_type):
+	match object_type:
+		"Rectangle":
+			return 0
+		"Circle":
+			return 1
+		"Triangle":
+			return 2
+		"Star":
+			return 3
+		"Hexagon":
+			return 4
+		_:
+			return 0
 
 func check_order() -> bool:
 	if count > 0:

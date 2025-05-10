@@ -82,10 +82,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ListOrder" parent="." instance=ExtResource("7_medaf")]
-offset_left = 24.0
-offset_top = 88.0
-offset_right = 444.0
-offset_bottom = 199.0
+offset_left = 79.0
+offset_top = 104.0
+offset_right = 528.0
+offset_bottom = 215.0
 
 [node name="GameOverPanel" type="Panel" parent="."]
 offset_left = 448.0
