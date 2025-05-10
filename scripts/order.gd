@@ -12,6 +12,8 @@ var shape_textures = {
 	"Circle": preload("res://assets/Circle.png")
 }
 
+signal order_completed
+
 func _ready():
 	call_deferred("update_display")
 
@@ -32,6 +34,8 @@ func check_order() -> bool:
 	if count > 0:
 		count -= 1
 		call_deferred("update_display")
+		if count == 0:
+			emit_signal("order_completed")
 		return true
 	return false
 
@@ -40,5 +44,3 @@ func is_completed() -> bool:
 
 func get_shape_type() -> String:
 	return shape_type
-
-signal order_completed 

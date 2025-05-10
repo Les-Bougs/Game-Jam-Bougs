@@ -86,3 +86,28 @@ offset_left = 24.0
 offset_top = 88.0
 offset_right = 444.0
 offset_bottom = 199.0
+
+[node name="GameOverPanel" type="Panel" parent="."]
+offset_left = 448.0
+offset_top = 320.0
+offset_right = 1536.0
+offset_bottom = 768.0
+
+[node name="FinalScoreLabel" type="Label" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 1024.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 100
+text = "Final Score : X Stars"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 320.0
+offset_right = 640.0
+offset_bottom = 424.0
+text = "Restart Button"

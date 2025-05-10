@@ -9,9 +9,9 @@ signal order_completed
 
 func _ready():
 	# Exemple d'initialisation avec quelques commandes
-	add_order("Star", 3)
-	add_order("Hexagon", 2)
-	add_order("Circle", 5)
+	add_order("Star", 2)
+	add_order("Hexagon", 1)
+	add_order("Circle", 1)
 
 func add_order(shape_type: String, count: int):
 	var order_instance = order_scene.instantiate()
@@ -19,6 +19,11 @@ func add_order(shape_type: String, count: int):
 	order_instance.order_completed.connect(_on_order_completed)
 	orders_container.add_child(order_instance)
 	orders.append(order_instance)
+
+func clear_orders():
+	for order in orders:
+		order.queue_free()
+	orders.clear()
 
 func get_accepted_types() -> Array:
 	var types = []

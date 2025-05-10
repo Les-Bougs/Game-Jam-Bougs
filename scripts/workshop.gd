@@ -4,8 +4,15 @@ extends Node2D
 @onready var order_platform = $ZoneFinal
 @onready var order_counter_label = $OrderCounterUI
 @onready var order_scene = $Order
+@onready var game_over_panel = $GameOverPanel
+@onready var final_score_label = $GameOverPanel/FinalScoreLabel
+@onready var restart_button = $GameOverPanel/RestartButton
 
-var current_score: int = 0
+var order_counts = {
+	"Star": 0,
+	"Hexagon": 0,
+	"Circle": 0
+}
 
 # Positions initiales des objets spawnables
 var spawnable_positions = {
@@ -17,20 +24,61 @@ var spawnable_positions = {
 
 func _ready():
 	validate_orders_button.pressed.connect(_on_validate_orders_button_pressed)
-	order_counter_label.text = "Orders: 0"
+	restart_button.pressed.connect(_on_restart_button_pressed)
+	update_counter_display()
+	game_over_panel.hide()
 	
 	# Connecter le signal de validation des formes à la scène Order
 	if order_platform.has_method("validate_orders"):
 		order_platform.order_validated.connect(_on_shape_validated)
 
 func _on_shape_validated(shape_type: String):
-	print("Forme validée : ", shape_type)
+	if shape_type in order_counts:
+		order_counts[shape_type] += 1
+		update_counter_display()
+		
+		# Vérifier si la commande est complétée
+		var list_order = get_node("ListOrder")
+		if list_order and list_order.is_all_completed():
+			show_completion_message()
+
+func show_completion_message():
+	game_over_panel.show()
+	final_score_label.text = "Order Completed !"
+	
+	# Désactiver les interactions pendant le game over
+	validate_orders_button.disabled = true
+	order_platform.set_process(false)
+
+func _on_restart_button_pressed():
+	# Réinitialiser les compteurs
+	for type in order_counts:
+		order_counts[type] = 0
+	update_counter_display()
+	
+	# Réinitialiser la ListOrder
+	var list_order = get_node("ListOrder")
+	if list_order:
+		list_order.clear_orders()
+		list_order.add_order("Star", 3)
+		list_order.add_order("Hexagon", 2)
+	
+	# Réactiver les interactions
+	validate_orders_button.disabled = false
+	order_platform.set_process(true)
+	
+	# Cacher le panel
+	game_over_panel.hide()
+
+func update_counter_display():
+	var display_text = "Orders:\n"
+	for type in order_counts:
+		display_text += "%s: %d\n" % [type, order_counts[type]]
+	order_counter_label.text = display_text
 
 func _on_validate_orders_button_pressed():
 	if order_platform.has_method("validate_orders"):
 		var new_orders = order_platform.validate_orders()
-		current_score += new_orders
-		order_counter_label.text = "Orders: " + str(current_score)
 		
 		# Générer une nouvelle commande après validation
 		if order_scene and order_scene.has_method("generate_new_order"):
