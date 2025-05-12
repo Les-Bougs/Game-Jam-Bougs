@@ -21,6 +21,7 @@ func _ready() -> void:
 		modulate = Color(Color.RED, 0.7)
 
 func _process(_delta: float) -> void:
+	visible = global.is_dragging
 	if zone_type == "Collector":
 		update_accepted_types()
 	update_label()
