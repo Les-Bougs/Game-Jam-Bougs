@@ -24,15 +24,38 @@ var spawnable_positions = {
 func _ready():
 	validate_orders_button.pressed.connect(_on_validate_orders_button_pressed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
-	update_counter_display()
 	game_over_panel.hide()
 	
-	clock.set_alarm(12)
+  # load orders from json
+	load_orders(global.day_nb)
+	update_counter_display()
+	
+  # setup clock ui
+  clock.set_alarm(12)
 	clock.start_clock()
+
 	
 	# Connecter le signal de validation des formes à la scène Order
 	if order_platform.has_method("validate_orders"):
 		order_platform.order_validated.connect(_on_shape_validated)
+
+
+func load_orders(day_nb: int):
+	var order_name = 'order_' + str(day_nb)
+	print(order_name)
+	var list_in = get_node("ListOrderIn")
+	var list_out = get_node("ListOrderOut")
+	
+	if list_in:
+		list_in.clear_orders()
+		list_in.load_initial_orders(order_name)
+		list_in.initialize_orders()
+		
+		if list_out:
+			list_out.clear_orders()
+			for type in list_in.initial_orders:
+				list_out.add_order(type, 0)
+
 
 func _on_shape_validated(shape_type: String):
 	if shape_type in order_counts:
@@ -63,6 +86,7 @@ func show_completion_message():
 	order_platform.set_process(false)
 
 func _on_restart_button_pressed():
+	global.day_nb += 1
 	get_tree().reload_current_scene()
 
 func update_counter_display():
