@@ -18,6 +18,19 @@ func load_initial_orders(order_nb):
 		var content = file.get_as_text()
 		initial_orders = JSON.parse_string(content)[order_nb]
 
+	load_initial_orders()
+	initialize_orders()
+	if zone_type == 'Outbound':
+		for order in orders:
+			order.count = 0
+			order.update_display()
+
+func load_initial_orders():
+	var file = FileAccess.open("res://scripts/object_utils/initial_orders.json", FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		initial_orders = JSON.parse_string(content)
+
 func initialize_orders():
 	for type in initial_orders:
 		add_order(type, initial_orders[type])
