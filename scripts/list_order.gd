@@ -10,12 +10,7 @@ var initial_orders = {}
 signal order_completed
 
 func _ready():
-	load_initial_orders("order_0")
-	initialize_orders()
-	if zone_type == 'Outbound':
-		for order in orders:
-			order.count = 0
-			order.update_display()
+	pass
 
 func load_initial_orders(order_nb):
 	var file = FileAccess.open("res://scripts/object_utils/initial_orders.json", FileAccess.READ)
