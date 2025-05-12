@@ -24,6 +24,15 @@ var spawnable_positions = {
 
 func _ready():
 	game_over_panel.hide()
+	
+	# setup clock ui
+	if global.level_state == "morning":
+		clock.hours = 7
+		clock.set_alarm(12)
+	elif global.level_state == "afternoon":
+		clock.hours = 13
+		clock.set_alarm(18)
+		
 	await black_screen.fade_out()
 	validate_orders_button.pressed.connect(_on_validate_orders_button_pressed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
@@ -32,8 +41,6 @@ func _ready():
 	load_orders(global.day_nb)
 	update_counter_display()
 	
-  	# setup clock ui
-	clock.set_alarm(12)
 	clock.start_clock()
 
 	
@@ -77,6 +84,7 @@ func _on_shape_validated(shape_type: String):
 		
 		if list_order and list_order.is_all_completed():
 			final_score_label.text = "Order Completed !"
+			global.player_money += 10
 			show_completion_message()
 
 func show_completion_message():
@@ -91,6 +99,18 @@ func show_completion_message():
 func _on_restart_button_pressed():
 	global.day_nb += 1
 	get_tree().reload_current_scene()
+	
+func _on_next_button_pressed() -> void:
+	await black_screen.fade_in()
+	if global.level_state == "morning":
+		global.level_state = "afternoon"
+		global.day_nb += 1
+		get_tree().change_scene_to_file("res://scenes/cafet_level.tscn")
+	elif global.level_state == "afternoon":
+		global.level_state = "morning"
+		global.day_nb += 1
+		get_tree().change_scene_to_file("res://scenes/home_level.tscn")
+
 
 func update_counter_display():
 	var display_text = "Orders:\n"
@@ -108,6 +128,7 @@ func _on_clock_clock_timeout() -> void:
 	
 	if list_order and list_order.is_all_completed():
 		final_score_label.text = "Order Completed !"
+		global.player_money += 10
 	else:
 		final_score_label.text = "Order Not Completed !"
 	show_completion_message()
