@@ -1,12 +1,20 @@
 {
-	"order1": {
+	"order_0": {
 		"Plank": 3,
 		"NailPlank": 1,
 		"Furniture": 1
 	},
-	"order2": {
+	"order_1": {
 		"Plank": 2,
-		"NailPlank": 2,
+		"NailPlank": 2
+	},
+	"order_2": {
+		"Plank": 1,
+		"NailPlank": 3
+	},
+	"order_3": {
+		"Plank": 3,
+		"NailPlank": 1,
 		"Furniture": 1
 	}
 }

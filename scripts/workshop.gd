@@ -64,27 +64,33 @@ func _on_restart_button_pressed():
 		order_counts[type] = 0
 	update_counter_display()
 	
-	# Réinitialiser la ListOrderIn
-	var list_order = get_node("ListOrderIn")
-	if list_order:
-		list_order.clear_orders()
-		list_order.add_order("Plank", 3)
-		list_order.add_order("Furniture", 2)
-		
-	# Réinitialiser la ListOrderOut
-	var list_order_out = get_node("ListOrderOut") 
-	if list_order_out:
-		list_order_out.clear_orders()
-		list_order_out.add_order("Plank", 0)
-		list_order_out.add_order("Furniture", 0)
-	
+	global.day_nb += 1
+	load_orders(global.day_nb)
+
 	# Réactiver les interactions
 	validate_orders_button.disabled = false
 	order_platform.set_process(true)
 	
 	# Cacher le panel
 	game_over_panel.hide()
-
+	
+func load_orders(day_nb: int):
+	var order_name = 'order_' + str(day_nb)
+	print(order_name)
+	var list_in = get_node("ListOrderIn")
+	var list_out = get_node("ListOrderOut")
+	
+	if list_in:
+		list_in.clear_orders()
+		list_in.load_initial_orders(order_name)
+		list_in.initialize_orders()
+		
+		if list_out:
+			list_out.clear_orders()
+			for type in list_in.initial_orders:
+				list_out.add_order(type, 0)
+	
+	
 func update_counter_display():
 	var display_text = "Orders:\n"
 	for type in order_counts:
