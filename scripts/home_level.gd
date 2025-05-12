@@ -9,7 +9,8 @@ extends Node2D
 
 func _ready() -> void:
 	sleep_button.hide()
-	black_screen.hide()
+	black_screen_label.text = ""
+	await black_screen.fade_out()
 
 
 func _on_bed_mouse_entered() -> void:
@@ -22,7 +23,6 @@ func _on_bed_mouse_exited() -> void:
 
 func _on_sleep_button_pressed() -> void:
 	sleep_button.disabled = 1
-	black_screen_label.text = ""
 	await black_screen.fade_in()
 	
 	for i in 3:
