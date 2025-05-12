@@ -1,11 +1,11 @@
 extends Node2D
 
 @onready var validate_orders_button = $Validate
-@onready var order_platform = $ZoneFinal
-@onready var order_scene = $Order
+@onready var order_platform: StaticBody2D = $ZoneFinal
 @onready var game_over_panel = $GameOverPanel
 @onready var final_score_label = $GameOverPanel/FinalScoreLabel
 @onready var restart_button = $GameOverPanel/RestartButton
+@onready var clock: Node2D = $Clock
 
 var order_counts = {
 	"Plank": 0,
@@ -26,6 +26,9 @@ func _ready():
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	update_counter_display()
 	game_over_panel.hide()
+	
+	clock.set_alarm(12)
+	clock.start_clock()
 	
 	# Connecter le signal de validation des formes à la scène Order
 	if order_platform.has_method("validate_orders"):
@@ -48,42 +51,19 @@ func _on_shape_validated(shape_type: String):
 					order.update_display()
 		
 		if list_order and list_order.is_all_completed():
+			final_score_label.text = "Order Completed !"
 			show_completion_message()
 
 func show_completion_message():
 	game_over_panel.show()
-	final_score_label.text = "Order Completed !"
+	#final_score_label.text = "Order Completed !"
 	
 	# Désactiver les interactions pendant le game over
 	validate_orders_button.disabled = true
 	order_platform.set_process(false)
 
 func _on_restart_button_pressed():
-	# Réinitialiser les compteurs
-	for type in order_counts:
-		order_counts[type] = 0
-	update_counter_display()
-	
-	# Réinitialiser la ListOrderIn
-	var list_order = get_node("ListOrderIn")
-	if list_order:
-		list_order.clear_orders()
-		list_order.add_order("Plank", 3)
-		list_order.add_order("Furniture", 2)
-		
-	# Réinitialiser la ListOrderOut
-	var list_order_out = get_node("ListOrderOut") 
-	if list_order_out:
-		list_order_out.clear_orders()
-		list_order_out.add_order("Plank", 0)
-		list_order_out.add_order("Furniture", 0)
-	
-	# Réactiver les interactions
-	validate_orders_button.disabled = false
-	order_platform.set_process(true)
-	
-	# Cacher le panel
-	game_over_panel.hide()
+	get_tree().reload_current_scene()
 
 func update_counter_display():
 	var display_text = "Orders:\n"
@@ -93,10 +73,18 @@ func update_counter_display():
 func _on_validate_orders_button_pressed():
 	if order_platform.has_method("validate_orders"):
 		var new_orders = order_platform.validate_orders()
-		
-		# Générer une nouvelle commande après validation
-		if order_scene and order_scene.has_method("generate_new_order"):
-			order_scene.generate_new_order() 
+
+func _on_clock_clock_timeout() -> void:
+	# Vérifier si la commande est complétée
+	var list_order = get_node("ListOrderIn")
+	var list_order_out = get_node("ListOrderOut")
+	
+	if list_order and list_order.is_all_completed():
+		final_score_label.text = "Order Completed !"
+	else:
+		final_score_label.text = "Order Not Completed !"
+	show_completion_message()
+
 
 func _input(event):
 	if event.is_action_pressed("validate_key"):

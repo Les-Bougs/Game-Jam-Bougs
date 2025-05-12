@@ -4,12 +4,12 @@ extends Node2D
 @onready var clock_label: Label = $ClockLabel
 @onready var timer: Timer = $Timer
 
-@export var time_step = 0.1 # Temps (en s) entre chaque tick de l'horloge
+@export var time_step: float = 1 # Temps (en s) entre chaque tick de l'horloge
 
-@export var incr = 7 # Incrémentation de l'heure en minutes
-@export var hours = 0 # Heure de départ
-@export var minutes = 0 # Minutes de départ
-@export var time_stop = 2 # Heure de fin
+@export var incr: int = 5 # Incrémentation de l'heure en minutes
+@export var hours: int = 0 # Heure de départ
+@export var minutes: int = 0 # Minutes de départ
+@export var time_stop: int = 0 # Heure de fin
 
 signal clock_timeout # Signal quand l'horloge atteint l'heure de fin
 
@@ -66,6 +66,9 @@ func start_clock() -> void:
 # Fonction pour arrêter l'horloge
 func stop_clock() -> void:
 	timer.stop()
+	
+func set_alarm(input_time: int) -> void:
+	time_stop = input_time
 
 
 func _on_timer_timeout() -> void:
