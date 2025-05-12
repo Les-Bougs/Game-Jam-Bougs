@@ -26,12 +26,12 @@ func _ready():
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	game_over_panel.hide()
 	
-  # load orders from json
+  	# load orders from json
 	load_orders(global.day_nb)
 	update_counter_display()
 	
-  # setup clock ui
-  clock.set_alarm(12)
+  	# setup clock ui
+	clock.set_alarm(12)
 	clock.start_clock()
 
 	
@@ -78,6 +78,7 @@ func _on_shape_validated(shape_type: String):
 			show_completion_message()
 
 func show_completion_message():
+	clock.stop_clock()
 	game_over_panel.show()
 	#final_score_label.text = "Order Completed !"
 	
