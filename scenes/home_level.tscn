@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cihrhtnvafdvu"]
+
+[ext_resource type="Script" uid="uid://ctl52mfm4hk77" path="res://scripts/home_level.gd" id="1_mr7i8"]
+[ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="1_sbm65"]
+[ext_resource type="Texture2D" uid="uid://c4rrs3b6hf14v" path="res://assets/sprites/HomeBackground.png" id="2_urirq"]
+[ext_resource type="FontFile" uid="uid://0mnfcm1q08on" path="res://assets/fonts/PixelOperator8.ttf" id="3_jujlx"]
+[ext_resource type="PackedScene" uid="uid://c78w6mwil8r3c" path="res://scenes/black_screen.tscn" id="4_v8m2j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mr7i8"]
+size = Vector2(280, 227)
+
+[node name="HomeLevel" type="Node2D"]
+script = ExtResource("1_mr7i8")
+
+[node name="GameUI" parent="." instance=ExtResource("1_sbm65")]
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(960, 540)
+texture = ExtResource("2_urirq")
+
+[node name="BlackScreen" parent="." instance=ExtResource("4_v8m2j")]
+visible = false
+
+[node name="BlackScreenLabel" type="Label" parent="BlackScreen"]
+layout_mode = 0
+offset_left = 684.0
+offset_top = 503.0
+offset_right = 1260.0
+offset_bottom = 631.0
+theme_override_fonts/font = ExtResource("3_jujlx")
+theme_override_font_sizes/font_size = 128
+text = "ZZZ..."
+
+[node name="Bed" type="Area2D" parent="."]
+position = Vector2(434, 469)
+
+[node name="SleepButton" type="Button" parent="Bed"]
+offset_right = 280.0
+offset_bottom = 227.0
+theme_override_fonts/font = ExtResource("3_jujlx")
+theme_override_font_sizes/font_size = 32
+text = "Go to sleep"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed"]
+position = Vector2(140, 113.5)
+shape = SubResource("RectangleShape2D_mr7i8")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="mouse_entered" from="Bed" to="." method="_on_bed_mouse_entered"]
+[connection signal="mouse_exited" from="Bed" to="." method="_on_bed_mouse_exited"]
+[connection signal="pressed" from="Bed/SleepButton" to="." method="_on_sleep_button_pressed"]

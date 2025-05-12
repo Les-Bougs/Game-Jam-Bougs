@@ -6,6 +6,7 @@ extends Node2D
 @onready var final_score_label = $GameOverPanel/FinalScoreLabel
 @onready var restart_button = $GameOverPanel/RestartButton
 @onready var clock: Node2D = $Clock
+@onready var black_screen: ColorRect = $BlackScreen
 
 var order_counts = {
 	"Plank": 0,
@@ -22,9 +23,10 @@ var spawnable_positions = {
 }
 
 func _ready():
+	game_over_panel.hide()
+	await black_screen.fade_out()
 	validate_orders_button.pressed.connect(_on_validate_orders_button_pressed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
-	game_over_panel.hide()
 	
   	# load orders from json
 	load_orders(global.day_nb)
