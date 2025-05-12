@@ -1,0 +1,12 @@
+{
+	"order1": {
+		"Plank": 3,
+		"NailPlank": 1,
+		"Furniture": 1
+	},
+	"order2": {
+		"Plank": 2,
+		"NailPlank": 2,
+		"Furniture": 1
+	}
+}

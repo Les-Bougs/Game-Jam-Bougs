@@ -74,7 +74,6 @@ func _on_validate_orders_button_pressed():
 	if order_platform.has_method("validate_orders"):
 		var new_orders = order_platform.validate_orders()
 
-
 func _on_clock_clock_timeout() -> void:
 	# Vérifier si la commande est complétée
 	var list_order = get_node("ListOrderIn")
@@ -85,3 +84,11 @@ func _on_clock_clock_timeout() -> void:
 	else:
 		final_score_label.text = "Order Not Completed !"
 	show_completion_message()
+
+
+func _input(event):
+	if event.is_action_pressed("validate_key"):
+		if game_over_panel.visible:
+			_on_restart_button_pressed()
+		else:
+			_on_validate_orders_button_pressed()
