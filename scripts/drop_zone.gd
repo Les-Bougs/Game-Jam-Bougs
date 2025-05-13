@@ -11,14 +11,16 @@ var contained_objects = []
 @onready var sprite = $AnimatedSprite2D
 
 func _ready() -> void:
-	modulate = Color(Color.MEDIUM_PURPLE, 0.7)
+	#modulate = Color(Color.MEDIUM_PURPLE, 0.7)
+	modulate.a = 0.5
 	add_to_group("dropable")
 	sprite.frame = get_frame_id(zone_type)
 	
 	if zone_type == "Collector":
 		update_accepted_types()
 	elif zone_type == "Trash":
-		modulate = Color(Color.RED, 0.7)
+		pass
+		#modulate = Color(Color.RED, 0.7)
 
 func _process(_delta: float) -> void:
 	visible = Globals.is_dragging
