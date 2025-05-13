@@ -11,12 +11,12 @@ config_version=5
 [application]
 
 config/name="gamejam_v1"
-run/main_scene="uid://cw00jaxijqhb2"
+run/main_scene="uid://bl8s1y4mbj46i"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 
-global="*res://global.gd"
+Globals="*res://global.gd"
 CombinationManager="*res://scripts/object_utils/combination_manager.gd"
 ObjectFactory="*res://scripts/object_utils/object_factory.gd"
 ObjectCombiner="*res://scripts/object_utils/object_combiner.gd"

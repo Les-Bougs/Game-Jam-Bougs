@@ -1,13 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://cw00jaxijqhb2"]
+[gd_scene load_steps=13 format=3 uid="uid://cw00jaxijqhb2"]
 
-[ext_resource type="Texture2D" uid="uid://rsywhkgau02j" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
-[ext_resource type="Texture2D" uid="uid://i6cr51yyogrn" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
+[ext_resource type="Texture2D" uid="uid://1g8syadmfwuy" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
+[ext_resource type="Texture2D" uid="uid://i7u03sfu0eab" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
 [ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="3_esw31"]
 [ext_resource type="PackedScene" uid="uid://cs146wtlm5oqo" path="res://scenes/object.tscn" id="4_esw31"]
 [ext_resource type="PackedScene" uid="uid://cxlc2dbb2suxx" path="res://scenes/drop_zone.tscn" id="5_f56wo"]
-[ext_resource type="Script" uid="uid://bni4heufncr5o" path="res://scripts/workshop.gd" id="6_f56wo"]
+[ext_resource type="PackedScene" uid="uid://c78w6mwil8r3c" path="res://scenes/black_screen.tscn" id="5_p0rnu"]
+[ext_resource type="Script" uid="uid://d188ndsn3an7u" path="res://scripts/workshop.gd" id="6_f56wo"]
 [ext_resource type="PackedScene" uid="uid://cdaijjs3sd0fh" path="res://scenes/list_order.tscn" id="7_medaf"]
-[ext_resource type="PackedScene" path="res://scenes/clock.tscn" id="8_odtix"]
+[ext_resource type="PackedScene" uid="uid://d2m75hf4tf80q" path="res://scenes/clock.tscn" id="8_odtix"]
+[ext_resource type="Texture2D" uid="uid://y6p3egof2a0a" path="res://assets/sprites/ValidateButton.png" id="8_uchhu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6q1b5"]
+atlas = ExtResource("8_uchhu")
+region = Rect2(0, 0, 25, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uchhu"]
+atlas = ExtResource("8_uchhu")
+region = Rect2(25, 0, 25, 21)
 
 [node name="WorkshopLevel" type="Node2D"]
 script = ExtResource("6_f56wo")
@@ -19,6 +29,7 @@ script = ExtResource("6_f56wo")
 [node name="Background" type="Sprite2D" parent="Backgrounds"]
 z_index = -100
 position = Vector2(960, 540)
+scale = Vector2(4, 4)
 texture = ExtResource("1_vj33k")
 
 [node name="PickUpBackground" type="Sprite2D" parent="Backgrounds"]
@@ -27,76 +38,81 @@ position = Vector2(960, 952)
 scale = Vector2(4, 4)
 texture = ExtResource("2_cxcf7")
 
+[node name="BlackScreen" parent="." instance=ExtResource("5_p0rnu")]
+visible = false
+
 [node name="Objects" type="Node" parent="."]
 
 [node name="Object1" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(232, 952)
+position = Vector2(144, 952)
 spawnable = true
 
 [node name="Object2" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(552, 952)
+position = Vector2(384, 952)
 object_type = "Hammer"
 spawnable = true
 
 [node name="Object3" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(872, 952)
+position = Vector2(624, 952)
 object_type = "Nail"
 spawnable = true
 
 [node name="Object4" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(1192, 952)
+position = Vector2(864, 952)
 object_type = "NailPlank"
 spawnable = true
 
 [node name="Object5" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(1512, 952)
+position = Vector2(1104, 952)
 object_type = "Furniture"
 spawnable = true
 
 [node name="ZoneFinal" parent="." instance=ExtResource("5_f56wo")]
-position = Vector2(1760, 440)
-scale = Vector2(0.55, 0.55)
+position = Vector2(1730, 445)
+scale = Vector2(4, 4)
 zone_type = "Collector"
 
 [node name="Zone1" parent="." instance=ExtResource("5_f56wo")]
-position = Vector2(240, 368)
-scale = Vector2(0.5, 0.5)
+position = Vector2(260, 400)
+scale = Vector2(4, 4)
 
 [node name="Zone2" parent="." instance=ExtResource("5_f56wo")]
-position = Vector2(632, 368)
-scale = Vector2(0.5, 0.5)
+position = Vector2(540, 400)
+scale = Vector2(4, 4)
 
 [node name="Trash" parent="." instance=ExtResource("5_f56wo")]
-position = Vector2(936, 720)
-scale = Vector2(0.1, 0.1)
+position = Vector2(857, 647)
+scale = Vector2(4, 4)
 zone_type = "Trash"
 
-[node name="Validate" type="Button" parent="."]
-offset_left = 1664.0
-offset_top = 704.0
-offset_right = 1856.0
-offset_bottom = 808.0
-text = "Validate"
+[node name="Validate" type="TextureButton" parent="."]
+offset_left = 1388.0
+offset_top = 380.0
+offset_right = 1488.0
+offset_bottom = 464.0
+texture_normal = SubResource("AtlasTexture_6q1b5")
+texture_pressed = SubResource("AtlasTexture_uchhu")
+stretch_mode = 0
 
 [node name="ListOrderIn" parent="." instance=ExtResource("7_medaf")]
-offset_left = 79.0
-offset_top = 104.0
-offset_right = 528.0
-offset_bottom = 215.0
+offset_top = 99.0
+offset_right = 449.0
+offset_bottom = 210.0
 
 [node name="ListOrderOut" parent="." instance=ExtResource("7_medaf")]
-offset_left = 1619.0
-offset_top = 640.0
-offset_right = 1888.0
-offset_bottom = 688.0
+offset_left = 1408.0
+offset_top = 671.0
+offset_right = 1677.0
+offset_bottom = 719.0
 zone_type = "Outbound"
 
 [node name="GameOverPanel" type="Panel" parent="."]
+visible = false
 offset_left = 448.0
 offset_top = 320.0
 offset_right = 1536.0
@@ -121,11 +137,20 @@ offset_right = 640.0
 offset_bottom = 424.0
 text = "Restart Button"
 
+[node name="NextButton" type="Button" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 320.0
+offset_right = 1001.0
+offset_bottom = 424.0
+text = "Next"
+
 [node name="Clock" parent="." instance=ExtResource("8_odtix")]
-position = Vector2(1744, 183)
+position = Vector2(1736, 900)
 scale = Vector2(2, 2)
 time_step = 0.2
 incr = 1
 hours = 7
 
+[connection signal="pressed" from="GameOverPanel/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="clock_timeout" from="Clock" to="." method="_on_clock_clock_timeout"]

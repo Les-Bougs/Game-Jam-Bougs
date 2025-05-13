@@ -45,22 +45,24 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("click"):
 		start_drag()
+		z_index += 1
 	elif Input.is_action_pressed("click"):
 		update_drag()
 	elif Input.is_action_just_released("click"):
 		end_drag()
+		z_index += -1
 
 func start_drag():
 	startPos = position
 	initialPos = global_position
 	offset = get_global_mouse_position() - global_position
-	global.is_dragging = true
+	Globals.is_dragging = true
 
 func update_drag():
 	global_position = get_global_mouse_position() - offset
 
 func end_drag():
-	global.is_dragging = false
+	Globals.is_dragging = false
 	var tween = get_tree().create_tween()
 	
 	if is_inside_dropable and current_dropable.is_valid_placement(self):
@@ -100,13 +102,13 @@ func check_combinations():
 
 func _on_area_2d_mouse_entered() -> void:
 	#print('entered')
-	if not global.is_dragging:
+	if not Globals.is_dragging:
 		draggable = true
 		scale = initialScale * 1.05
 
 func _on_area_2d_mouse_exited() -> void:
 	#print('exited')
-	if not global.is_dragging:
+	if not Globals.is_dragging:
 		draggable = false
 		scale = initialScale
 
@@ -116,13 +118,15 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if current_dropable != null and current_dropable != body:
 		current_dropable.remove_object(self)
-		current_dropable.modulate = Color(Color.MEDIUM_PURPLE, 1)
+		#current_dropable.modulate = Color(Color.MEDIUM_PURPLE, 1)
+		current_dropable.modulate = Color(1, 1, 1, 0.5)
 	
 	if body.is_valid_placement(self):
-		body.modulate = Color(Color.REBECCA_PURPLE, 1)
+		#body.modulate = Color(Color.REBECCA_PURPLE, 1)
+		body.modulate = Color(1, 1, 1, 0.7)
 		body.add_object(self)
 	else:
-		body.modulate = Color(Color.RED, 1)
+		body.modulate = Color(Color.RED, 0.7)
 	
 	is_inside_dropable = true
 	current_dropable = body
@@ -130,7 +134,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group('dropable') and body == current_dropable:
 		is_inside_dropable = false
-		body.modulate = Color(Color.MEDIUM_PURPLE, 1)
+		body.modulate = Color(1, 1, 1, 0.5)
+		#body.modulate = Color(Color.MEDIUM_PURPLE, 1)
 		body.remove_object(self)
 		current_dropable = null
 
