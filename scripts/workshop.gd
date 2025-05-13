@@ -34,7 +34,6 @@ func _ready():
 	clock.set_alarm(12)
 	clock.start_clock()
 
-	
 	# Connecter le signal de validation des formes à la scène Order
 	if order_platform.has_method("validate_orders"):
 		order_platform.order_validated.connect(_on_shape_validated)

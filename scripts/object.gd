@@ -116,10 +116,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if current_dropable != null and current_dropable != body:
 		current_dropable.remove_object(self)
-		current_dropable.modulate = Color(Color.MEDIUM_PURPLE, 1)
+		#current_dropable.modulate = Color(Color.MEDIUM_PURPLE, 1)
 	
 	if body.is_valid_placement(self):
-		body.modulate = Color(Color.REBECCA_PURPLE, 1)
+		#body.modulate = Color(Color.REBECCA_PURPLE, 1)
+		body.modulate = Color(Color.LIME_GREEN, 1)
 		body.add_object(self)
 	else:
 		body.modulate = Color(Color.RED, 1)
@@ -130,7 +131,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group('dropable') and body == current_dropable:
 		is_inside_dropable = false
-		body.modulate = Color(Color.MEDIUM_PURPLE, 1)
+		#body.modulate = Color(Color.MEDIUM_PURPLE, 1)
+		body.modulate = Color(1, 1, 1, 1)  # Reset to default color
 		body.remove_object(self)
 		current_dropable = null
 

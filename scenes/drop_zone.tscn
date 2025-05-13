@@ -1,13 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxlc2dbb2suxx"]
+[gd_scene load_steps=9 format=3 uid="uid://cxlc2dbb2suxx"]
 
 [ext_resource type="Texture2D" uid="uid://bk77n3xq8ta84" path="res://assets/Square2.png" id="1_5owwn"]
 [ext_resource type="Script" uid="uid://b0ybshfln726a" path="res://scripts/drop_zone.gd" id="1_6m7pw"]
 [ext_resource type="Texture2D" uid="uid://bed0ueyyrvo4r" path="res://assets/Star 2.png" id="2_6m7pw"]
 [ext_resource type="Texture2D" uid="uid://djc2pm5adfsgc" path="res://assets/vecteezy_trash-can-pixel_10968225.jpg" id="4_2f7qs"]
+[ext_resource type="Texture2D" uid="uid://dvlkhsxpivycd" path="res://assets/sprites/trash_zone.png" id="4_iymyj"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcqwk"]
+load_path = "res://.godot/imported/drop_zone.png-46c8fc0fce22d6f4f93cff4bfb19c0bc.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g1g82"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_lcqwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_lcqwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iymyj")
+}, {
 "duration": 1.0,
 "texture": ExtResource("1_5owwn")
 }, {
@@ -23,7 +36,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iymyj"]
-size = Vector2(512, 512)
+size = Vector2(832, 848)
 
 [node name="DropZone" type="StaticBody2D" groups=["dropable"]]
 script = ExtResource("1_6m7pw")
@@ -43,4 +56,5 @@ metadata/_edit_group_ = true
 sprite_frames = SubResource("SpriteFrames_g1g82")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 40)
 shape = SubResource("RectangleShape2D_iymyj")

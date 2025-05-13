@@ -11,7 +11,7 @@ var contained_objects = []
 @onready var sprite = $AnimatedSprite2D
 
 func _ready() -> void:
-	modulate = Color(Color.MEDIUM_PURPLE, 0.7)
+	#modulate = Color(Color.MEDIUM_PURPLE, 0.7)
 	add_to_group("dropable")
 	sprite.frame = get_frame_id(zone_type)
 	
@@ -46,6 +46,7 @@ func validate_orders():
 	
 	contained_objects.clear()
 	update_label()
+	modulate = Color(1, 1, 1, 1)
 	return new_orders
 
 func get_frame_id(zone_type: String) -> int:
