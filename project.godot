@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gamejam_v1"
-run/main_scene="uid://bl8s1y4mbj46i"
+run/main_scene="res://scenes/workshop_level.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
