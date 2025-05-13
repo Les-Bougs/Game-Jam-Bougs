@@ -33,7 +33,7 @@ theme_override_font_sizes/font_size = 128
 text = "ZZZ..."
 
 [node name="Bed" type="Area2D" parent="."]
-position = Vector2(434, 469)
+position = Vector2(288, 500)
 
 [node name="SleepButton" type="Button" parent="Bed"]
 offset_right = 280.0
