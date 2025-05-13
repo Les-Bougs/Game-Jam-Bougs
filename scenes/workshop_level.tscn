@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cw00jaxijqhb2"]
+[gd_scene load_steps=13 format=3 uid="uid://cw00jaxijqhb2"]
 
 [ext_resource type="Texture2D" uid="uid://1g8syadmfwuy" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
 [ext_resource type="Texture2D" uid="uid://i7u03sfu0eab" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
@@ -9,6 +9,15 @@
 [ext_resource type="Script" uid="uid://d188ndsn3an7u" path="res://scripts/workshop.gd" id="6_f56wo"]
 [ext_resource type="PackedScene" uid="uid://cdaijjs3sd0fh" path="res://scenes/list_order.tscn" id="7_medaf"]
 [ext_resource type="PackedScene" uid="uid://d2m75hf4tf80q" path="res://scenes/clock.tscn" id="8_odtix"]
+[ext_resource type="Texture2D" uid="uid://y6p3egof2a0a" path="res://assets/sprites/ValidateButton.png" id="8_uchhu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6q1b5"]
+atlas = ExtResource("8_uchhu")
+region = Rect2(0, 0, 25, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uchhu"]
+atlas = ExtResource("8_uchhu")
+region = Rect2(25, 0, 25, 21)
 
 [node name="WorkshopLevel" type="Node2D"]
 script = ExtResource("6_f56wo")
@@ -81,12 +90,14 @@ position = Vector2(857, 647)
 scale = Vector2(4, 4)
 zone_type = "Trash"
 
-[node name="Validate" type="Button" parent="."]
-offset_left = 1369.0
-offset_top = 371.0
-offset_right = 1561.0
-offset_bottom = 475.0
-text = "Validate"
+[node name="Validate" type="TextureButton" parent="."]
+offset_left = 1388.0
+offset_top = 380.0
+offset_right = 1488.0
+offset_bottom = 464.0
+texture_normal = SubResource("AtlasTexture_6q1b5")
+texture_pressed = SubResource("AtlasTexture_uchhu")
+stretch_mode = 0
 
 [node name="ListOrderIn" parent="." instance=ExtResource("7_medaf")]
 offset_top = 99.0
