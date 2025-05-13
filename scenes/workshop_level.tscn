@@ -20,6 +20,7 @@ script = ExtResource("6_f56wo")
 [node name="Background" type="Sprite2D" parent="Backgrounds"]
 z_index = -100
 position = Vector2(960, 540)
+scale = Vector2(4, 4)
 texture = ExtResource("1_vj33k")
 
 [node name="PickUpBackground" type="Sprite2D" parent="Backgrounds"]

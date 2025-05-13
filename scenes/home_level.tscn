@@ -17,6 +17,7 @@ script = ExtResource("1_mr7i8")
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100
 position = Vector2(960, 540)
+scale = Vector2(4, 4)
 texture = ExtResource("2_urirq")
 
 [node name="BlackScreen" parent="." instance=ExtResource("4_v8m2j")]
