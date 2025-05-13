@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbkq2oscn25te"]
+[gd_scene load_steps=6 format=3 uid="uid://dbkq2oscn25te"]
 
 [ext_resource type="Script" uid="uid://b1cyfer2nuhy" path="res://scripts/cafet_level.gd" id="1_g56co"]
 [ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="2_a8v1j"]
 [ext_resource type="PackedScene" uid="uid://c78w6mwil8r3c" path="res://scenes/black_screen.tscn" id="3_556i7"]
+[ext_resource type="Texture2D" uid="uid://c8jg42vb814c" path="res://assets/sprites/CafetBackground.png" id="3_a57gd"]
 [ext_resource type="FontFile" uid="uid://0mnfcm1q08on" path="res://assets/fonts/PixelOperator8.ttf" id="4_a8v1j"]
 
 [node name="CafetLevel" type="Node2D"]
@@ -10,14 +11,19 @@ script = ExtResource("1_g56co")
 
 [node name="GameUI" parent="." instance=ExtResource("2_a8v1j")]
 
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(960, 540)
+texture = ExtResource("3_a57gd")
+
 [node name="BlackScreen" parent="." instance=ExtResource("3_556i7")]
 visible = false
 
 [node name="WorkButton" type="Button" parent="."]
-offset_left = 760.0
-offset_top = 440.0
-offset_right = 1160.0
-offset_bottom = 640.0
+offset_left = 75.0
+offset_top = 806.0
+offset_right = 475.0
+offset_bottom = 1006.0
 theme_override_fonts/font = ExtResource("4_a8v1j")
 theme_override_font_sizes/font_size = 32
 text = "Go back to work"

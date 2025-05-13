@@ -7,7 +7,7 @@ signal order_validated(shape_type: String)
 @export var accepted_types: Array = []
 
 var contained_objects = []
-@onready var label = $Label
+#@onready var label = $Label
 @onready var sprite = $AnimatedSprite2D
 
 func _ready() -> void:
@@ -51,8 +51,8 @@ func validate_orders():
 func get_frame_id(zone_type: String) -> int:
 	match zone_type:
 		"Normal": return 0
-		"Collector": return 1
-		"Trash": return 2
+		"Collector": return 0
+		"Trash": return 11
 		_: return 0
 
 func add_object(obj):
@@ -73,7 +73,7 @@ func update_label():
 	for obj in contained_objects:
 		if is_instance_valid(obj):
 			shapes.append(obj.object_type)
-	label.text = str(shapes)
+	#label.text = str(shapes)
 
 func is_valid_placement(obj) -> bool:
 	if zone_type == "Collector":

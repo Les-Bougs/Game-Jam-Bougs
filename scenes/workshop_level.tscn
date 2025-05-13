@@ -35,72 +35,72 @@ visible = false
 
 [node name="Object1" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(232, 952)
+position = Vector2(144, 952)
 spawnable = true
 
 [node name="Object2" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(552, 952)
+position = Vector2(384, 952)
 object_type = "Hammer"
 spawnable = true
 
 [node name="Object3" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(872, 952)
+position = Vector2(624, 952)
 object_type = "Nail"
 spawnable = true
 
 [node name="Object4" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(1192, 952)
+position = Vector2(864, 952)
 object_type = "NailPlank"
 spawnable = true
 
 [node name="Object5" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
-position = Vector2(1512, 952)
+position = Vector2(1104, 952)
 object_type = "Furniture"
 spawnable = true
 
 [node name="ZoneFinal" parent="." instance=ExtResource("5_f56wo")]
-position = Vector2(1760, 440)
-scale = Vector2(0.55, 0.55)
+position = Vector2(1730, 445)
+scale = Vector2(4, 4)
 zone_type = "Collector"
 
 [node name="Zone1" parent="." instance=ExtResource("5_f56wo")]
-position = Vector2(240, 368)
-scale = Vector2(0.5, 0.5)
+position = Vector2(260, 400)
+scale = Vector2(4, 4)
 
 [node name="Zone2" parent="." instance=ExtResource("5_f56wo")]
-position = Vector2(632, 368)
-scale = Vector2(0.5, 0.5)
+position = Vector2(540, 400)
+scale = Vector2(4, 4)
 
 [node name="Trash" parent="." instance=ExtResource("5_f56wo")]
-position = Vector2(936, 720)
-scale = Vector2(0.1, 0.1)
+position = Vector2(857, 647)
+scale = Vector2(4, 4)
 zone_type = "Trash"
 
 [node name="Validate" type="Button" parent="."]
-offset_left = 1664.0
-offset_top = 704.0
-offset_right = 1856.0
-offset_bottom = 808.0
+offset_left = 1369.0
+offset_top = 371.0
+offset_right = 1561.0
+offset_bottom = 475.0
 text = "Validate"
 
 [node name="ListOrderIn" parent="." instance=ExtResource("7_medaf")]
-offset_left = 79.0
-offset_top = 104.0
-offset_right = 528.0
-offset_bottom = 215.0
+offset_top = 99.0
+offset_right = 449.0
+offset_bottom = 210.0
 
 [node name="ListOrderOut" parent="." instance=ExtResource("7_medaf")]
-offset_left = 1619.0
-offset_top = 640.0
-offset_right = 1888.0
-offset_bottom = 688.0
+offset_left = 1408.0
+offset_top = 671.0
+offset_right = 1677.0
+offset_bottom = 719.0
 zone_type = "Outbound"
 
 [node name="GameOverPanel" type="Panel" parent="."]
+visible = false
 offset_left = 448.0
 offset_top = 320.0
 offset_right = 1536.0
@@ -134,7 +134,7 @@ offset_bottom = 424.0
 text = "Next"
 
 [node name="Clock" parent="." instance=ExtResource("8_odtix")]
-position = Vector2(1744, 183)
+position = Vector2(1736, 900)
 scale = Vector2(2, 2)
 time_step = 0.2
 incr = 1
