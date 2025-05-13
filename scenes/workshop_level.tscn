@@ -126,6 +126,7 @@ offset_bottom = 424.0
 text = "Restart Button"
 
 [node name="NextButton" type="Button" parent="GameOverPanel"]
+layout_mode = 0
 offset_left = 745.0
 offset_top = 320.0
 offset_right = 1001.0

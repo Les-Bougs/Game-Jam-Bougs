@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 
-global="*res://global.gd"
+Globals="*res://global.gd"
 CombinationManager="*res://scripts/object_utils/combination_manager.gd"
 ObjectFactory="*res://scripts/object_utils/object_factory.gd"
 ObjectCombiner="*res://scripts/object_utils/object_combiner.gd"

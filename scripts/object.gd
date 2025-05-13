@@ -54,13 +54,13 @@ func start_drag():
 	startPos = position
 	initialPos = global_position
 	offset = get_global_mouse_position() - global_position
-	global.is_dragging = true
+	Globals.is_dragging = true
 
 func update_drag():
 	global_position = get_global_mouse_position() - offset
 
 func end_drag():
-	global.is_dragging = false
+	Globals.is_dragging = false
 	var tween = get_tree().create_tween()
 	
 	if is_inside_dropable and current_dropable.is_valid_placement(self):
@@ -100,13 +100,13 @@ func check_combinations():
 
 func _on_area_2d_mouse_entered() -> void:
 	#print('entered')
-	if not global.is_dragging:
+	if not Globals.is_dragging:
 		draggable = true
 		scale = initialScale * 1.05
 
 func _on_area_2d_mouse_exited() -> void:
 	#print('exited')
-	if not global.is_dragging:
+	if not Globals.is_dragging:
 		draggable = false
 		scale = initialScale
 
