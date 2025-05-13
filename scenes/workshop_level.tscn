@@ -12,14 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://pxr24r7frj2x" path="res://assets/sprites/ValidateButton.png" id="8_uchhu"]
 [ext_resource type="Shader" uid="uid://dx2y70lv25yia" path="res://shaders/vhs.gdshader" id="11_6q1b5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6q1b5"]
-atlas = ExtResource("8_uchhu")
-region = Rect2(0, 0, 25, 21)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uchhu"]
-atlas = ExtResource("8_uchhu")
-region = Rect2(25, 0, 25, 21)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lr2yr"]
 shader = ExtResource("11_6q1b5")
 shader_parameter/overlay = true
@@ -28,21 +20,29 @@ shader_parameter/scanlines_width = 0.25
 shader_parameter/grille_opacity = 0.3
 shader_parameter/resolution = Vector2(640, 480)
 shader_parameter/pixelate = false
-shader_parameter/roll = false
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 0.01
 shader_parameter/roll_variation = 1.8
 shader_parameter/distort_intensity = 0.05
 shader_parameter/noise_opacity = 0.4
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.06
 shader_parameter/aberration = 0.01
-shader_parameter/brightness = 1.4
+shader_parameter/brightness = 1.8
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.05
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6q1b5"]
+atlas = ExtResource("8_uchhu")
+region = Rect2(0, 0, 25, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uchhu"]
+atlas = ExtResource("8_uchhu")
+region = Rect2(25, 0, 25, 21)
 
 [node name="WorkshopLevel" type="Node2D"]
 script = ExtResource("6_f56wo")
@@ -62,6 +62,15 @@ z_index = -99
 position = Vector2(960, 952)
 scale = Vector2(4, 4)
 texture = ExtResource("2_cxcf7")
+
+[node name="Shaders" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Shaders"]
+z_index = -1
+material = SubResource("ShaderMaterial_lr2yr")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
 
 [node name="BlackScreen" parent="." instance=ExtResource("5_p0rnu")]
 visible = false
@@ -176,13 +185,6 @@ scale = Vector2(2, 2)
 time_step = 0.2
 incr = 1
 hours = 7
-
-[node name="Shaders" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="Shaders"]
-material = SubResource("ShaderMaterial_lr2yr")
-offset_right = 1920.0
-offset_bottom = 1080.0
 
 [connection signal="pressed" from="GameOverPanel/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="clock_timeout" from="Clock" to="." method="_on_clock_clock_timeout"]
