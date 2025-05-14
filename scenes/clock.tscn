@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2m75hf4tf80q"]
 
-[ext_resource type="Script" uid="uid://c2t5adwnpg5xa" path="res://scripts/clock.gd" id="1_vlc7k"]
-[ext_resource type="Texture2D" uid="uid://bwfrdtltagkci" path="res://assets/sprites/ClockBackground.png" id="2_eptq3"]
-[ext_resource type="FontFile" uid="uid://c7slifubep3li" path="res://assets/fonts/DigitTech7-Regular.ttf" id="2_y58p0"]
+[ext_resource type="Script" uid="uid://dpmbax5eqnf45" path="res://scripts/clock.gd" id="1_vlc7k"]
+[ext_resource type="Texture2D" uid="uid://c35foonmnbp1k" path="res://assets/sprites/ClockBackground.png" id="2_eptq3"]
+[ext_resource type="FontFile" uid="uid://b6vn2lcxp1ave" path="res://assets/fonts/DigitTech7-Regular.ttf" id="2_y58p0"]
 
 [node name="Clock" type="Node2D"]
 script = ExtResource("1_vlc7k")
