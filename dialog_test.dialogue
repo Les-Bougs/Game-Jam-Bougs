@@ -1,0 +1,18 @@
+~ start
+
+Nicolas : Coucou Benjamin !
+Nicolas : Ceci est notre super simulateur d'usine
+Nicolas : Commence par attraper un objet dans la barre du bas
+=> END
+
+~ first_pick
+Nicolas : Super ! Maintenant place l'objet sur le tapis roulant
+=> END
+
+~ first_drop
+Nicolas : Maintenant appuie sur le bouton vert pour l'envoyer
+=> END
+
+~ tuto_end
+Patron : Je t'ai envoyé ta première commande, au boulot ! 
+=> END
