@@ -22,6 +22,10 @@ ObjectFactory="*res://scripts/object_utils/object_factory.gd"
 ObjectCombiner="*res://scripts/object_utils/object_combiner.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
+[dialogue_manager]
+
+runtime/balloon_path="res://dialogues/balloon.tscn"
+
 [display]
 
 window/size/viewport_width=1920
@@ -52,7 +56,7 @@ validate_key={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialog_test.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialog_test.dialogue", "res://dialogues/dialog_test.dialogue")
 
 [rendering]
 
