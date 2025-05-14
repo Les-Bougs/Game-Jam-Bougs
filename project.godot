@@ -20,6 +20,11 @@ Globals="*res://global.gd"
 CombinationManager="*res://scripts/object_utils/combination_manager.gd"
 ObjectFactory="*res://scripts/object_utils/object_factory.gd"
 ObjectCombiner="*res://scripts/object_utils/object_combiner.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/balloon_path="res://dialogues/balloon.tscn"
 
 [display]
 
@@ -31,6 +36,10 @@ window/stretch/mode="viewport"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
@@ -44,6 +53,10 @@ validate_key={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialog_test.dialogue", "res://dialogues/dialog_test.dialogue")
 
 [rendering]
 

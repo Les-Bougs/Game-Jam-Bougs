@@ -7,6 +7,7 @@ extends Node2D
 
 func _ready() -> void:
 	black_screen.fade_out()
+	DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("pause_cafe"))
 
 
 

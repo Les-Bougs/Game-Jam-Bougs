@@ -6,3 +6,7 @@ var day_nb = 0
 var level_state = "morning"
 
 var player_money: int = 0
+var first_pick = true
+var first_drop = true
+var first_send = true
+var first_day = true

@@ -1,0 +1,26 @@
+~ start
+
+Nicolas : Coucou [wave]Benjamin[/wave] !
+Nicolas : Ceci est notre super simulateur d'usine
+Nicolas : Commence par attraper un objet dans la barre du bas
+=> END
+
+~ first_pick
+Nicolas : Super ! Maintenant place l'objet sur le tapis roulant
+=> END
+
+~ first_drop
+Nicolas : Maintenant appuie sur le bouton vert pour l'envoyer
+=> END
+
+~ tuto_end
+Patron : Je t'ai envoyé ta première commande[wait=2], au boulot ! 
+=> END
+
+~ pause_cafe
+Camarade : Alors le nouveau, on se plait à l'usine ?
+- Oui c'est super j'adore travailler !
+	Patron : Super ! Aller, retourne bosser
+- Non... Je veux rentrer chez moi :'(
+	Patron : C'est pas la réponse que je veux entendre => pause_cafe
+=> END

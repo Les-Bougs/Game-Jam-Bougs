@@ -57,6 +57,9 @@ func start_drag():
 	initialPos = global_position
 	offset = get_global_mouse_position() - global_position
 	Globals.is_dragging = true
+	if Globals.first_pick:
+		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("first_pick"))
+		Globals.first_pick = false
 
 func update_drag():
 	global_position = get_global_mouse_position() - offset
@@ -67,6 +70,9 @@ func end_drag():
 	
 	if is_inside_dropable and current_dropable.is_valid_placement(self):
 		place_in_zone(tween)
+		if Globals.first_drop:
+			DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("first_drop"))
+			Globals.first_drop = false
 	else:
 		return_to_initial_position(tween)
 

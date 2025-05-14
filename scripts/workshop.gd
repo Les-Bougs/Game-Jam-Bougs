@@ -47,7 +47,9 @@ func _ready():
 
 	# ecran noir de transition
 	await black_screen.fade_out()
-
+	if Globals.first_day:
+		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("start"))
+		Globals.first_day = false
 	# Démarrer l'horloge
 	clock.start_clock()
 
@@ -120,6 +122,9 @@ func _on_next_button_pressed() -> void:
 func _on_validate_orders_button_pressed():
 	if order_platform.has_method("validate_orders"):
 		order_platform.validate_orders()
+	if Globals.first_send:
+		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("tuto_end"))
+		Globals.first_send = false
 
 
 func _on_clock_clock_timeout() -> void:
