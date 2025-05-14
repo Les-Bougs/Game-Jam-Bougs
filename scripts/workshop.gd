@@ -47,7 +47,9 @@ func _ready():
 
 	# ecran noir de transition
 	await black_screen.fade_out()
-	DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("start"))
+	if Globals.first_day:
+		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("start"))
+		Globals.first_day = false
 	# Démarrer l'horloge
 	clock.start_clock()
 

@@ -1,7 +1,6 @@
 ~ start
 
-% Nicolas : Coucou [wave]Benjamin[/wave] !
-% Nicolas : Coucou [wave]camarade Benjamin[/wave] !
+Nicolas : Coucou [wave]Benjamin[/wave] !
 Nicolas : Ceci est notre super simulateur d'usine
 Nicolas : Commence par attraper un objet dans la barre du bas
 => END
@@ -15,7 +14,7 @@ Nicolas : Maintenant appuie sur le bouton vert pour l'envoyer
 => END
 
 ~ tuto_end
-Patron : Je t'ai envoyé ta première commande[wait=1], au boulot ! 
+Patron : Je t'ai envoyé ta première commande[wait=2], au boulot ! 
 => END
 
 ~ pause_cafe
