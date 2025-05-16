@@ -1,4 +1,12 @@
 ~ start
+Nicolas : Besoin du tuto ?
+- Oui
+- Non
+	set Globals.first_pick = false
+	set Globals.first_drop = false
+	set Globals.first_send = false
+	set Globals.first_day = false
+	=> END
 
 % Nicolas : Coucou [wave]Benjamin[/wave] !
 % Nicolas : Coucou [wave]camarade Benjamin[/wave] !
