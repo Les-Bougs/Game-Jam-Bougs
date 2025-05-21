@@ -11,6 +11,10 @@ func _ready() -> void:
 	sleep_button.hide()
 	black_screen_label.text = ""
 	await black_screen.fade_out()
+	
+	# Afficher le dialogue du soir
+	var dialogue_name = "day_" + str(Globals.day_nb) + "_evening"
+	DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
 
 
 func _on_bed_mouse_entered() -> void:

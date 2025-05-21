@@ -3,7 +3,7 @@ extends Node2D
 var is_dragging = false
 var day_nb = 0
 
-var level_state = "morning"
+var level_state = "afternoon"
 
 var player_money: int = 0
 var first_pick = true

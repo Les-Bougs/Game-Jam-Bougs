@@ -1,20 +1,29 @@
 {
-	"order_0": {
+	"day_1_morning": {
+		"Plank": 2,
+		"NailPlank": 1
+	},
+	"day_1_afternoon": {
 		"Plank": 3,
 		"NailPlank": 1,
 		"Furniture": 1
 	},
-	"order_1": {
+	"day_2_morning": {
 		"Plank": 2,
 		"NailPlank": 2
 	},
-	"order_2": {
+	"day_2_afternoon": {
+		"Plank": 3,
+		"NailPlank": 2,
+		"Furniture": 1
+	},
+	"day_3_morning": {
 		"Plank": 1,
 		"NailPlank": 3
 	},
-	"order_3": {
+	"day_3_afternoon": {
 		"Plank": 3,
-		"NailPlank": 1,
-		"Furniture": 1
+		"NailPlank": 2,
+		"Furniture": 2
 	}
 }

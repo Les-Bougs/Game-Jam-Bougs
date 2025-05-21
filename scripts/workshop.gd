@@ -23,6 +23,14 @@ var spawnable_positions = {
 }
 
 func _ready():
+	print("old : " ,Globals.day_nb, ' ', Globals.level_state)
+	if Globals.level_state == 'afternoon':
+		Globals.day_nb +=1
+		Globals.level_state = 'morning'
+	else:
+		Globals.level_state = 'afternoon'
+		
+	print("new : ",Globals.day_nb, ' ', Globals.level_state)
 	game_over_panel.hide() # Hide the game over panel at the start
 	
 	# setup clock hours and alarm depending on the level state
@@ -47,15 +55,15 @@ func _ready():
 
 	# ecran noir de transition
 	await black_screen.fade_out()
-	if Globals.first_day:
-		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("start"))
-		Globals.first_day = false
+	var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state
+	DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
+	Globals.first_day = false
 	# Démarrer l'horloge
 	clock.start_clock()
 
 
 func load_orders(day_nb: int):
-	var order_name = 'order_' + str(day_nb)
+	var order_name = 'day_' + str(day_nb) + '_' + Globals.level_state
 	print(order_name)
 	var list_in = get_node("ListOrderIn")
 	var list_out = get_node("ListOrderOut")
@@ -102,7 +110,6 @@ func show_completion_message():
 
 
 func _on_restart_button_pressed():
-	Globals.day_nb += 1
 	get_tree().reload_current_scene()
 	
 
@@ -110,12 +117,12 @@ func _on_restart_button_pressed():
 func _on_next_button_pressed() -> void:
 	await black_screen.fade_in()
 	if Globals.level_state == "morning":
-		Globals.level_state = "afternoon"
-		Globals.day_nb += 1
+		#Globals.level_state = "afternoon"
+		#Globals.day_nb += 1
 		get_tree().change_scene_to_file("res://scenes/cafet_level.tscn")
 	elif Globals.level_state == "afternoon":
-		Globals.level_state = "morning"
-		Globals.day_nb += 1
+		#Globals.level_state = "morning"
+		#Globals.day_nb += 1
 		get_tree().change_scene_to_file("res://scenes/home_level.tscn")
 
 
@@ -123,7 +130,8 @@ func _on_validate_orders_button_pressed():
 	if order_platform.has_method("validate_orders"):
 		order_platform.validate_orders()
 	if Globals.first_send:
-		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("tuto_end"))
+		var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state + "_tuto_end"
+		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
 		Globals.first_send = false
 
 
