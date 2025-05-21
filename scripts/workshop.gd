@@ -145,6 +145,12 @@ func _input(event):
 			_on_restart_button_pressed()
 		else:
 			_on_validate_orders_button_pressed()
+	elif event.is_action_pressed("cheat_day"):
+		print("cheat_day")
+		final_score_label.text = "Order Completed !"
+		Globals.player_money += 10
+		show_completion_message()
+		#_on_next_button_pressed()
 	
 	# Raccourcis pour envoyer directement des éléments vers la zone de validation
 	if not game_over_panel.visible:
