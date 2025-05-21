@@ -1,29 +1,420 @@
 {
 	"day_1_morning": {
-		"Plank": 2,
-		"NailPlank": 1
+		"orders": [
+			{"type": "Plank", "count": 2},
+			{"type": "NailPlank", "count": 1}
+		]
 	},
 	"day_1_afternoon": {
-		"Plank": 3,
-		"NailPlank": 1,
-		"Furniture": 1
+		"orders": [
+			{"type": "Plank", "count": 3},
+			{"type": "NailPlank", "count": 2}
+		]
 	},
 	"day_2_morning": {
-		"Plank": 2,
-		"NailPlank": 2
+		"orders": [
+			{"type": "Plank", "count": 3},
+			{"type": "NailPlank", "count": 2},
+			{"type": "Furniture", "count": 1}
+		]
 	},
 	"day_2_afternoon": {
-		"Plank": 3,
-		"NailPlank": 2,
-		"Furniture": 1
+		"orders": [
+			{"type": "Plank", "count": 4},
+			{"type": "NailPlank", "count": 3},
+			{"type": "Furniture", "count": 1}
+		]
 	},
 	"day_3_morning": {
-		"Plank": 1,
-		"NailPlank": 3
+		"orders": [
+			{"type": "Plank", "count": 4},
+			{"type": "NailPlank", "count": 3},
+			{"type": "Furniture", "count": 2}
+		]
 	},
 	"day_3_afternoon": {
-		"Plank": 3,
-		"NailPlank": 2,
-		"Furniture": 2
+		"orders": [
+			{"type": "Plank", "count": 5},
+			{"type": "NailPlank", "count": 4},
+			{"type": "Furniture", "count": 2}
+		]
+	},
+	"day_4_morning": {
+		"orders": [
+			{"type": "Plank", "count": 5},
+			{"type": "NailPlank", "count": 4},
+			{"type": "Furniture", "count": 3}
+		]
+	},
+	"day_4_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 6},
+			{"type": "NailPlank", "count": 5},
+			{"type": "Furniture", "count": 3}
+		]
+	},
+	"day_5_morning": {
+		"orders": [
+			{"type": "Plank", "count": 6},
+			{"type": "NailPlank", "count": 5},
+			{"type": "Furniture", "count": 4}
+		]
+	},
+	"day_5_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 7},
+			{"type": "NailPlank", "count": 6},
+			{"type": "Furniture", "count": 4}
+		]
+	},
+	"day_6_morning": {
+		"orders": [
+			{"type": "Plank", "count": 7},
+			{"type": "NailPlank", "count": 6},
+			{"type": "Furniture", "count": 5}
+		]
+	},
+	"day_6_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 8},
+			{"type": "NailPlank", "count": 7},
+			{"type": "Furniture", "count": 5}
+		]
+	},
+	"day_7_morning": {
+		"orders": [
+			{"type": "Plank", "count": 8},
+			{"type": "NailPlank", "count": 7},
+			{"type": "Furniture", "count": 6}
+		]
+	},
+	"day_7_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 9},
+			{"type": "NailPlank", "count": 8},
+			{"type": "Furniture", "count": 6}
+		]
+	},
+	"day_8_morning": {
+		"orders": [
+			{"type": "Plank", "count": 9},
+			{"type": "NailPlank", "count": 8},
+			{"type": "Furniture", "count": 7}
+		]
+	},
+	"day_8_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 10},
+			{"type": "NailPlank", "count": 9},
+			{"type": "Furniture", "count": 7}
+		]
+	},
+	"day_9_morning": {
+		"orders": [
+			{"type": "Plank", "count": 10},
+			{"type": "NailPlank", "count": 9},
+			{"type": "Furniture", "count": 8}
+		]
+	},
+	"day_9_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 11},
+			{"type": "NailPlank", "count": 10},
+			{"type": "Furniture", "count": 8}
+		]
+	},
+	"day_10_morning": {
+		"orders": [
+			{"type": "Plank", "count": 11},
+			{"type": "NailPlank", "count": 10},
+			{"type": "Furniture", "count": 9}
+		]
+	},
+	"day_10_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 12},
+			{"type": "NailPlank", "count": 11},
+			{"type": "Furniture", "count": 9}
+		]
+	},
+	"day_11_morning": {
+		"orders": [
+			{"type": "Plank", "count": 12},
+			{"type": "NailPlank", "count": 11},
+			{"type": "Furniture", "count": 10}
+		]
+	},
+	"day_11_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 13},
+			{"type": "NailPlank", "count": 12},
+			{"type": "Furniture", "count": 10}
+		]
+	},
+	"day_12_morning": {
+		"orders": [
+			{"type": "Plank", "count": 13},
+			{"type": "NailPlank", "count": 12},
+			{"type": "Furniture", "count": 11}
+		]
+	},
+	"day_12_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 14},
+			{"type": "NailPlank", "count": 13},
+			{"type": "Furniture", "count": 11}
+		]
+	},
+	"day_13_morning": {
+		"orders": [
+			{"type": "Plank", "count": 14},
+			{"type": "NailPlank", "count": 13},
+			{"type": "Furniture", "count": 12}
+		]
+	},
+	"day_13_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 15},
+			{"type": "NailPlank", "count": 14},
+			{"type": "Furniture", "count": 12}
+		]
+	},
+	"day_14_morning": {
+		"orders": [
+			{"type": "Plank", "count": 15},
+			{"type": "NailPlank", "count": 14},
+			{"type": "Furniture", "count": 13}
+		]
+	},
+	"day_14_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 16},
+			{"type": "NailPlank", "count": 15},
+			{"type": "Furniture", "count": 13}
+		]
+	},
+	"day_15_morning": {
+		"orders": [
+			{"type": "Plank", "count": 16},
+			{"type": "NailPlank", "count": 15},
+			{"type": "Furniture", "count": 14}
+		]
+	},
+	"day_15_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 17},
+			{"type": "NailPlank", "count": 16},
+			{"type": "Furniture", "count": 14}
+		]
+	},
+	"day_16_morning": {
+		"orders": [
+			{"type": "Plank", "count": 17},
+			{"type": "NailPlank", "count": 16},
+			{"type": "Furniture", "count": 15}
+		]
+	},
+	"day_16_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 18},
+			{"type": "NailPlank", "count": 17},
+			{"type": "Furniture", "count": 15}
+		]
+	},
+	"day_17_morning": {
+		"orders": [
+			{"type": "Plank", "count": 18},
+			{"type": "NailPlank", "count": 17},
+			{"type": "Furniture", "count": 16}
+		]
+	},
+	"day_17_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 19},
+			{"type": "NailPlank", "count": 18},
+			{"type": "Furniture", "count": 16}
+		]
+	},
+	"day_18_morning": {
+		"orders": [
+			{"type": "Plank", "count": 19},
+			{"type": "NailPlank", "count": 18},
+			{"type": "Furniture", "count": 17}
+		]
+	},
+	"day_18_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 20},
+			{"type": "NailPlank", "count": 19},
+			{"type": "Furniture", "count": 17}
+		]
+	},
+	"day_19_morning": {
+		"orders": [
+			{"type": "Plank", "count": 20},
+			{"type": "NailPlank", "count": 19},
+			{"type": "Furniture", "count": 18}
+		]
+	},
+	"day_19_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 21},
+			{"type": "NailPlank", "count": 20},
+			{"type": "Furniture", "count": 18}
+		]
+	},
+	"day_20_morning": {
+		"orders": [
+			{"type": "Plank", "count": 21},
+			{"type": "NailPlank", "count": 20},
+			{"type": "Furniture", "count": 19}
+		]
+	},
+	"day_20_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 22},
+			{"type": "NailPlank", "count": 21},
+			{"type": "Furniture", "count": 19}
+		]
+	},
+	"day_21_morning": {
+		"orders": [
+			{"type": "Plank", "count": 22},
+			{"type": "NailPlank", "count": 21},
+			{"type": "Furniture", "count": 20}
+		]
+	},
+	"day_21_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 23},
+			{"type": "NailPlank", "count": 22},
+			{"type": "Furniture", "count": 20}
+		]
+	},
+	"day_22_morning": {
+		"orders": [
+			{"type": "Plank", "count": 23},
+			{"type": "NailPlank", "count": 22},
+			{"type": "Furniture", "count": 21}
+		]
+	},
+	"day_22_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 24},
+			{"type": "NailPlank", "count": 23},
+			{"type": "Furniture", "count": 21}
+		]
+	},
+	"day_23_morning": {
+		"orders": [
+			{"type": "Plank", "count": 24},
+			{"type": "NailPlank", "count": 23},
+			{"type": "Furniture", "count": 22}
+		]
+	},
+	"day_23_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 25},
+			{"type": "NailPlank", "count": 24},
+			{"type": "Furniture", "count": 22}
+		]
+	},
+	"day_24_morning": {
+		"orders": [
+			{"type": "Plank", "count": 25},
+			{"type": "NailPlank", "count": 24},
+			{"type": "Furniture", "count": 23}
+		]
+	},
+	"day_24_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 26},
+			{"type": "NailPlank", "count": 25},
+			{"type": "Furniture", "count": 23}
+		]
+	},
+	"day_25_morning": {
+		"orders": [
+			{"type": "Plank", "count": 26},
+			{"type": "NailPlank", "count": 25},
+			{"type": "Furniture", "count": 24}
+		]
+	},
+	"day_25_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 27},
+			{"type": "NailPlank", "count": 26},
+			{"type": "Furniture", "count": 24}
+		]
+	},
+	"day_26_morning": {
+		"orders": [
+			{"type": "Plank", "count": 27},
+			{"type": "NailPlank", "count": 26},
+			{"type": "Furniture", "count": 25}
+		]
+	},
+	"day_26_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 28},
+			{"type": "NailPlank", "count": 27},
+			{"type": "Furniture", "count": 25}
+		]
+	},
+	"day_27_morning": {
+		"orders": [
+			{"type": "Plank", "count": 28},
+			{"type": "NailPlank", "count": 27},
+			{"type": "Furniture", "count": 26}
+		]
+	},
+	"day_27_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 29},
+			{"type": "NailPlank", "count": 28},
+			{"type": "Furniture", "count": 26}
+		]
+	},
+	"day_28_morning": {
+		"orders": [
+			{"type": "Plank", "count": 29},
+			{"type": "NailPlank", "count": 28},
+			{"type": "Furniture", "count": 27}
+		]
+	},
+	"day_28_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 30},
+			{"type": "NailPlank", "count": 29},
+			{"type": "Furniture", "count": 27}
+		]
+	},
+	"day_29_morning": {
+		"orders": [
+			{"type": "Plank", "count": 30},
+			{"type": "NailPlank", "count": 29},
+			{"type": "Furniture", "count": 28}
+		]
+	},
+	"day_29_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 31},
+			{"type": "NailPlank", "count": 30},
+			{"type": "Furniture", "count": 28}
+		]
+	},
+	"day_30_morning": {
+		"orders": [
+			{"type": "Plank", "count": 31},
+			{"type": "NailPlank", "count": 30},
+			{"type": "Furniture", "count": 29}
+		]
+	},
+	"day_30_afternoon": {
+		"orders": [
+			{"type": "Plank", "count": 32},
+			{"type": "NailPlank", "count": 31},
+			{"type": "Furniture", "count": 29}
+		]
 	}
 }

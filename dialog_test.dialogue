@@ -50,18 +50,6 @@ Nicolas : Premier jour terminé !
 Nicolas : Repose-toi bien, demain sera plus intense
 => rent
 
-~ rent
-Patron : C'est l'heure de payer ton loyer
-Patron : 15 pièces comme d'habitude
-set Globals.player_money -= 15
-if Globals.player_money >= 0:
-	Patron : Loyer payé
-	=> END
-else 
-	=> game_over
-
-
-
 ~ day_2_morning
 Patron : Bienvenue pour ton deuxième jour !
 Patron : Aujourd'hui, nous allons augmenter la difficulté
@@ -109,16 +97,13 @@ Nicolas : Troisième jour terminé !
 Nicolas : Tu es devenu un vrai professionnel !
 => rent
 
-~ day_3_rent
-Patron : Dernier jour, mais le loyer reste le même
-Patron : 15 pièces s'il te plaît
-- Je vais payer
-	set Globals.player_money -= 15
-	Patron : Merci ! Bonne nuit
-- Je n'ai pas assez d'argent...
-	Patron : Dans ce cas, tu devras travailler plus demain
-	set Globals.player_money = 0
-=> END
+~ rent
+Patron : C'est l'heure de payer ton loyer, 15 pièces comme d'habitude
+set Globals.player_money -= 15
+if Globals.player_money >= 0:
+	=> END
+else 
+	=> game_over
 
 ~ game_over
 Patron : Tu n'as pas pu payer ton loyer...

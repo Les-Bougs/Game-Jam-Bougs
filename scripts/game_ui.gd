@@ -21,8 +21,6 @@ func _process(_delta: float) -> void:
 
 func _on_debug_add_money_pressed() -> void:
 	Globals.player_money += 10
-	print("Argent ajouté : ", Globals.player_money)
 
 func _on_debug_remove_money_pressed() -> void:
 	Globals.player_money -= 10
-	print("Argent retiré : ", Globals.player_money)
