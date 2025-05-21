@@ -14,6 +14,12 @@ var order_counts = {
 	"Furniture": 0
 }
 
+var inventory = {
+	"Plank": 0,
+	"NailPlank": 0,
+	"Furniture": 0
+}
+
 # Positions initiales des objets spawnables
 var spawnable_positions = {
 	"Plank": Vector2(232, 768),
@@ -74,8 +80,8 @@ func load_orders(day_nb: int):
 		
 		if list_out:
 			list_out.clear_orders()
-			for type in list_in.initial_orders:
-				list_out.add_order(type, 0)
+			for order in list_in.initial_orders.orders:
+				list_out.add_order(order.type, 0)
 
 
 func _on_shape_validated(shape_type: String):

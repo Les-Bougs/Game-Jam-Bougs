@@ -19,8 +19,8 @@ func load_initial_orders(order_nb):
 		initial_orders = JSON.parse_string(content)[order_nb]
 
 func initialize_orders():
-	for type in initial_orders:
-		add_order(type, initial_orders[type])
+	for order in initial_orders.orders:
+		add_order(order.type, order.count)
 
 func add_order(shape_type: String, count: int):
 	var order_instance = order_scene.instantiate()
