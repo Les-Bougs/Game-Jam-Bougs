@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cihrhtnvafdvu"]
 
-[ext_resource type="Script" uid="uid://ctl52mfm4hk77" path="res://scripts/home_level.gd" id="1_mr7i8"]
+[ext_resource type="Script" uid="uid://ri7tapweokjb" path="res://scripts/home_level.gd" id="1_mr7i8"]
 [ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="1_sbm65"]
-[ext_resource type="Texture2D" uid="uid://c4rrs3b6hf14v" path="res://assets/sprites/HomeBackground.png" id="2_urirq"]
-[ext_resource type="FontFile" uid="uid://0mnfcm1q08on" path="res://assets/fonts/PixelOperator8.ttf" id="3_jujlx"]
+[ext_resource type="Texture2D" uid="uid://cplre8pu728ho" path="res://assets/sprites/HomeBackground.png" id="2_urirq"]
+[ext_resource type="FontFile" uid="uid://cdypc0ud6krih" path="res://assets/fonts/PixelOperator8.ttf" id="3_jujlx"]
 [ext_resource type="PackedScene" uid="uid://c78w6mwil8r3c" path="res://scenes/black_screen.tscn" id="4_v8m2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mr7i8"]
@@ -48,6 +48,32 @@ position = Vector2(140, 113.5)
 shape = SubResource("RectangleShape2D_mr7i8")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="GameOverPanel" type="Panel" parent="."]
+visible = false
+offset_left = 448.0
+offset_top = 320.0
+offset_right = 1536.0
+offset_bottom = 768.0
+
+[node name="FinalScoreLabel" type="Label" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 1024.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 100
+text = "Final Score : X Days"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverPanel"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 320.0
+offset_right = 640.0
+offset_bottom = 424.0
+text = "Restart Button"
 
 [connection signal="mouse_entered" from="Bed" to="." method="_on_bed_mouse_entered"]
 [connection signal="mouse_exited" from="Bed" to="." method="_on_bed_mouse_exited"]

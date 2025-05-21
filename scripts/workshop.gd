@@ -14,6 +14,12 @@ var order_counts = {
 	"Furniture": 0
 }
 
+var inventory = {
+	"Plank": 0,
+	"NailPlank": 0,
+	"Furniture": 0
+}
+
 # Positions initiales des objets spawnables
 var spawnable_positions = {
 	"Plank": Vector2(232, 768),
@@ -23,6 +29,14 @@ var spawnable_positions = {
 }
 
 func _ready():
+	print("old : " ,Globals.day_nb, ' ', Globals.level_state)
+	if Globals.level_state == 'afternoon':
+		Globals.day_nb +=1
+		Globals.level_state = 'morning'
+	else:
+		Globals.level_state = 'afternoon'
+		
+	print("new : ",Globals.day_nb, ' ', Globals.level_state)
 	game_over_panel.hide() # Hide the game over panel at the start
 	
 	# setup clock hours and alarm depending on the level state
@@ -47,15 +61,14 @@ func _ready():
 
 	# ecran noir de transition
 	await black_screen.fade_out()
-	if Globals.first_day:
-		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("start"))
-		Globals.first_day = false
+	var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state
+	DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
+	Globals.first_day = false
 	# Démarrer l'horloge
 	clock.start_clock()
 
-
 func load_orders(day_nb: int):
-	var order_name = 'order_' + str(day_nb)
+	var order_name = 'day_' + str(day_nb) + '_' + Globals.level_state
 	print(order_name)
 	var list_in = get_node("ListOrderIn")
 	var list_out = get_node("ListOrderOut")
@@ -67,8 +80,8 @@ func load_orders(day_nb: int):
 		
 		if list_out:
 			list_out.clear_orders()
-			for type in list_in.initial_orders:
-				list_out.add_order(type, 0)
+			for order in list_in.initial_orders.orders:
+				list_out.add_order(order.type, 0)
 
 
 func _on_shape_validated(shape_type: String):
@@ -104,18 +117,15 @@ func show_completion_message():
 func _on_restart_button_pressed():
 	Globals.day_nb += 1
 	get_tree().reload_current_scene()
-	
+
 
 # Passer à la scène suivante
 func _on_next_button_pressed() -> void:
-	await black_screen.fade_in()
 	if Globals.level_state == "morning":
-		Globals.level_state = "afternoon"
-		Globals.day_nb += 1
+		await black_screen.fade_in()
 		get_tree().change_scene_to_file("res://scenes/cafet_level.tscn")
 	elif Globals.level_state == "afternoon":
-		Globals.level_state = "morning"
-		Globals.day_nb += 1
+		await black_screen.fade_in()
 		get_tree().change_scene_to_file("res://scenes/home_level.tscn")
 
 
@@ -123,7 +133,8 @@ func _on_validate_orders_button_pressed():
 	if order_platform.has_method("validate_orders"):
 		order_platform.validate_orders()
 	if Globals.first_send:
-		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), ("tuto_end"))
+		var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state + "_tuto_end"
+		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
 		Globals.first_send = false
 
 
@@ -145,6 +156,14 @@ func _input(event):
 			_on_restart_button_pressed()
 		else:
 			_on_validate_orders_button_pressed()
+	elif event.is_action_pressed("cheat_day"):
+		if game_over_panel.visible:
+			_on_next_button_pressed()
+		else:
+			print("cheat_day")
+			final_score_label.text = "Order Completed !"
+			Globals.player_money += 10
+			show_completion_message()
 	
 	# Raccourcis pour envoyer directement des éléments vers la zone de validation
 	if not game_over_panel.visible:

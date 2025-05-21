@@ -1,10 +1,10 @@
 [gd_scene load_steps=18 format=3 uid="uid://oglixf7nir7t"]
 
-[ext_resource type="Script" uid="uid://dwbm3vye25s1j" path="res://scripts/game_ui.gd" id="1_bt76a"]
-[ext_resource type="FontFile" uid="uid://da0ps0dh4sbv7" path="res://assets/fonts/PixelOperator8.ttf" id="1_rns2u"]
-[ext_resource type="Texture2D" uid="uid://c2s2ayvjqcxdd" path="res://assets/sprites/UI_top_background.png" id="1_u2dgd"]
-[ext_resource type="Texture2D" uid="uid://cvov4hf1a41wc" path="res://assets/sprites/loadingbar.png" id="1_yubou"]
-[ext_resource type="Texture2D" uid="uid://b1smbsdw1ne4d" path="res://assets/sprites/Gold.png" id="3_u001w"]
+[ext_resource type="Script" uid="uid://d2t8ns74cwvl" path="res://scripts/game_ui.gd" id="1_bt76a"]
+[ext_resource type="FontFile" uid="uid://cdypc0ud6krih" path="res://assets/fonts/PixelOperator8.ttf" id="1_rns2u"]
+[ext_resource type="Texture2D" uid="uid://b3lum1leimxep" path="res://assets/sprites/UI_top_background.png" id="1_u2dgd"]
+[ext_resource type="Texture2D" uid="uid://dv8mvem5wknxj" path="res://assets/sprites/loadingbar.png" id="1_yubou"]
+[ext_resource type="Texture2D" uid="uid://ht5ah20gooya" path="res://assets/sprites/Gold.png" id="3_u001w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rns2u"]
 atlas = ExtResource("1_yubou")
@@ -156,3 +156,17 @@ z_index = 10
 position = Vector2(1890, 37)
 scale = Vector2(3, 3)
 texture = ExtResource("3_u001w")
+
+[node name="DebugButtons" type="HBoxContainer" parent="."]
+offset_left = 1541.0
+offset_top = 61.0
+offset_right = 1635.0
+offset_bottom = 92.0
+
+[node name="DebugAddMoney" type="Button" parent="DebugButtons"]
+layout_mode = 2
+text = "+10"
+
+[node name="DebugRemoveMoney" type="Button" parent="DebugButtons"]
+layout_mode = 2
+text = "-10"
