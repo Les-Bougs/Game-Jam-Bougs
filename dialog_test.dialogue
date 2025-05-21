@@ -1,16 +1,23 @@
 ~ day_1_morning
-Nicolas : Besoin du tuto ?
-- Oui
-- Non
+if Globals.tuto
+	Nicolas : Besoin du tuto ?
+	- Oui
+	- Non
+		set Globals.first_pick = false
+		set Globals.first_drop = false
+		set Globals.first_send = false
+		set Globals.first_day = false
+		=> END
+	Nicolas : Bienvenue pour ton premier jour !
+	Nicolas : Ceci est notre super simulateur d'usine
+	Nicolas : Commence par attraper un objet dans la barre du bas
+	=> END
+else:
 	set Globals.first_pick = false
 	set Globals.first_drop = false
 	set Globals.first_send = false
 	set Globals.first_day = false
 	=> END
-Nicolas : Bienvenue pour ton premier jour !
-Nicolas : Ceci est notre super simulateur d'usine
-Nicolas : Commence par attraper un objet dans la barre du bas
-=> END
 
 ~ day_1_morning_first_pick
 Nicolas : Super ! Maintenant place l'objet sur le tapis roulant
@@ -41,7 +48,19 @@ Camarade : Alors le nouveau, on se plait à l'usine ?
 ~ day_1_evening
 Nicolas : Premier jour terminé !
 Nicolas : Repose-toi bien, demain sera plus intense
-=> END
+=> rent
+
+~ rent
+Patron : C'est l'heure de payer ton loyer
+Patron : 15 pièces comme d'habitude
+set Globals.player_money -= 15
+if Globals.player_money >= 0:
+	Patron : Loyer payé
+	=> END
+else 
+	=> game_over
+
+
 
 ~ day_2_morning
 Patron : Bienvenue pour ton deuxième jour !
@@ -49,8 +68,7 @@ Patron : Aujourd'hui, nous allons augmenter la difficulté
 => END
 
 ~ day_2_afternoon
-Patron : Bienvenue pour l'après-midi !
-Patron : Les commandes sont encore plus complexes maintenant
+Patron : Bienvenue pour l'après-midi ! Les commandes sont encore plus complexes maintenant
 => END
 
 ~ day_2_pause_cafe
@@ -65,7 +83,7 @@ Camarade : Tu commences à prendre le rythme !
 ~ day_2_evening
 Nicolas : Deuxième jour terminé !
 Nicolas : Tu progresses bien, continue comme ça
-=> END
+=> rent
 
 ~ day_3_morning
 Patron : Troisième jour déjà !
@@ -89,4 +107,21 @@ Camarade : Tu deviens un vrai expert !
 ~ day_3_evening
 Nicolas : Troisième jour terminé !
 Nicolas : Tu es devenu un vrai professionnel !
+=> rent
+
+~ day_3_rent
+Patron : Dernier jour, mais le loyer reste le même
+Patron : 15 pièces s'il te plaît
+- Je vais payer
+	set Globals.player_money -= 15
+	Patron : Merci ! Bonne nuit
+- Je n'ai pas assez d'argent...
+	Patron : Dans ce cas, tu devras travailler plus demain
+	set Globals.player_money = 0
+=> END
+
+~ game_over
+Patron : Tu n'as pas pu payer ton loyer...
+Patron : Je suis désolé, mais tu ne peux plus rester ici
+set Globals.game_over = true
 => END

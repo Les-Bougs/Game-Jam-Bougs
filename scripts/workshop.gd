@@ -61,7 +61,6 @@ func _ready():
 	# Démarrer l'horloge
 	clock.start_clock()
 
-
 func load_orders(day_nb: int):
 	var order_name = 'day_' + str(day_nb) + '_' + Globals.level_state
 	print(order_name)
@@ -110,19 +109,17 @@ func show_completion_message():
 
 
 func _on_restart_button_pressed():
+	Globals.day_nb += 1
 	get_tree().reload_current_scene()
-	
+
 
 # Passer à la scène suivante
 func _on_next_button_pressed() -> void:
-	await black_screen.fade_in()
 	if Globals.level_state == "morning":
-		#Globals.level_state = "afternoon"
-		#Globals.day_nb += 1
+		await black_screen.fade_in()
 		get_tree().change_scene_to_file("res://scenes/cafet_level.tscn")
 	elif Globals.level_state == "afternoon":
-		#Globals.level_state = "morning"
-		#Globals.day_nb += 1
+		await black_screen.fade_in()
 		get_tree().change_scene_to_file("res://scenes/home_level.tscn")
 
 
@@ -154,11 +151,13 @@ func _input(event):
 		else:
 			_on_validate_orders_button_pressed()
 	elif event.is_action_pressed("cheat_day"):
-		print("cheat_day")
-		final_score_label.text = "Order Completed !"
-		Globals.player_money += 10
-		show_completion_message()
-		#_on_next_button_pressed()
+		if game_over_panel.visible:
+			_on_next_button_pressed()
+		else:
+			print("cheat_day")
+			final_score_label.text = "Order Completed !"
+			Globals.player_money += 10
+			show_completion_message()
 	
 	# Raccourcis pour envoyer directement des éléments vers la zone de validation
 	if not game_over_panel.visible:
