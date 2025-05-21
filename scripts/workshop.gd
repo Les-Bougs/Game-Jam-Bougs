@@ -145,3 +145,27 @@ func _input(event):
 			_on_restart_button_pressed()
 		else:
 			_on_validate_orders_button_pressed()
+	
+	# Raccourcis pour envoyer directement des éléments vers la zone de validation
+	if not game_over_panel.visible:
+		var object_mapping = {
+			"send_object1": "Objects/Object1",
+			"send_object2": "Objects/Object2",
+			"send_object3": "Objects/Object3",
+			"send_object4": "Objects/Object4",
+			"send_object5": "Objects/Object5"
+		}
+		
+		for action in object_mapping:
+			if event.is_action_pressed(action):
+				var source_obj = get_node(object_mapping[action])
+				if source_obj and source_obj.is_inside_tree() and source_obj.spawnable:
+					var new_obj = ObjectFactory.create_object(
+						source_obj.object_type,
+						order_platform.global_position,
+						source_obj.scale,
+						self
+					)
+					if new_obj:
+						_on_validate_orders_button_pressed()
+				break

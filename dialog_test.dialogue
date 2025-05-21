@@ -1,4 +1,12 @@
 ~ start
+Nicolas : Besoin du tuto ?
+- Oui
+- Non
+	set Globals.first_pick = false
+	set Globals.first_drop = false
+	set Globals.first_send = false
+	set Globals.first_day = false
+	=> END
 
 % Nicolas : Coucou [wave]Benjamin[/wave] !
 % Nicolas : Coucou [wave]camarade Benjamin[/wave] !
@@ -23,5 +31,6 @@ Camarade : Alors le nouveau, on se plait à l'usine ?
 - Oui c'est super j'adore travailler !
 	Patron : Super ! Aller, retourne bosser
 - Non... Je veux rentrer chez moi :'(
+	set Globals.player_money -= 5
 	Patron : C'est pas la réponse que je veux entendre => pause_cafe
 => END
