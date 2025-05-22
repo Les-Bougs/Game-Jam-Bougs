@@ -1,6 +1,8 @@
 extends Node
 
 const OBJECT_SCENE = preload("res://scenes/object.tscn")
+const FRAME_IDS_PATH = "res://scripts/object_utils/frame_ids.json"
+const OBJECT_NAMES_PATH = "res://scripts/object_utils/object_names.json"
 
 enum ObjectType {
 	RECTANGLE,
@@ -11,16 +13,24 @@ enum ObjectType {
 }
 
 var frame_ids = {}
-const SPAWNABLE_TYPES = ["Plank", "Hammer", "Nail", "NailPlank"]
+var object_names = {}
+const SPAWNABLE_TYPES = ["CircuitBoard", "SolderingIron", "Transistor", "TransistorModule"]
 
 func _ready():
 	load_frame_ids()
+	load_object_names()
 
 func load_frame_ids():
-	var file = FileAccess.open("res://scripts/object_utils/frame_ids.json", FileAccess.READ)
+	var file = FileAccess.open(FRAME_IDS_PATH, FileAccess.READ)
 	if file:
 		var content = file.get_as_text()
 		frame_ids = JSON.parse_string(content)
+
+func load_object_names():
+	var file = FileAccess.open(OBJECT_NAMES_PATH, FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		object_names = JSON.parse_string(content)
 
 func create_object(type: String, position: Vector2, scale: Vector2, parent: Node, spawnable: bool = false) -> Node2D:
 	var object = OBJECT_SCENE.instantiate()

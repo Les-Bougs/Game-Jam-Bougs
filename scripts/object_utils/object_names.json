@@ -1,0 +1,7 @@
+{
+  "CircuitBoard": "CircuitBoard",
+  "SolderingIron": "SolderingIron",
+  "Transistor": "Transistor",
+  "TransistorModule": "TransistorModule",
+  "ComputerUnit": "ComputerUnit"
+} 

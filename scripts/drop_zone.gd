@@ -7,20 +7,15 @@ signal order_validated(shape_type: String)
 @export var accepted_types: Array = []
 
 var contained_objects = []
-#@onready var label = $Label
 @onready var sprite = $AnimatedSprite2D
 
 func _ready() -> void:
-	#modulate = Color(Color.MEDIUM_PURPLE, 0.7)
 	modulate.a = 0.5
 	add_to_group("dropable")
 	sprite.frame = get_frame_id(zone_type)
 	
 	if zone_type == "Collector":
 		update_accepted_types()
-	elif zone_type == "Trash":
-		pass
-		#modulate = Color(Color.RED, 0.7)
 
 func _process(_delta: float) -> void:
 	visible = Globals.is_dragging
@@ -71,19 +66,13 @@ func get_contained_objects():
 	return contained_objects
 
 func update_label():
-	var shapes = []
-	for obj in contained_objects:
-		if is_instance_valid(obj):
-			shapes.append(obj.object_type)
-	#label.text = str(shapes)
+	pass # Label désactivé, pas nécessaire
 
 func is_valid_placement(obj) -> bool:
 	if zone_type == "Collector":
 		return obj.object_type in accepted_types
 	if zone_type == "Trash":
 		return true
-	# Zone normale
-	print(obj.object_type)
 	if contained_objects.size() == 0:
 		return true
 	for contained_obj in contained_objects:
@@ -92,4 +81,4 @@ func is_valid_placement(obj) -> bool:
 		var combination_manager = get_node("/root/CombinationManager")
 		if combination_manager.can_combine(contained_obj.object_type, obj.object_type):
 			return true
-	return false 
+	return false

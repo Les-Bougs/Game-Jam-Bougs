@@ -4,28 +4,27 @@ extends Node2D
 @onready var order_platform: StaticBody2D = $ZoneFinal
 @onready var game_over_panel = $GameOverPanel
 @onready var final_score_label = $GameOverPanel/FinalScoreLabel
-@onready var restart_button = $GameOverPanel/RestartButton
 @onready var clock: Node2D = $Clock
 @onready var black_screen: ColorRect = $BlackScreen
 
 var order_counts = {
-	"Plank": 0,
-	"NailPlank": 0,
-	"Furniture": 0
+	"CircuitBoard": 0,
+	"TransistorModule": 0,
+	"ComputerUnit": 0
 }
 
 var inventory = {
-	"Plank": 0,
-	"NailPlank": 0,
-	"Furniture": 0
+	"CircuitBoard": 0,
+	"TransistorModule": 0,
+	"ComputerUnit": 0
 }
 
 # Positions initiales des objets spawnables
 var spawnable_positions = {
-	"Plank": Vector2(232, 768),
-	"Hammer": Vector2(552, 768),
-	"NailPlank": Vector2(872, 768),
-	"Furniture": Vector2(1192, 768)
+	"CircuitBoard": Vector2(232, 768),
+	"SolderingIron": Vector2(552, 768),
+	"TransistorModule": Vector2(872, 768),
+	"ComputerUnit": Vector2(1192, 768)
 }
 
 func _ready():
@@ -49,7 +48,6 @@ func _ready():
 		
 	
 	validate_orders_button.pressed.connect(_on_validate_orders_button_pressed)
-	restart_button.pressed.connect(_on_restart_button_pressed)
 	
   	# load orders from json
 	load_orders(Globals.day_nb)
@@ -114,11 +112,6 @@ func show_completion_message():
 	order_platform.set_process(false)
 
 
-func _on_restart_button_pressed():
-	Globals.day_nb += 1
-	get_tree().reload_current_scene()
-
-
 # Passer à la scène suivante
 func _on_next_button_pressed() -> void:
 	if Globals.level_state == "morning":
@@ -153,7 +146,7 @@ func _on_clock_clock_timeout() -> void:
 func _input(event):
 	if event.is_action_pressed("validate_key"):
 		if game_over_panel.visible:
-			_on_restart_button_pressed()
+			_on_next_button_pressed()
 		else:
 			_on_validate_orders_button_pressed()
 	elif event.is_action_pressed("cheat_day"):

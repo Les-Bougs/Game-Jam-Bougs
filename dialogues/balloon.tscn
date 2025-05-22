@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dmallu6rfjy0q"]
 
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
-[ext_resource type="Script" uid="uid://4qle5p3wt6ep" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="Script" uid="uid://mbpbg5f7fis5" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 
 [sub_resource type="GDScript" id="GDScript_o7syd"]
 script/source = "extends CanvasLayer

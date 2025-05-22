@@ -1,7 +1,7 @@
 {
-	"Plank": 5,
-	"Hammer": 2,
-	"Nail": 4,
-	"NailPlank": 10,
-	"Furniture": 8
+	"CircuitBoard": 5,
+	"SolderingIron": 2,
+	"Transistor": 4,
+	"TransistorModule": 10,
+	"ComputerUnit": 8
 } 

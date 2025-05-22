@@ -1,16 +1,16 @@
 [gd_scene load_steps=15 format=3 uid="uid://cw00jaxijqhb2"]
 
-[ext_resource type="Texture2D" uid="uid://4mm7k1hf0qyn" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
-[ext_resource type="Texture2D" uid="uid://d1pam8bxfsc5j" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
+[ext_resource type="Texture2D" uid="uid://eg6yyxareysc" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
+[ext_resource type="Texture2D" uid="uid://cbw1q2fh0taau" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
 [ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="3_esw31"]
 [ext_resource type="PackedScene" uid="uid://cs146wtlm5oqo" path="res://scenes/object.tscn" id="4_esw31"]
 [ext_resource type="PackedScene" uid="uid://cxlc2dbb2suxx" path="res://scenes/drop_zone.tscn" id="5_f56wo"]
 [ext_resource type="PackedScene" uid="uid://c78w6mwil8r3c" path="res://scenes/black_screen.tscn" id="5_p0rnu"]
-[ext_resource type="Script" uid="uid://duf4lseyed872" path="res://scripts/workshop.gd" id="6_f56wo"]
-[ext_resource type="PackedScene" uid="uid://cdaijjs3sd0fh" path="res://scenes/list_order.tscn" id="7_medaf"]
-[ext_resource type="PackedScene" uid="uid://d2m75hf4tf80q" path="res://scenes/clock.tscn" id="8_odtix"]
-[ext_resource type="Texture2D" uid="uid://btndbia27ud0l" path="res://assets/sprites/ValidateButton.png" id="8_uchhu"]
-[ext_resource type="Shader" uid="uid://rt7fu0xuurg7" path="res://shaders/vhs.gdshader" id="11_6q1b5"]
+[ext_resource type="Script" uid="uid://bsrc1vw01yhvg" path="res://scripts/workshop.gd" id="6_f56wo"]
+[ext_resource type="PackedScene" path="res://scenes/list_order.tscn" id="7_medaf"]
+[ext_resource type="PackedScene" path="res://scenes/clock.tscn" id="8_odtix"]
+[ext_resource type="Texture2D" uid="uid://pxr24r7frj2x" path="res://assets/sprites/ValidateButton.png" id="8_uchhu"]
+[ext_resource type="Shader" uid="uid://dx2y70lv25yia" path="res://shaders/vhs.gdshader" id="11_6q1b5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lr2yr"]
 shader = ExtResource("11_6q1b5")
@@ -84,25 +84,25 @@ spawnable = true
 [node name="Object2" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
 position = Vector2(384, 952)
-object_type = "Hammer"
+object_type = "SolderingIron"
 spawnable = true
 
 [node name="Object3" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
 position = Vector2(624, 952)
-object_type = "Nail"
+object_type = "Transistor"
 spawnable = true
 
 [node name="Object4" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
 position = Vector2(864, 952)
-object_type = "NailPlank"
+object_type = "TransistorModule"
 spawnable = true
 
 [node name="Object5" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
 position = Vector2(1104, 952)
-object_type = "Furniture"
+object_type = "ComputerUnit"
 spawnable = true
 
 [node name="ZoneFinal" parent="." instance=ExtResource("5_f56wo")]
@@ -145,7 +145,6 @@ offset_bottom = 719.0
 zone_type = "Outbound"
 
 [node name="GameOverPanel" type="Panel" parent="."]
-visible = false
 offset_left = 448.0
 offset_top = 320.0
 offset_right = 1536.0
@@ -162,19 +161,11 @@ text = "Final Score : X Stars"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RestartButton" type="Button" parent="GameOverPanel"]
-layout_mode = 0
-offset_left = 384.0
-offset_top = 320.0
-offset_right = 640.0
-offset_bottom = 424.0
-text = "Restart Button"
-
 [node name="NextButton" type="Button" parent="GameOverPanel"]
 layout_mode = 0
-offset_left = 745.0
+offset_left = 392.0
 offset_top = 320.0
-offset_right = 1001.0
+offset_right = 648.0
 offset_bottom = 424.0
 text = "Next"
 
