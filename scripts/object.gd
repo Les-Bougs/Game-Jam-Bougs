@@ -14,7 +14,6 @@ var current_dropable = null
 var offset: Vector2
 var initialPos: Vector2
 
-# Références aux gestionnaires
 var object_factory: Node
 var object_combiner: Node
 
@@ -24,8 +23,6 @@ func _ready():
 	initialScale = scale
 	add_to_group("draggable")
 	$AnimatedSprite2D.frame = get_frame_id(object_type)
-	
-	# Récupère les références aux gestionnaires
 	object_factory = get_node("/root/ObjectFactory")
 	object_combiner = get_node("/root/ObjectCombiner")
 
@@ -34,12 +31,11 @@ func load_frame_ids():
 	if file:
 		var content = file.get_as_text()
 		frame_ids = JSON.parse_string(content)
-	
-func get_frame_id(object_type):
-	return frame_ids.get(object_type, 5)  # 5 est la valeur par défaut (Plank)
 
-###########
-func _physics_process(delta: float) -> void:
+func get_frame_id(object_type):
+	return frame_ids.get(object_type, 5)
+
+func _physics_process(_delta: float) -> void:
 	if not draggable:
 		return
 		
@@ -49,8 +45,8 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed("click"):
 		update_drag()
 	elif Input.is_action_just_released("click"):
-		end_drag()
-		z_index += -1
+		await end_drag()
+		z_index -= 1
 
 func start_drag():
 	startPos = position
@@ -70,33 +66,31 @@ func end_drag():
 	var tween = get_tree().create_tween()
 	
 	if is_inside_dropable and current_dropable.is_valid_placement(self):
-		place_in_zone(tween)
+		await place_in_zone(tween)
 		if Globals.first_drop:
 			var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state + "_first_drop"
 			DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
 			Globals.first_drop = false
 	else:
-		return_to_initial_position(tween)
+		await return_to_initial_position(tween)
 
 func place_in_zone(tween):
 	tween.tween_property(self, "position", current_dropable.position, 0.2).set_ease(Tween.EASE_OUT)
-	
-	# Si c'est une zone de suppression, on attend la fin de l'animation avant de supprimer
+	await tween.finished
+
 	if current_dropable.zone_type == "Trash":
-		await tween.finished
-		# Si l'objet est spawnable et vient de la pile, on en crée un nouveau avant de le supprimer
 		if spawnable and startPos == pilePos:
 			object_factory.spawn_in_pile(object_type, pilePos, initialScale, get_parent())
 		queue_free()
 		return
-	
-	# Si c'est une autre zone pas trash
+
 	check_combinations()
 	if startPos == pilePos and spawnable:
 		object_factory.spawn_in_pile(object_type, pilePos, initialScale, get_parent())
 
 func return_to_initial_position(tween):
 	tween.tween_property(self, "global_position", initialPos, 0.2).set_ease(Tween.EASE_OUT)
+	await tween.finished
 	if current_dropable != null:
 		current_dropable.remove_object(self)
 		current_dropable = null
@@ -109,43 +103,56 @@ func check_combinations():
 			break
 
 func _on_area_2d_mouse_entered() -> void:
-	#print('entered')
 	if not Globals.is_dragging:
 		draggable = true
 		scale = initialScale * 1.05
 
 func _on_area_2d_mouse_exited() -> void:
-	#print('exited')
 	if not Globals.is_dragging:
 		draggable = false
 		scale = initialScale
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if not body.is_in_group('dropable'):
+	if not body.is_in_group("dropable"):
 		return
-		
+
 	if current_dropable != null and current_dropable != body:
 		current_dropable.remove_object(self)
-		#current_dropable.modulate = Color(Color.MEDIUM_PURPLE, 1)
-		current_dropable.modulate = Color(1, 1, 1, 0.5)
-	
+		tween_modulate(current_dropable, Color(1, 1, 1, 0.5))
+		for obj in current_dropable.get_contained_objects():
+			if obj != self:
+				tween_modulate(obj, Color(1, 1, 1, 1))
+
 	if body.is_valid_placement(self):
-		#body.modulate = Color(Color.REBECCA_PURPLE, 1)
-		body.modulate = Color(1, 1, 1, 0.7)
+		tween_modulate(body, Color(0, 1, 0, 0.7)) # vert
 		body.add_object(self)
+		for obj in body.get_contained_objects():
+			if obj != self:
+				tween_modulate(obj, Color(0, 1, 0, 0.7))
 	else:
-		body.modulate = Color(Color.RED, 0.7)
-	
+		tween_modulate(body, Color(1, 0, 0, 0.7)) # rouge
+		for obj in body.get_contained_objects():
+			if obj != self:
+				tween_modulate(obj, Color(1, 0, 0, 0.7))
+
 	is_inside_dropable = true
 	current_dropable = body
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.is_in_group('dropable') and body == current_dropable:
+	if body.is_in_group("dropable") and body == current_dropable:
 		is_inside_dropable = false
-		body.modulate = Color(1, 1, 1, 0.5)
-		#body.modulate = Color(Color.MEDIUM_PURPLE, 1)
+		tween_modulate(body, Color(1, 1, 1, 0.5))
+		for obj in body.get_contained_objects():
+			if obj != self:
+				tween_modulate(obj, Color(1, 1, 1, 1))
 		body.remove_object(self)
 		current_dropable = null
+
+func tween_modulate(target: Node, color: Color):
+	if not is_instance_valid(target):
+		return
+	var tween = get_tree().create_tween()
+	tween.tween_property(target, "modulate", color, 0.08) # <== accéléré
 
 func _exit_tree():
 	if current_dropable != null and is_instance_valid(current_dropable):
