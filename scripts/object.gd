@@ -1,5 +1,9 @@
 extends Node2D
 
+# Constantes pour les chemins de fichiers
+const FRAME_IDS_PATH = "res://scripts/object_utils/frame_ids.json"
+const OBJECT_NAMES_PATH = "res://scripts/object_utils/object_names.json"
+
 @export_enum("CircuitBoard", "SolderingIron", "Transistor", "TransistorModule", "ComputerUnit") var object_type: String = "CircuitBoard"
 @export var spawnable: bool = false
 
@@ -29,7 +33,7 @@ func _ready():
 	object_combiner = get_node("/root/ObjectCombiner")
 
 func load_frame_ids():
-	var file = FileAccess.open("res://scripts/object_utils/frame_ids.json", FileAccess.READ)
+	var file = FileAccess.open(FRAME_IDS_PATH, FileAccess.READ)
 	if file:
 		var content = file.get_as_text()
 		frame_ids = JSON.parse_string(content)
@@ -38,7 +42,7 @@ func get_frame_id(object_type):
 	return frame_ids.get(object_type, 5)
 
 func load_object_names():
-	var file = FileAccess.open("res://scripts/object_utils/object_names.json", FileAccess.READ)
+	var file = FileAccess.open(OBJECT_NAMES_PATH, FileAccess.READ)
 	if file:
 		var content = file.get_as_text()
 		object_names = JSON.parse_string(content)
