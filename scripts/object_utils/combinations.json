@@ -1,4 +1,4 @@
 {
-  "NailPlank+NailPlank": "Furniture",
-  "Nail+Plank": "NailPlank"
+  "CircuitBoard+Transistor": "TransistorModule",
+  "TransistorModule+TransistorModule": "ComputerUnit"
 }

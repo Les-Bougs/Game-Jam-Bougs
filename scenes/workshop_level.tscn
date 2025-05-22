@@ -84,25 +84,25 @@ spawnable = true
 [node name="Object2" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
 position = Vector2(384, 952)
-object_type = "Hammer"
+object_type = "SolderingIron"
 spawnable = true
 
 [node name="Object3" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
 position = Vector2(624, 952)
-object_type = "Nail"
+object_type = "Transistor"
 spawnable = true
 
 [node name="Object4" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
 position = Vector2(864, 952)
-object_type = "NailPlank"
+object_type = "TransistorModule"
 spawnable = true
 
 [node name="Object5" parent="Objects" instance=ExtResource("4_esw31")]
 z_index = 1
 position = Vector2(1104, 952)
-object_type = "Furniture"
+object_type = "ComputerUnit"
 spawnable = true
 
 [node name="ZoneFinal" parent="." instance=ExtResource("5_f56wo")]

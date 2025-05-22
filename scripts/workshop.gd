@@ -9,23 +9,23 @@ extends Node2D
 @onready var black_screen: ColorRect = $BlackScreen
 
 var order_counts = {
-	"Plank": 0,
-	"NailPlank": 0,
-	"Furniture": 0
+	"CircuitBoard": 0,
+	"TransistorModule": 0,
+	"ComputerUnit": 0
 }
 
 var inventory = {
-	"Plank": 0,
-	"NailPlank": 0,
-	"Furniture": 0
+	"CircuitBoard": 0,
+	"TransistorModule": 0,
+	"ComputerUnit": 0
 }
 
 # Positions initiales des objets spawnables
 var spawnable_positions = {
-	"Plank": Vector2(232, 768),
-	"Hammer": Vector2(552, 768),
-	"NailPlank": Vector2(872, 768),
-	"Furniture": Vector2(1192, 768)
+	"CircuitBoard": Vector2(232, 768),
+	"SolderingIron": Vector2(552, 768),
+	"TransistorModule": Vector2(872, 768),
+	"ComputerUnit": Vector2(1192, 768)
 }
 
 func _ready():

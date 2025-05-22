@@ -11,7 +11,7 @@ enum ObjectType {
 }
 
 var frame_ids = {}
-const SPAWNABLE_TYPES = ["Plank", "Hammer", "Nail", "NailPlank"]
+const SPAWNABLE_TYPES = ["CircuitBoard", "SolderingIron", "Transistor", "TransistorModule"]
 
 func _ready():
 	load_frame_ids()

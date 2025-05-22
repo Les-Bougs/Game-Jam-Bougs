@@ -1,12 +1,13 @@
 extends Node2D
 
-@export_enum("Plank", "Hammer", "Nail", "NailPlank", "Furniture") var object_type: String = "Plank"
+@export_enum("CircuitBoard", "SolderingIron", "Transistor", "TransistorModule", "ComputerUnit") var object_type: String = "CircuitBoard"
 @export var spawnable: bool = false
 
 var pilePos: Vector2
 var startPos: Vector2
 var initialScale: Vector2
 var frame_ids = {}
+var object_names = {}
 
 var draggable = false
 var is_inside_dropable = false
@@ -19,6 +20,7 @@ var object_combiner: Node
 
 func _ready():
 	load_frame_ids()
+	load_object_names()
 	pilePos = position
 	initialScale = scale
 	add_to_group("draggable")
@@ -34,6 +36,12 @@ func load_frame_ids():
 
 func get_frame_id(object_type):
 	return frame_ids.get(object_type, 5)
+
+func load_object_names():
+	var file = FileAccess.open("res://scripts/object_utils/object_names.json", FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		object_names = JSON.parse_string(content)
 
 func _physics_process(_delta: float) -> void:
 	if not draggable:
