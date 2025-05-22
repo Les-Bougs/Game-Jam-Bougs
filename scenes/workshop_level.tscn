@@ -145,7 +145,6 @@ offset_bottom = 719.0
 zone_type = "Outbound"
 
 [node name="GameOverPanel" type="Panel" parent="."]
-visible = false
 offset_left = 448.0
 offset_top = 320.0
 offset_right = 1536.0
@@ -162,19 +161,11 @@ text = "Final Score : X Stars"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RestartButton" type="Button" parent="GameOverPanel"]
-layout_mode = 0
-offset_left = 384.0
-offset_top = 320.0
-offset_right = 640.0
-offset_bottom = 424.0
-text = "Restart Button"
-
 [node name="NextButton" type="Button" parent="GameOverPanel"]
 layout_mode = 0
-offset_left = 745.0
+offset_left = 392.0
 offset_top = 320.0
-offset_right = 1001.0
+offset_right = 648.0
 offset_bottom = 424.0
 text = "Next"
 
