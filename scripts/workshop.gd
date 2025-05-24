@@ -60,7 +60,7 @@ func _ready():
 	# ecran noir de transition
 	await black_screen.fade_out()
 	var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state
-	DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
+	DialogueManager.show_dialogue_balloon(load("res://dialogues/dialogue_jeu_v1.dialogue"), dialogue_name)
 	Globals.first_day = false
 	# Démarrer l'horloge
 	clock.start_clock()
@@ -127,7 +127,7 @@ func _on_validate_orders_button_pressed():
 		order_platform.validate_orders()
 	if Globals.first_send:
 		var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state + "_tuto_end"
-		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
+		DialogueManager.show_dialogue_balloon(load("res://dialogues/dialogue_jeu_v1.dialogue"), dialogue_name)
 		Globals.first_send = false
 
 

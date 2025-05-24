@@ -67,7 +67,7 @@ func start_drag():
 	Globals.is_dragging = true
 	if Globals.first_pick:
 		var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state + "_first_pick"
-		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
+		DialogueManager.show_dialogue_balloon(load("res://dialogues/dialogue_jeu_v1.dialogue"), dialogue_name)
 		Globals.first_pick = false
 
 func update_drag():
@@ -81,7 +81,7 @@ func end_drag():
 		await place_in_zone(tween)
 		if Globals.first_drop:
 			var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state + "_first_drop"
-			DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
+			DialogueManager.show_dialogue_balloon(load("res://dialogues/dialogue_jeu_v1.dialogue"), dialogue_name)
 			Globals.first_drop = false
 	else:
 		await return_to_initial_position(tween)

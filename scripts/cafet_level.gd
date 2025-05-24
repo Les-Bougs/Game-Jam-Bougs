@@ -9,7 +9,7 @@ func _ready() -> void:
 	black_screen.fade_out()
 	var dialog_line = "day_" + str(Globals.day_nb) + "_pause_cafe"
 	print(dialog_line)
-	DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialog_line)
+	DialogueManager.show_dialogue_balloon(load("res://dialogues/dialogue_jeu_v1.dialogue"), dialog_line)
 
 
 

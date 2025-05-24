@@ -1,0 +1,894 @@
+~ day_1_morning
+if Globals.tuto
+	Nicolas : Besoin du tuto ?
+	- Oui
+	- Non
+		set Globals.first_pick = false
+		set Globals.first_drop = false
+		set Globals.first_send = false
+		set Globals.first_day = false
+		=> END
+	Nicolas : Bienvenue pour ton premier jour !
+	Nicolas : Ceci est notre super simulateur d'usine
+	Nicolas : Commence par attraper un objet dans la barre du bas
+	=> END
+else:
+	set Globals.first_pick = false
+	set Globals.first_drop = false
+	set Globals.first_send = false
+	set Globals.first_day = false
+	=> END
+
+~ day_1_morning_first_pick
+Nicolas : Super ! Maintenant place l'objet sur le tapis roulant
+=> END
+
+~ day_1_morning_first_drop
+Nicolas : Maintenant appuie sur le bouton vert pour l'envoyer
+=> END
+
+~ day_1_morning_tuto_end
+Patron : Je t'ai envoyé ta première commande[wait=1], au boulot ! 
+=> END
+
+~ day_1_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Continuons avec les commandes du matin
+=> END
+
+~ day_1_pause_cafe
+Camarade : Alors le nouveau, on se plait à l'usine ?
+- Oui c'est super j'adore travailler !
+	Patron : Super ! Aller, retourne bosser
+- Non... Je veux rentrer chez moi :'(
+	set Globals.player_money -= 5
+	Patron : C'est pas la réponse que je veux entendre => day_1_pause_cafe
+=> END
+
+~ day_1_evening
+Nicolas : Premier jour terminé !
+Nicolas : Repose-toi bien, demain sera plus intense
+=> rent
+
+~ rent
+Patron : C'est l'heure de payer ton loyer, {{Globals.rent_value}} pièces comme d'habitude
+set Globals.player_money -= Globals.rent_value
+if Globals.player_money >= 0:
+	=> END
+else 
+	=> game_over
+
+~ game_over
+Patron : Tu n'as pas pu payer ton loyer...
+Patron : Je suis désolé, mais tu ne peux plus rester ici
+set Globals.game_over = true
+=> END
+
+~ day_2_morning
+Patron : Bienvenue pour ton deuxième jour !
+Patron : Aujourd'hui, nous allons augmenter la cadence
+=> END
+
+~ day_2_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Les commandes sont plus complexes maintenant
+=> END
+
+~ day_2_pause_cafe
+Camarade : Tu commences à prendre le rythme !
+- Merci, je fais de mon mieux !
+	Patron : Continue comme ça !
+- J'ai encore du mal...
+	set Globals.player_money -= 3
+	Patron : Ne te décourage pas ! => day_2_pause_cafe
+=> END
+
+~ day_2_evening
+Nicolas : Deuxième jour terminé !
+Nicolas : Tu progresses bien, continue comme ça
+=> rent
+
+~ day_3_morning
+Patron : Troisième jour déjà !
+Patron : J'ai une mauvaise nouvelle... Le loyer augmente de 20%
+set Globals.rent_value = 18
+Patron : Il faudra payer {{Globals.rent_value}} pièces maintenant
+=> END
+
+~ day_3_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Je vois que tu commences à fatiguer...
+set Globals.player_happiness -= 5
+=> END
+
+~ day_3_pause_cafe
+Syndicaliste : Bonjour camarade ! Je suis du syndicat.
+Syndicaliste : On a remarqué que tu travaillais dur. Tu devrais te reposer un peu.
+- Je vais bien, merci
+	Syndicaliste : Comme tu veux... => day_3_pause_cafe
+- Vous avez raison, je suis épuisé
+	set Globals.union_pressure += 10
+	Syndicaliste : Rejoins-nous à la pause de demain, on en reparlera
+=> END
+
+~ day_3_evening
+Nicolas : Troisième jour terminé !
+Nicolas : N'oublie pas que le loyer a augmenté...
+=> rent
+
+~ day_4_morning
+Patron : Quatrième jour !
+Patron : J'ai besoin que tu travailles encore plus vite aujourd'hui
+set Globals.work_pressure += 10
+=> END
+
+~ day_4_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Un de tes collègues s'est blessé ce matin...
+Patron : Il faudra compenser son absence
+set Globals.player_happiness -= 10
+=> END
+
+~ day_4_pause_cafe
+Syndicaliste : Tu as vu l'accident de ce matin ?
+- C'est la faute du collègue, il n'a pas fait attention
+	set Globals.union_pressure -= 5
+	set Globals.boss_satisfaction += 5
+- Les conditions de travail sont dangereuses
+	set Globals.union_pressure += 10
+	set Globals.boss_satisfaction -= 5
+	Syndicaliste : On organise une réunion ce soir, tu devrais venir
+=> END
+
+~ day_4_evening
+Nicolas : Quatrième jour terminé !
+Nicolas : Les choses commencent à se compliquer...
+=> rent
+
+~ day_5_morning
+Syndicaliste : Camarade ! On organise une grève aujourd'hui !
+Syndicaliste : Les conditions de travail sont devenues intenables
+- Je participe à la grève
+	set Globals.union_pressure += 15
+	set Globals.boss_satisfaction -= 10
+	set Globals.player_money -= 5
+	Syndicaliste : Bienvenue dans la lutte !
+- Je préfère travailler
+	set Globals.union_pressure -= 10
+	set Globals.boss_satisfaction += 15
+	Patron : Bon choix, continue comme ça
+=> END
+
+~ day_5_afternoon
+if Globals.union_pressure > 50:
+	Syndicaliste : La grève prend de l'ampleur !
+	Syndicaliste : Le patron commence à s'inquiéter
+else:
+	Patron : Je vois que tu n'as pas suivi les grévistes
+	Patron : Tu auras une prime à la fin du mois
+	set Globals.player_money += 10
+=> END
+
+~ day_5_pause_cafe
+if Globals.union_pressure > 50:
+	Syndicaliste : On a besoin de toi pour la caisse de grève
+	- Je donne 5 pièces
+		set Globals.player_money -= 5
+		set Globals.union_pressure += 5
+	- Je ne peux pas me le permettre
+		set Globals.union_pressure -= 5
+else:
+	Patron : Les grévistes font une erreur
+	Patron : L'entreprise a besoin de nous tous
+=> END
+
+~ day_5_evening
+if Globals.union_pressure > 50:
+	Nicolas : La grève continue demain...
+	Nicolas : Le patron menace de licencier
+else:
+	Nicolas : Journée calme malgré la grève
+	Nicolas : Le patron est content de toi
+=> rent
+
+~ day_6_morning
+if Globals.union_pressure > 50:
+	Patron : J'ai une proposition pour toi
+	Patron : Si tu reprends le travail, je t'augmente
+	- Je continue la grève
+		set Globals.union_pressure += 10
+		set Globals.boss_satisfaction -= 15
+	- J'accepte l'augmentation
+		set Globals.player_money += 20
+		set Globals.union_pressure -= 20
+		set Globals.boss_satisfaction += 20
+else:
+	Patron : Bienvenue pour ce nouveau jour !
+	Patron : Les grévistes commencent à faiblir
+=> END
+
+~ day_6_afternoon
+if Globals.union_pressure > 50:
+	Syndicaliste : Le patron menace de fermer l'usine
+	Syndicaliste : Il faut tenir bon !
+else:
+	Patron : La grève est en train de s'effondrer
+	Patron : Tu as fait le bon choix
+=> END
+
+~ day_6_pause_cafe
+if Globals.union_pressure > 50:
+	Syndicaliste : On a besoin de ton témoignage
+	Syndicaliste : Les conditions de travail sont dangereuses
+	- Je témoigne
+		set Globals.union_pressure += 15
+		set Globals.boss_satisfaction -= 20
+	- Je préfère me taire
+		set Globals.union_pressure -= 10
+		set Globals.boss_satisfaction += 10
+else:
+	Patron : Les grévistes vont payer cher
+	Patron : Mais toi, tu seras récompensé
+=> END
+
+~ day_6_evening
+if Globals.union_pressure > 50:
+	Nicolas : La grève s'achève...
+	Nicolas : Le patron a gagné cette bataille
+else:
+	Nicolas : La grève est terminée
+	Nicolas : Le patron t'a promis une promotion
+=> rent
+
+~ day_7_morning
+Patron : Attention ! Un accident grave vient d'arriver
+Patron : Jean s'est fait écraser par une machine
+set Globals.player_happiness -= 15
+=> END
+
+~ day_7_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : L'inspection du travail arrive demain
+Patron : Il faudra être prudent dans tes déclarations
+=> END
+
+~ day_7_pause_cafe
+Syndicaliste : Tu as vu l'accident de Jean ?
+Syndicaliste : C'est la troisième fois ce mois-ci
+- C'était un accident
+	set Globals.boss_satisfaction += 10
+	set Globals.union_pressure -= 5
+- Les machines sont mal entretenues
+	set Globals.union_pressure += 15
+	set Globals.boss_satisfaction -= 10
+	Syndicaliste : On compte sur toi pour témoigner
+=> END
+
+~ day_7_evening
+Nicolas : Journée difficile...
+Nicolas : L'ambiance est tendue à l'usine
+=> rent
+
+~ day_8_morning
+Inspecteur : Bonjour, je suis l'inspecteur du travail
+Inspecteur : Je voudrais vous poser quelques questions
+- Les conditions sont bonnes
+	set Globals.boss_satisfaction += 20
+	set Globals.union_pressure -= 15
+- Il y a des problèmes de sécurité
+	set Globals.union_pressure += 20
+	set Globals.boss_satisfaction -= 20
+	Inspecteur : Merci pour votre franchise
+=> END
+
+~ day_8_afternoon
+Patron : Bienvenue pour l'après-midi !
+if Globals.boss_satisfaction > 50:
+	Patron : Merci pour ton témoignage
+	Patron : Voici une prime de 15 pièces
+	set Globals.player_money += 15
+else:
+	Patron : Tu nous as mis dans une situation difficile
+	Patron : Il va falloir payer des amendes
+	set Globals.player_money -= 10
+=> END
+
+~ day_8_pause_cafe
+if Globals.boss_satisfaction > 50:
+	Camarade : Comment as-tu pu faire ça ?
+	Camarade : Tu nous as tous trahis
+	set Globals.player_happiness -= 10
+else:
+	Syndicaliste : Merci pour ton courage
+	Syndicaliste : On va enfin pouvoir améliorer la sécurité
+	set Globals.player_happiness += 10
+=> END
+
+~ day_8_evening
+Nicolas : L'inspection est terminée
+Nicolas : Les choses vont changer à l'usine
+=> rent 
+
+~ day_9_morning
+Patron : Réunion générale ce matin !
+Patron : L'entreprise doit se restructurer
+Patron : Certains postes vont être supprimés
+set Globals.player_happiness -= 10
+=> END
+
+~ day_9_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : La charge de travail va augmenter
+Patron : Il faudra être plus productif
+set Globals.work_pressure += 20
+=> END
+
+~ day_9_pause_cafe
+Syndicaliste : Tu as entendu les annonces ?
+Syndicaliste : On ne peut pas laisser faire ça
+- Je suis d'accord, il faut se battre
+	set Globals.union_pressure += 15
+	set Globals.boss_satisfaction -= 10
+	Syndicaliste : On organise une action demain
+- Je préfère garder mon poste
+	set Globals.union_pressure -= 10
+	set Globals.boss_satisfaction += 15
+	Patron : Tu as raison, il faut être pragmatique
+=> END
+
+~ day_9_evening
+Nicolas : Les licenciements commencent demain
+Nicolas : L'ambiance est électrique
+=> rent
+
+~ day_10_morning
+Patron : Les licenciements sont effectifs
+Patron : Tu devras faire le travail de deux personnes
+set Globals.work_pressure += 25
+=> END
+
+~ day_10_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Les objectifs de production ont augmenté
+Patron : Il faudra faire des heures supplémentaires
+- Je refuse
+	set Globals.boss_satisfaction -= 15
+	set Globals.union_pressure += 10
+	Patron : Tu risques ton poste
+- Je vais essayer
+	set Globals.boss_satisfaction += 10
+	set Globals.player_happiness -= 15
+	set Globals.player_money += 10
+=> END
+
+~ day_10_pause_cafe
+if Globals.union_pressure > 50:
+	Syndicaliste : On organise une manifestation
+	Syndicaliste : Il faut montrer notre force
+	- Je participe
+		set Globals.union_pressure += 20
+		set Globals.boss_satisfaction -= 20
+		set Globals.player_money -= 5
+	- Je ne peux pas me le permettre
+		set Globals.union_pressure -= 10
+		set Globals.boss_satisfaction += 10
+else:
+	Patron : Les manifestants seront licenciés
+	Patron : Tu as fait le bon choix
+=> END
+
+~ day_10_evening
+Nicolas : Journée éprouvante...
+Nicolas : Le travail est de plus en plus dur
+=> rent 
+
+~ day_11_morning
+Patron : Un an déjà que tu es avec nous !
+Patron : C'est le moment de faire le bilan
+if Globals.boss_satisfaction > 70:
+	Patron : Tu as été exemplaire
+	Patron : Voici une augmentation de 20%
+	set Globals.player_money += 30
+else:
+	Patron : Tu pourrais faire mieux
+	Patron : On verra l'année prochaine
+=> END
+
+~ day_11_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : J'ai une nouvelle pour toi
+Patron : Le loyer augmente encore de 15%
+set Globals.rent_value = 21
+=> END
+
+~ day_11_pause_cafe
+Syndicaliste : Un an de lutte !
+Syndicaliste : On a obtenu quelques améliorations
+- C'est grâce à vous
+	set Globals.union_pressure += 10
+	set Globals.player_happiness += 5
+- Les conditions sont toujours mauvaises
+	set Globals.union_pressure += 15
+	set Globals.boss_satisfaction -= 10
+	Syndicaliste : On continue le combat
+=> END
+
+~ day_11_evening
+Nicolas : Un an déjà...
+Nicolas : Les choses ne s'améliorent pas
+=> rent
+
+~ day_12_morning
+Patron : Nouvelle année, nouveaux défis !
+Patron : On va moderniser l'usine
+Patron : Il faudra s'adapter aux nouvelles machines
+set Globals.work_pressure += 15
+=> END
+
+~ day_12_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Les nouvelles machines arrivent demain
+Patron : Il faudra être plus rapide
+=> END
+
+~ day_12_pause_cafe
+Camarade : Tu as vu les nouvelles machines ?
+Camarade : Elles vont nous remplacer
+- C'est le progrès
+	set Globals.boss_satisfaction += 10
+	set Globals.union_pressure -= 5
+- Il faut se battre contre ça
+	set Globals.union_pressure += 15
+	set Globals.boss_satisfaction -= 10
+	Syndicaliste : On organise une réunion ce soir
+=> END
+
+~ day_12_evening
+Nicolas : Les machines arrivent demain
+Nicolas : L'avenir est incertain
+=> rent 
+
+~ day_13_morning
+Patron : Les nouvelles machines sont là !
+Patron : Il faudra suivre une formation
+Patron : Les plus lents seront remplacés
+set Globals.work_pressure += 20
+=> END
+
+~ day_13_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : La formation commence maintenant
+Patron : Attention, une erreur et c'est la porte
+=> END
+
+~ day_13_pause_cafe
+Syndicaliste : Ces machines sont dangereuses
+Syndicaliste : On a déjà eu deux accidents
+- Je vais faire attention
+	set Globals.boss_satisfaction += 10
+	set Globals.union_pressure -= 5
+- Il faut arrêter ces machines
+	set Globals.union_pressure += 20
+	set Globals.boss_satisfaction -= 15
+	Syndicaliste : On organise une action demain
+=> END
+
+~ day_13_evening
+Nicolas : La formation était intense
+Nicolas : Les machines sont complexes
+=> rent
+
+~ day_14_morning
+Patron : Premier jour avec les nouvelles machines
+Patron : Les objectifs ont doublé
+Patron : Il faudra être plus rapide que les machines
+set Globals.work_pressure += 25
+=> END
+
+~ day_14_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Trois ouvriers ont déjà été remplacés
+Patron : Ne sois pas le prochain
+=> END
+
+~ day_14_pause_cafe
+Camarade : Je n'arrive pas à suivre le rythme
+Camarade : Je vais être licencié
+- Reste avec nous, on va s'entraider
+	set Globals.union_pressure += 15
+	set Globals.player_happiness += 5
+- C'est la sélection naturelle
+	set Globals.boss_satisfaction += 10
+	set Globals.union_pressure -= 10
+	set Globals.player_happiness -= 5
+=> END
+
+~ day_14_evening
+Nicolas : Les machines sont plus rapides que nous
+Nicolas : L'humain ne peut pas suivre
+=> rent 
+
+~ day_15_morning
+Patron : Réunion urgente ce matin !
+Patron : La crise économique frappe l'entreprise
+Patron : Les salaires vont être réduits de 15%
+set Globals.player_money -= 20
+set Globals.player_happiness -= 15
+=> END
+
+~ day_15_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Les prix des matières premières augmentent
+Patron : Il faudra travailler encore plus
+=> END
+
+~ day_15_pause_cafe
+Syndicaliste : On ne peut pas accepter cette baisse de salaire
+Syndicaliste : Il faut se battre
+- Je suis d'accord
+	set Globals.union_pressure += 20
+	set Globals.boss_satisfaction -= 15
+	Syndicaliste : On organise une grève demain
+- Je ne peux pas me permettre de perdre mon travail
+	set Globals.union_pressure -= 10
+	set Globals.boss_satisfaction += 15
+	Patron : Tu as raison, il faut être raisonnable
+=> END
+
+~ day_15_evening
+Nicolas : La crise s'installe
+Nicolas : Les temps sont durs
+=> rent
+
+~ day_16_morning
+Patron : Les prix augmentent encore
+Patron : Le loyer passe à 25 pièces
+set Globals.rent_value = 25
+=> END
+
+~ day_16_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : L'entreprise doit faire des économies
+Patron : Les pauses sont réduites de moitié
+set Globals.player_happiness -= 10
+=> END
+
+~ day_16_pause_cafe
+Camarade : Je n'arrive plus à joindre les deux bouts
+Camarade : Le loyer, la nourriture, tout augmente
+- On va s'en sortir ensemble
+	set Globals.union_pressure += 15
+	set Globals.player_happiness += 5
+- Chacun pour soi
+	set Globals.boss_satisfaction += 10
+	set Globals.union_pressure -= 10
+	set Globals.player_happiness -= 5
+=> END
+
+~ day_16_evening
+Nicolas : La vie devient de plus en plus chère
+Nicolas : Comment va-t-on s'en sortir ?
+=> rent 
+
+~ day_17_morning
+Syndicaliste : Grève générale aujourd'hui !
+Syndicaliste : Tout le pays est en grève
+Syndicaliste : C'est le moment de se battre
+- Je participe à la grève
+	set Globals.union_pressure += 25
+	set Globals.boss_satisfaction -= 20
+	set Globals.player_money -= 10
+	Syndicaliste : Bienvenue dans la lutte !
+- Je vais travailler
+	set Globals.union_pressure -= 15
+	set Globals.boss_satisfaction += 20
+	Patron : Tu as fait le bon choix
+=> END
+
+~ day_17_afternoon
+if Globals.union_pressure > 70:
+	Syndicaliste : La grève prend de l'ampleur !
+	Syndicaliste : Le gouvernement s'inquiète
+else:
+	Patron : Les grévistes font une erreur
+	Patron : L'économie va en souffrir
+=> END
+
+~ day_17_pause_cafe
+if Globals.union_pressure > 70:
+	Syndicaliste : On a besoin de toi pour la manifestation
+	- Je participe
+		set Globals.union_pressure += 20
+		set Globals.boss_satisfaction -= 15
+		set Globals.player_money -= 5
+	- Je préfère rester ici
+		set Globals.union_pressure -= 10
+		set Globals.boss_satisfaction += 10
+else:
+	Patron : Les manifestants seront punis
+	Patron : Mais toi, tu seras récompensé
+=> END
+
+~ day_17_evening
+if Globals.union_pressure > 70:
+	Nicolas : La grève continue demain
+	Nicolas : Le mouvement s'amplifie
+else:
+	Nicolas : La grève s'essouffle
+	Nicolas : Le patron est content de toi
+=> rent
+
+~ day_18_morning
+if Globals.union_pressure > 70:
+	Patron : J'ai une dernière proposition
+	Patron : Si tu reprends le travail, je double ton salaire
+	- Je continue la grève
+		set Globals.union_pressure += 15
+		set Globals.boss_satisfaction -= 20
+	- J'accepte l'augmentation
+		set Globals.player_money += 40
+		set Globals.union_pressure -= 30
+		set Globals.boss_satisfaction += 25
+else:
+	Patron : Bienvenue pour ce nouveau jour
+	Patron : Les grévistes commencent à revenir
+=> END
+
+~ day_18_afternoon
+if Globals.union_pressure > 70:
+	Syndicaliste : Le gouvernement menace d'intervenir
+	Syndicaliste : Il faut tenir bon
+else:
+	Patron : La grève est en train de s'effondrer
+	Patron : Tu as fait le bon choix
+=> END
+
+~ day_18_pause_cafe
+if Globals.union_pressure > 70:
+	Syndicaliste : On a besoin de ton témoignage
+	Syndicaliste : Les conditions de travail sont intenables
+	- Je témoigne
+		set Globals.union_pressure += 20
+		set Globals.boss_satisfaction -= 25
+	- Je préfère me taire
+		set Globals.union_pressure -= 15
+		set Globals.boss_satisfaction += 15
+else:
+	Patron : Les grévistes vont payer cher
+	Patron : Mais toi, tu seras promu
+=> END
+
+~ day_18_evening
+if Globals.union_pressure > 70:
+	Nicolas : La grève s'achève...
+	Nicolas : Le gouvernement a gagné
+else:
+	Nicolas : La grève est terminée
+	Nicolas : Le patron t'a promis une promotion
+=> rent 
+
+~ day_19_morning
+Patron : Réunion urgente ce matin !
+Patron : Le gouvernement annonce une réforme des retraites
+Patron : L'âge de départ est repoussé de 2 ans
+set Globals.player_happiness -= 20
+=> END
+
+~ day_19_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Les syndicats appellent à la grève
+Patron : Mais l'entreprise doit continuer à tourner
+=> END
+
+~ day_19_pause_cafe
+Syndicaliste : On ne peut pas accepter cette réforme
+Syndicaliste : Il faut se battre pour nos droits
+- Je participe à la grève
+	set Globals.union_pressure += 25
+	set Globals.boss_satisfaction -= 20
+	set Globals.player_money -= 10
+	Syndicaliste : Bienvenue dans la lutte !
+- Je continue à travailler
+	set Globals.union_pressure -= 15
+	set Globals.boss_satisfaction += 20
+	Patron : Tu as fait le bon choix
+=> END
+
+~ day_19_evening
+Nicolas : La réforme des retraites...
+Nicolas : Encore deux ans à tenir
+=> rent
+
+~ day_20_morning
+if Globals.union_pressure > 70:
+	Syndicaliste : La grève prend de l'ampleur
+	Syndicaliste : Le gouvernement commence à céder
+else:
+	Patron : Les grévistes font une erreur
+	Patron : Il faut penser à l'économie
+=> END
+
+~ day_20_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : J'ai une proposition pour toi
+Patron : Si tu restes loyal, je te garde jusqu'à la retraite
+- J'accepte
+	set Globals.boss_satisfaction += 25
+	set Globals.union_pressure -= 20
+	set Globals.player_happiness += 10
+- Je refuse
+	set Globals.union_pressure += 20
+	set Globals.boss_satisfaction -= 25
+	set Globals.player_happiness -= 10
+	Syndicaliste : On continue le combat
+=> END
+
+~ day_20_pause_cafe
+if Globals.union_pressure > 70:
+	Syndicaliste : On a besoin de toi pour la manifestation
+	- Je participe
+		set Globals.union_pressure += 20
+		set Globals.boss_satisfaction -= 15
+		set Globals.player_money -= 5
+	- Je préfère rester ici
+		set Globals.union_pressure -= 10
+		set Globals.boss_satisfaction += 10
+else:
+	Patron : Les manifestants seront punis
+	Patron : Mais toi, tu seras récompensé
+=> END
+
+~ day_20_evening
+if Globals.union_pressure > 70:
+	Nicolas : La lutte continue
+	Nicolas : Le gouvernement commence à céder
+else:
+	Nicolas : La grève s'essouffle
+	Nicolas : Le patron t'a promis une promotion
+=> rent 
+
+~ day_21_morning
+Patron : J'ai une dernière proposition pour toi
+Patron : Je peux te promouvoir contremaître
+Patron : Mais il faudra surveiller les autres ouvriers
+set Globals.work_pressure += 30
+=> END
+
+~ day_21_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : Réfléchis bien à ma proposition
+Patron : C'est ta dernière chance d'avancer
+=> END
+
+~ day_21_pause_cafe
+Syndicaliste : Tu as entendu la proposition du patron ?
+Syndicaliste : Il veut te retourner contre nous
+- Je refuse la promotion
+	set Globals.union_pressure += 25
+	set Globals.boss_satisfaction -= 20
+	set Globals.player_happiness += 10
+	Syndicaliste : Tu as fait le bon choix
+- J'accepte la promotion
+	set Globals.union_pressure -= 30
+	set Globals.boss_satisfaction += 25
+	set Globals.player_money += 50
+	set Globals.player_happiness -= 15
+	Patron : Bienvenue dans l'encadrement
+=> END
+
+~ day_21_evening
+Nicolas : Une décision importante à prendre
+Nicolas : Le choix sera difficile
+=> rent
+
+~ day_22_morning
+if Globals.boss_satisfaction > 70:
+	Patron : Bienvenue contremaître !
+	Patron : Tu devras être plus strict avec les ouvriers
+	set Globals.work_pressure += 20
+else:
+	Patron : Tu as fait ton choix
+	Patron : Les choses vont changer
+=> END
+
+~ day_22_afternoon
+Patron : Bienvenue pour l'après-midi !
+if Globals.boss_satisfaction > 70:
+	Patron : Surveille bien les ouvriers
+	Patron : Signale-moi les fauteurs de trouble
+else:
+	Patron : Les conditions vont s'améliorer
+	Patron : Grâce à votre combat
+=> END
+
+~ day_22_pause_cafe
+if Globals.boss_satisfaction > 70:
+	Camarade : Comment as-tu pu faire ça ?
+	Camarade : Tu nous as tous trahis
+	set Globals.player_happiness -= 20
+else:
+	Syndicaliste : Merci pour ton courage
+	Syndicaliste : On va enfin pouvoir négocier
+	set Globals.player_happiness += 15
+=> END
+
+~ day_22_evening
+Nicolas : Les choses vont changer
+Nicolas : Pour le meilleur ou pour le pire
+=> rent 
+
+~ day_23_morning
+Patron : Dernier jour avant la retraite
+Patron : Faisons le bilan de ces deux années
+if Globals.boss_satisfaction > 70:
+	Patron : Tu as été un excellent employé
+	Patron : Voici une prime de départ
+	set Globals.player_money += 100
+else:
+	Patron : Tu as fait des choix difficiles
+	Patron : Mais tu as tenu bon
+=> END
+
+~ day_23_afternoon
+Patron : Bienvenue pour l'après-midi !
+Patron : C'est ton dernier après-midi à l'usine
+Patron : Profite-en pour dire au revoir
+=> END
+
+~ day_23_pause_cafe
+if Globals.union_pressure > 70:
+	Syndicaliste : Tu as été un grand combattant
+	Syndicaliste : On continuera le combat sans toi
+	set Globals.player_happiness += 20
+else:
+	Camarade : Tu pars à la retraite
+	Camarade : On va te manquer
+	set Globals.player_happiness += 10
+=> END
+
+~ day_23_evening
+Nicolas : Dernière soirée à l'usine
+Nicolas : Demain, c'est la retraite
+=> rent
+
+~ day_24_morning
+Patron : Bienvenue pour ton dernier jour
+Patron : C'est le moment de la retraite
+if Globals.player_happiness > 70:
+	Patron : Tu pars la tête haute
+	Patron : Tu as fait ce que tu pensais juste
+else:
+	Patron : Tu pars avec des regrets
+	Patron : Mais c'est la vie
+=> END
+
+~ day_24_afternoon
+Patron : Bienvenue pour ton dernier après-midi
+Patron : C'est le moment de dire au revoir
+=> END
+
+~ day_24_pause_cafe
+if Globals.union_pressure > 70:
+	Syndicaliste : Tu as été un exemple pour nous
+	Syndicaliste : On continuera ton combat
+	set Globals.player_happiness += 25
+else:
+	Camarade : Profite bien de ta retraite
+	Camarade : Tu l'as méritée
+	set Globals.player_happiness += 15
+=> END
+
+~ day_24_evening
+Nicolas : C'est la fin
+Nicolas : La retraite commence
+=> end_game
+
+~ end_game
+if Globals.player_happiness > 70:
+	Nicolas : Tu pars avec la satisfaction du devoir accompli
+	Nicolas : Tu as fait ce que tu pensais juste
+else:
+	Nicolas : Tu pars avec des regrets
+	Nicolas : Mais c'est la vie
+set Globals.game_over = true
+=> END 
