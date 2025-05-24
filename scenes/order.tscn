@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bi78743x683s3"]
 
-[ext_resource type="Script" uid="uid://b81mknn1kgo81" path="res://scripts/order.gd" id="1_1jo6x"]
-[ext_resource type="Texture2D" uid="uid://bti8a5ke4bosv" path="res://assets/sprites/Objects.png" id="2_cbfvs"]
+[ext_resource type="Script" uid="uid://8rrekltquw83" path="res://scripts/order.gd" id="1_1jo6x"]
+[ext_resource type="Texture2D" uid="uid://b44s26x54gh43" path="res://assets/sprites/Objects.png" id="2_cbfvs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0y2b"]
 atlas = ExtResource("2_cbfvs")
@@ -108,21 +108,18 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Control" type="Control" parent="MarginContainer"]
+[node name="SpriteWrapper" type="Control" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="AnimatedSprite2D" parent="MarginContainer/Control"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/SpriteWrapper"]
 position = Vector2(52, 52)
 scale = Vector2(1.76, 1.76)
 sprite_frames = SubResource("SpriteFrames_vj5ml")
 
-[node name="CountLabel" type="Label" parent="MarginContainer/Control"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 72.0
-offset_right = 104.0
-offset_bottom = 95.0
+[node name="CountLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 theme_override_font_sizes/font_size = 16
 text = "xN"
 horizontal_alignment = 1
-vertical_alignment = 1

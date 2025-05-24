@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdaijjs3sd0fh"]
 
-[ext_resource type="Script" uid="uid://cjmmai0nj2ltx" path="res://scripts/list_order.gd" id="1_yvnqr"]
+[ext_resource type="Script" uid="uid://c8x1orgtrr8sl" path="res://scripts/list_order.gd" id="1_yvnqr"]
 
 [node name="ListOrder" type="Control"]
 layout_mode = 3
@@ -26,3 +26,7 @@ theme_override_constants/margin_bottom = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+visible = false
+layout_mode = 2

@@ -16,9 +16,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lr2yr"]
 shader = ExtResource("11_6q1b5")
 shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.84
-shader_parameter/scanlines_width = 0.18
-shader_parameter/grille_opacity = 0.313
+shader_parameter/scanlines_opacity = 0.1
+shader_parameter/scanlines_width = 0.1
+shader_parameter/grille_opacity = 0.05
 shader_parameter/resolution = Vector2(640, 480)
 shader_parameter/pixelate = false
 shader_parameter/roll = true
@@ -30,7 +30,7 @@ shader_parameter/noise_opacity = 0.17
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.08
 shader_parameter/aberration = 0.01
-shader_parameter/brightness = 1.7
+shader_parameter/brightness = 1.5
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.05
 shader_parameter/clip_warp = false
@@ -135,18 +135,19 @@ stretch_mode = 0
 
 [node name="ListOrderIn" parent="." instance=ExtResource("7_medaf")]
 offset_top = 99.0
-offset_right = 449.0
-offset_bottom = 210.0
+offset_right = 639.0
+offset_bottom = 261.0
 
 [node name="ListOrderOut" parent="." instance=ExtResource("7_medaf")]
-offset_left = 1408.0
-offset_top = 671.0
-offset_right = 1677.0
-offset_bottom = 719.0
+offset_left = 1249.0
+offset_top = 558.0
+offset_right = 1906.0
+offset_bottom = 629.0
 zone_type = "Outbound"
 
 [node name="GameOverPanel" type="Panel" parent="."]
 visible = false
+z_index = 1
 offset_left = 448.0
 offset_top = 320.0
 offset_right = 1536.0
@@ -177,6 +178,7 @@ scale = Vector2(2, 2)
 hours = 7
 
 [node name="NPC" parent="." instance=ExtResource("12_lr2yr")]
+visible = false
 position = Vector2(1062, 400)
 
 [connection signal="pressed" from="GameOverPanel/NextButton" to="." method="_on_next_button_pressed"]

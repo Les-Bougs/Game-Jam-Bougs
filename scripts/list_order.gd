@@ -24,6 +24,7 @@ func initialize_orders():
 
 func add_order(shape_type: String, count: int):
 	var order_instance = order_scene.instantiate()
+	order_instance.is_outbound = zone_type
 	order_instance.setup(shape_type, count)
 	order_instance.order_completed.connect(_on_order_completed)
 	orders_container.add_child(order_instance)
