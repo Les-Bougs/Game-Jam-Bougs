@@ -15,21 +15,21 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lr2yr"]
 shader = ExtResource("11_6q1b5")
 shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.25
-shader_parameter/grille_opacity = 0.3
+shader_parameter/scanlines_opacity = 0.84
+shader_parameter/scanlines_width = 0.18
+shader_parameter/grille_opacity = 0.313
 shader_parameter/resolution = Vector2(640, 480)
 shader_parameter/pixelate = false
-shader_parameter/roll = false
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
-shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.05
-shader_parameter/noise_opacity = 0.4
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 18.742
+shader_parameter/roll_variation = 0.558
+shader_parameter/distort_intensity = 0.005
+shader_parameter/noise_opacity = 0.17
 shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.06
+shader_parameter/static_noise_intensity = 0.08
 shader_parameter/aberration = 0.01
-shader_parameter/brightness = 1.4
+shader_parameter/brightness = 1.7
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.05
 shader_parameter/clip_warp = false
@@ -47,8 +47,6 @@ region = Rect2(25, 0, 25, 21)
 [node name="WorkshopLevel" type="Node2D"]
 script = ExtResource("6_f56wo")
 
-[node name="GameUI" parent="." instance=ExtResource("3_esw31")]
-
 [node name="Shaders" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Shaders"]
@@ -56,6 +54,8 @@ material = SubResource("ShaderMaterial_lr2yr")
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+
+[node name="GameUI" parent="." instance=ExtResource("3_esw31")]
 
 [node name="Backgrounds" type="Node" parent="."]
 
@@ -145,6 +145,7 @@ offset_bottom = 719.0
 zone_type = "Outbound"
 
 [node name="GameOverPanel" type="Panel" parent="."]
+visible = false
 offset_left = 448.0
 offset_top = 320.0
 offset_right = 1536.0
@@ -157,7 +158,7 @@ offset_top = 64.0
 offset_right = 1024.0
 offset_bottom = 384.0
 theme_override_font_sizes/font_size = 100
-text = "Final Score : X Stars"
+text = "Final Score : X Days"
 horizontal_alignment = 1
 vertical_alignment = 1
 
