@@ -1,6 +1,6 @@
 ~ day_1_morning
 if Globals.tuto
-	Nicolas : Besoin du tuto ?
+	Camarade : Besoin du tuto ?
 	- Oui
 	- Non
 		set Globals.first_pick = false
@@ -8,9 +8,9 @@ if Globals.tuto
 		set Globals.first_send = false
 		set Globals.first_day = false
 		=> END
-	Nicolas : Bienvenue pour ton premier jour !
-	Nicolas : Ceci est notre super simulateur d'usine
-	Nicolas : Commence par attraper un objet dans la barre du bas
+	Camarade : Bienvenue pour ton premier jour !
+	Camarade : Ceci est notre super simulateur d'usine
+	Camarade : Commence par attraper un objet dans la barre du bas
 	=> END
 else:
 	set Globals.first_pick = false
@@ -20,11 +20,11 @@ else:
 	=> END
 
 ~ day_1_morning_first_pick
-Nicolas : Super ! Maintenant place l'objet sur le tapis roulant
+Camarade : Super ! Maintenant place l'objet sur le tapis roulant
 => END
 
 ~ day_1_morning_first_drop
-Nicolas : Maintenant appuie sur le bouton vert pour l'envoyer
+Camarade : Maintenant appuie sur le bouton vert pour l'envoyer
 => END
 
 ~ day_1_morning_tuto_end
@@ -49,8 +49,8 @@ Camarade : Alors le nouveau, on se plait à l'usine ?
 => END
 
 ~ day_1_evening
-Nicolas : Premier jour terminé !
-Nicolas : Repose-toi bien, demain sera plus intense
+Camarade : Premier jour terminé !
+Camarade : Repose-toi bien, demain sera plus intense
 => rent
 
 ~ rent
@@ -87,8 +87,8 @@ Camarade : Tu commences à prendre le rythme !
 => END
 
 ~ day_2_evening
-Nicolas : Deuxième jour terminé !
-Nicolas : Tu progresses bien, continue comme ça
+Camarade : Deuxième jour terminé !
+Camarade : Tu progresses bien, continue comme ça
 => rent
 
 ~ day_3_morning
@@ -115,8 +115,8 @@ Syndicaliste : On a remarqué que tu travaillais dur. Tu devrais te reposer un p
 => END
 
 ~ day_3_evening
-Nicolas : Troisième jour terminé !
-Nicolas : N'oublie pas que le loyer a augmenté...
+Camarade : Troisième jour terminé !
+Camarade : N'oublie pas que le loyer a augmenté...
 => rent
 
 ~ day_4_morning
@@ -144,8 +144,8 @@ Syndicaliste : Tu as vu l'accident de ce matin ?
 => END
 
 ~ day_4_evening
-Nicolas : Quatrième jour terminé !
-Nicolas : Les choses commencent à se compliquer...
+Camarade : Quatrième jour terminé !
+Camarade : Les choses commencent à se compliquer...
 => rent
 
 ~ day_5_morning
@@ -187,11 +187,11 @@ else:
 
 ~ day_5_evening
 if Globals.union_pressure > 50:
-	Nicolas : La grève continue demain...
-	Nicolas : Le patron menace de licencier
+	Camarade : La grève continue demain...
+	Camarade : Le patron menace de licencier
 else:
-	Nicolas : Journée calme malgré la grève
-	Nicolas : Le patron est content de toi
+	Camarade : Journée calme malgré la grève
+	Camarade : Le patron est content de toi
 => rent
 
 ~ day_6_morning
@@ -236,11 +236,11 @@ else:
 
 ~ day_6_evening
 if Globals.union_pressure > 50:
-	Nicolas : La grève s'achève...
-	Nicolas : Le patron a gagné cette bataille
+	Camarade : La grève s'achève...
+	Camarade : Le patron a gagné cette bataille
 else:
-	Nicolas : La grève est terminée
-	Nicolas : Le patron t'a promis une promotion
+	Camarade : La grève est terminée
+	Camarade : Le patron t'a promis une promotion
 => rent
 
 ~ day_7_morning
@@ -268,8 +268,8 @@ Syndicaliste : C'est la troisième fois ce mois-ci
 => END
 
 ~ day_7_evening
-Nicolas : Journée difficile...
-Nicolas : L'ambiance est tendue à l'usine
+Camarade : Journée difficile...
+Camarade : L'ambiance est tendue à l'usine
 => rent
 
 ~ day_8_morning
@@ -308,8 +308,8 @@ else:
 => END
 
 ~ day_8_evening
-Nicolas : L'inspection est terminée
-Nicolas : Les choses vont changer à l'usine
+Camarade : L'inspection est terminée
+Camarade : Les choses vont changer à l'usine
 => rent 
 
 ~ day_9_morning
@@ -340,8 +340,8 @@ Syndicaliste : On ne peut pas laisser faire ça
 => END
 
 ~ day_9_evening
-Nicolas : Les licenciements commencent demain
-Nicolas : L'ambiance est électrique
+Camarade : Les licenciements commencent demain
+Camarade : L'ambiance est électrique
 => rent
 
 ~ day_10_morning
@@ -381,8 +381,8 @@ else:
 => END
 
 ~ day_10_evening
-Nicolas : Journée éprouvante...
-Nicolas : Le travail est de plus en plus dur
+Camarade : Journée éprouvante...
+Camarade : Le travail est de plus en plus dur
 => rent 
 
 ~ day_11_morning
@@ -417,8 +417,8 @@ Syndicaliste : On a obtenu quelques améliorations
 => END
 
 ~ day_11_evening
-Nicolas : Un an déjà...
-Nicolas : Les choses ne s'améliorent pas
+Camarade : Un an déjà...
+Camarade : Les choses ne s'améliorent pas
 => rent
 
 ~ day_12_morning
@@ -447,8 +447,8 @@ Camarade : Elles vont nous remplacer
 => END
 
 ~ day_12_evening
-Nicolas : Les machines arrivent demain
-Nicolas : L'avenir est incertain
+Camarade : Les machines arrivent demain
+Camarade : L'avenir est incertain
 => rent 
 
 ~ day_13_morning
@@ -477,8 +477,8 @@ Syndicaliste : On a déjà eu deux accidents
 => END
 
 ~ day_13_evening
-Nicolas : La formation était intense
-Nicolas : Les machines sont complexes
+Camarade : La formation était intense
+Camarade : Les machines sont complexes
 => rent
 
 ~ day_14_morning
@@ -507,8 +507,8 @@ Camarade : Je vais être licencié
 => END
 
 ~ day_14_evening
-Nicolas : Les machines sont plus rapides que nous
-Nicolas : L'humain ne peut pas suivre
+Camarade : Les machines sont plus rapides que nous
+Camarade : L'humain ne peut pas suivre
 => rent 
 
 ~ day_15_morning
@@ -539,8 +539,8 @@ Syndicaliste : Il faut se battre
 => END
 
 ~ day_15_evening
-Nicolas : La crise s'installe
-Nicolas : Les temps sont durs
+Camarade : La crise s'installe
+Camarade : Les temps sont durs
 => rent
 
 ~ day_16_morning
@@ -569,8 +569,8 @@ Camarade : Le loyer, la nourriture, tout augmente
 => END
 
 ~ day_16_evening
-Nicolas : La vie devient de plus en plus chère
-Nicolas : Comment va-t-on s'en sortir ?
+Camarade : La vie devient de plus en plus chère
+Camarade : Comment va-t-on s'en sortir ?
 => rent 
 
 ~ day_17_morning
@@ -614,11 +614,11 @@ else:
 
 ~ day_17_evening
 if Globals.union_pressure > 70:
-	Nicolas : La grève continue demain
-	Nicolas : Le mouvement s'amplifie
+	Camarade : La grève continue demain
+	Camarade : Le mouvement s'amplifie
 else:
-	Nicolas : La grève s'essouffle
-	Nicolas : Le patron est content de toi
+	Camarade : La grève s'essouffle
+	Camarade : Le patron est content de toi
 => rent
 
 ~ day_18_morning
@@ -663,11 +663,11 @@ else:
 
 ~ day_18_evening
 if Globals.union_pressure > 70:
-	Nicolas : La grève s'achève...
-	Nicolas : Le gouvernement a gagné
+	Camarade : La grève s'achève...
+	Camarade : Le gouvernement a gagné
 else:
-	Nicolas : La grève est terminée
-	Nicolas : Le patron t'a promis une promotion
+	Camarade : La grève est terminée
+	Camarade : Le patron t'a promis une promotion
 => rent 
 
 ~ day_19_morning
@@ -698,8 +698,8 @@ Syndicaliste : Il faut se battre pour nos droits
 => END
 
 ~ day_19_evening
-Nicolas : La réforme des retraites...
-Nicolas : Encore deux ans à tenir
+Camarade : La réforme des retraites...
+Camarade : Encore deux ans à tenir
 => rent
 
 ~ day_20_morning
@@ -743,11 +743,11 @@ else:
 
 ~ day_20_evening
 if Globals.union_pressure > 70:
-	Nicolas : La lutte continue
-	Nicolas : Le gouvernement commence à céder
+	Camarade : La lutte continue
+	Camarade : Le gouvernement commence à céder
 else:
-	Nicolas : La grève s'essouffle
-	Nicolas : Le patron t'a promis une promotion
+	Camarade : La grève s'essouffle
+	Camarade : Le patron t'a promis une promotion
 => rent 
 
 ~ day_21_morning
@@ -780,8 +780,8 @@ Syndicaliste : Il veut te retourner contre nous
 => END
 
 ~ day_21_evening
-Nicolas : Une décision importante à prendre
-Nicolas : Le choix sera difficile
+Camarade : Une décision importante à prendre
+Camarade : Le choix sera difficile
 => rent
 
 ~ day_22_morning
@@ -816,8 +816,8 @@ else:
 => END
 
 ~ day_22_evening
-Nicolas : Les choses vont changer
-Nicolas : Pour le meilleur ou pour le pire
+Camarade : Les choses vont changer
+Camarade : Pour le meilleur ou pour le pire
 => rent 
 
 ~ day_23_morning
@@ -850,8 +850,8 @@ else:
 => END
 
 ~ day_23_evening
-Nicolas : Dernière soirée à l'usine
-Nicolas : Demain, c'est la retraite
+Camarade : Dernière soirée à l'usine
+Camarade : Demain, c'est la retraite
 => rent
 
 ~ day_24_morning
@@ -882,16 +882,16 @@ else:
 => END
 
 ~ day_24_evening
-Nicolas : C'est la fin
-Nicolas : La retraite commence
+Camarade : C'est la fin
+Camarade : La retraite commence
 => end_game
 
 ~ end_game
 if Globals.player_happiness > 70:
-	Nicolas : Tu pars avec la satisfaction du devoir accompli
-	Nicolas : Tu as fait ce que tu pensais juste
+	Camarade : Tu pars avec la satisfaction du devoir accompli
+	Camarade : Tu as fait ce que tu pensais juste
 else:
-	Nicolas : Tu pars avec des regrets
-	Nicolas : Mais c'est la vie
+	Camarade : Tu pars avec des regrets
+	Camarade : Mais c'est la vie
 set Globals.game_over = true
 => END 

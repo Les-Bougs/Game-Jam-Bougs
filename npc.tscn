@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://k6fa1a7vnhwd"]
+
+[ext_resource type="Texture2D" uid="uid://x3ofqfelj3s" path="res://assets/sprites/icon.svg" id="1_ideak"]
+[ext_resource type="Texture2D" uid="uid://tb2fi6e6j7i2" path="res://assets/sprites/NPCSprites.png" id="2_kh24r"]
+[ext_resource type="Script" uid="uid://dbnj1k5xgximl" path="res://scripts/npc.gd" id="4_ul7y6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul7y6"]
+atlas = ExtResource("2_kh24r")
+region = Rect2(0, 0, 512, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bc6q4"]
+atlas = ExtResource("2_kh24r")
+region = Rect2(512, 0, 512, 1024)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xxcha"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul7y6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bc6q4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ideak")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_xxcha")
+script = ExtResource("4_ul7y6")

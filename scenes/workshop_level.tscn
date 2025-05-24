@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cw00jaxijqhb2"]
+[gd_scene load_steps=16 format=3 uid="uid://cw00jaxijqhb2"]
 
 [ext_resource type="Texture2D" uid="uid://bxc4lqrfeu4jl" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
 [ext_resource type="Texture2D" uid="uid://4p11lgkx1w5y" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d2m75hf4tf80q" path="res://scenes/clock.tscn" id="8_odtix"]
 [ext_resource type="Texture2D" uid="uid://bnr7etnawp7vc" path="res://assets/sprites/ValidateButton.png" id="8_uchhu"]
 [ext_resource type="Shader" uid="uid://b3fhylgpca3t6" path="res://shaders/vhs.gdshader" id="11_6q1b5"]
+[ext_resource type="PackedScene" uid="uid://k6fa1a7vnhwd" path="res://npc.tscn" id="12_lr2yr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lr2yr"]
 shader = ExtResource("11_6q1b5")
@@ -174,6 +175,9 @@ text = "Next"
 position = Vector2(1736, 900)
 scale = Vector2(2, 2)
 hours = 7
+
+[node name="NPC" parent="." instance=ExtResource("12_lr2yr")]
+position = Vector2(1062, 400)
 
 [connection signal="pressed" from="GameOverPanel/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="clock_timeout" from="Clock" to="." method="_on_clock_clock_timeout"]
