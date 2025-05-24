@@ -1,35 +1,36 @@
-[gd_scene load_steps=15 format=3 uid="uid://cw00jaxijqhb2"]
+[gd_scene load_steps=16 format=3 uid="uid://cw00jaxijqhb2"]
 
-[ext_resource type="Texture2D" uid="uid://eg6yyxareysc" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
-[ext_resource type="Texture2D" uid="uid://cbw1q2fh0taau" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
+[ext_resource type="Texture2D" uid="uid://bxc4lqrfeu4jl" path="res://assets/sprites/FactoryBackground.png" id="1_vj33k"]
+[ext_resource type="Texture2D" uid="uid://4p11lgkx1w5y" path="res://assets/sprites/UI_bottom_background.png" id="2_cxcf7"]
 [ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="3_esw31"]
 [ext_resource type="PackedScene" uid="uid://cs146wtlm5oqo" path="res://scenes/object.tscn" id="4_esw31"]
 [ext_resource type="PackedScene" uid="uid://cxlc2dbb2suxx" path="res://scenes/drop_zone.tscn" id="5_f56wo"]
 [ext_resource type="PackedScene" uid="uid://c78w6mwil8r3c" path="res://scenes/black_screen.tscn" id="5_p0rnu"]
-[ext_resource type="Script" uid="uid://bsrc1vw01yhvg" path="res://scripts/workshop.gd" id="6_f56wo"]
-[ext_resource type="PackedScene" path="res://scenes/list_order.tscn" id="7_medaf"]
-[ext_resource type="PackedScene" path="res://scenes/clock.tscn" id="8_odtix"]
-[ext_resource type="Texture2D" uid="uid://pxr24r7frj2x" path="res://assets/sprites/ValidateButton.png" id="8_uchhu"]
-[ext_resource type="Shader" uid="uid://dx2y70lv25yia" path="res://shaders/vhs.gdshader" id="11_6q1b5"]
+[ext_resource type="Script" uid="uid://prll0db1ud64" path="res://scripts/workshop.gd" id="6_f56wo"]
+[ext_resource type="PackedScene" uid="uid://cdaijjs3sd0fh" path="res://scenes/list_order.tscn" id="7_medaf"]
+[ext_resource type="PackedScene" uid="uid://d2m75hf4tf80q" path="res://scenes/clock.tscn" id="8_odtix"]
+[ext_resource type="Texture2D" uid="uid://bnr7etnawp7vc" path="res://assets/sprites/ValidateButton.png" id="8_uchhu"]
+[ext_resource type="Shader" uid="uid://b3fhylgpca3t6" path="res://shaders/vhs.gdshader" id="11_6q1b5"]
+[ext_resource type="PackedScene" uid="uid://k6fa1a7vnhwd" path="res://npc.tscn" id="12_lr2yr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lr2yr"]
 shader = ExtResource("11_6q1b5")
 shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.25
-shader_parameter/grille_opacity = 0.3
+shader_parameter/scanlines_opacity = 0.84
+shader_parameter/scanlines_width = 0.18
+shader_parameter/grille_opacity = 0.313
 shader_parameter/resolution = Vector2(640, 480)
 shader_parameter/pixelate = false
-shader_parameter/roll = false
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
-shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.05
-shader_parameter/noise_opacity = 0.4
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 18.742
+shader_parameter/roll_variation = 0.558
+shader_parameter/distort_intensity = 0.005
+shader_parameter/noise_opacity = 0.17
 shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.06
+shader_parameter/static_noise_intensity = 0.08
 shader_parameter/aberration = 0.01
-shader_parameter/brightness = 1.4
+shader_parameter/brightness = 1.7
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.05
 shader_parameter/clip_warp = false
@@ -47,8 +48,6 @@ region = Rect2(25, 0, 25, 21)
 [node name="WorkshopLevel" type="Node2D"]
 script = ExtResource("6_f56wo")
 
-[node name="GameUI" parent="." instance=ExtResource("3_esw31")]
-
 [node name="Shaders" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Shaders"]
@@ -56,6 +55,8 @@ material = SubResource("ShaderMaterial_lr2yr")
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+
+[node name="GameUI" parent="." instance=ExtResource("3_esw31")]
 
 [node name="Backgrounds" type="Node" parent="."]
 
@@ -145,6 +146,7 @@ offset_bottom = 719.0
 zone_type = "Outbound"
 
 [node name="GameOverPanel" type="Panel" parent="."]
+visible = false
 offset_left = 448.0
 offset_top = 320.0
 offset_right = 1536.0
@@ -157,7 +159,7 @@ offset_top = 64.0
 offset_right = 1024.0
 offset_bottom = 384.0
 theme_override_font_sizes/font_size = 100
-text = "Final Score : X Stars"
+text = "Final Score : X Days"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -173,6 +175,9 @@ text = "Next"
 position = Vector2(1736, 900)
 scale = Vector2(2, 2)
 hours = 7
+
+[node name="NPC" parent="." instance=ExtResource("12_lr2yr")]
+position = Vector2(1062, 400)
 
 [connection signal="pressed" from="GameOverPanel/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="clock_timeout" from="Clock" to="." method="_on_clock_clock_timeout"]

@@ -6,6 +6,7 @@ extends Node2D
 @onready var final_score_label = $GameOverPanel/FinalScoreLabel
 @onready var clock: Node2D = $Clock
 @onready var black_screen: ColorRect = $BlackScreen
+@onready var npc = $NPC
 
 var order_counts = {
 	"CircuitBoard": 0,
@@ -28,6 +29,7 @@ var spawnable_positions = {
 }
 
 func _ready():
+	npc.hide()
 	print("old : " ,Globals.day_nb, ' ', Globals.level_state)
 	if Globals.level_state == 'afternoon':
 		Globals.day_nb +=1
@@ -48,7 +50,7 @@ func _ready():
 		
 	
 	validate_orders_button.pressed.connect(_on_validate_orders_button_pressed)
-	
+
   	# load orders from json
 	load_orders(Globals.day_nb)
 	#update_counter_display()
@@ -60,7 +62,7 @@ func _ready():
 	# ecran noir de transition
 	await black_screen.fade_out()
 	var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state
-	DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
+	DialogueManager.show_dialogue_balloon(load("res://dialogues/dialogue_jeu_v1.dialogue"), dialogue_name)
 	Globals.first_day = false
 	# Démarrer l'horloge
 	clock.start_clock()
@@ -127,7 +129,7 @@ func _on_validate_orders_button_pressed():
 		order_platform.validate_orders()
 	if Globals.first_send:
 		var dialogue_name = "day_" + str(Globals.day_nb) + "_" + Globals.level_state + "_tuto_end"
-		DialogueManager.show_dialogue_balloon(load("res://dialog_test.dialogue"), dialogue_name)
+		DialogueManager.show_dialogue_balloon(load("res://dialogues/dialogue_jeu_v1.dialogue"), dialogue_name)
 		Globals.first_send = false
 
 

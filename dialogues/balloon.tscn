@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmallu6rfjy0q"]
+[gd_scene load_steps=10 format=3 uid="uid://dmallu6rfjy0q"]
 
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
-[ext_resource type="Script" uid="uid://mbpbg5f7fis5" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="Texture2D" uid="uid://c6o6do1nmvou" path="res://assets/dark-texture-surface.jpg" id="2_gqa88"]
+[ext_resource type="Script" uid="uid://c074mlfmrrt2q" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 
 [sub_resource type="GDScript" id="GDScript_o7syd"]
 script/source = "extends CanvasLayer
@@ -274,6 +275,7 @@ mouse_filter = 1
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer"]
+z_index = 2
 layout_mode = 2
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
@@ -291,6 +293,12 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "Dialogue..."
+
+[node name="TextureRect" type="TextureRect" parent="Balloon/MarginContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_gqa88")
+expand_mode = 1
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true

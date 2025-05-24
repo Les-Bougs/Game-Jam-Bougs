@@ -1,10 +1,10 @@
 [gd_scene load_steps=18 format=3 uid="uid://oglixf7nir7t"]
 
-[ext_resource type="Script" uid="uid://dwbm3vye25s1j" path="res://scripts/game_ui.gd" id="1_bt76a"]
-[ext_resource type="FontFile" uid="uid://da0ps0dh4sbv7" path="res://assets/fonts/PixelOperator8.ttf" id="1_rns2u"]
-[ext_resource type="Texture2D" uid="uid://c2s2ayvjqcxdd" path="res://assets/sprites/UI_top_background.png" id="1_u2dgd"]
-[ext_resource type="Texture2D" uid="uid://cvov4hf1a41wc" path="res://assets/sprites/loadingbar.png" id="1_yubou"]
-[ext_resource type="Texture2D" uid="uid://b1smbsdw1ne4d" path="res://assets/sprites/Gold.png" id="3_u001w"]
+[ext_resource type="Script" uid="uid://wjpm8r75tqgv" path="res://scripts/game_ui.gd" id="1_bt76a"]
+[ext_resource type="FontFile" uid="uid://b6lq2fwhnwenq" path="res://assets/fonts/PixelOperator8.ttf" id="1_rns2u"]
+[ext_resource type="Texture2D" uid="uid://cuibrw65472tb" path="res://assets/sprites/UI_top_background.png" id="1_u2dgd"]
+[ext_resource type="Texture2D" uid="uid://cfcmuwin5wvwf" path="res://assets/sprites/loadingbar.png" id="1_yubou"]
+[ext_resource type="Texture2D" uid="uid://bisscocakwnss" path="res://assets/sprites/Gold.png" id="3_u001w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rns2u"]
 atlas = ExtResource("1_yubou")
@@ -118,6 +118,18 @@ position = Vector2(590, 40)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g2v8e")
 
+[node name="UnionChangeLabel" type="Label" parent="Union"]
+visible = false
+z_index = 20
+offset_left = 725.0
+offset_top = 25.0
+offset_right = 781.0
+offset_bottom = 57.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_rns2u")
+theme_override_font_sizes/font_size = 32
+text = "+0"
+
 [node name="Happy" type="Node" parent="."]
 
 [node name="HappyLabel" type="Label" parent="Happy"]
@@ -137,6 +149,18 @@ position = Vector2(1290, 40)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g2v8e")
 
+[node name="HappyChangeLabel" type="Label" parent="Happy"]
+visible = false
+z_index = 20
+offset_left = 1425.0
+offset_top = 26.0
+offset_right = 1481.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_rns2u")
+theme_override_font_sizes/font_size = 32
+text = "+0"
+
 [node name="Money" type="Node" parent="."]
 
 [node name="MoneyLabel" type="Label" parent="Money"]
@@ -148,7 +172,7 @@ offset_bottom = 56.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_rns2u")
 theme_override_font_sizes/font_size = 32
-text = "Money 000000"
+text = "Money 000"
 horizontal_alignment = 2
 
 [node name="MoneySprite" type="Sprite2D" parent="Money"]
@@ -157,10 +181,22 @@ position = Vector2(1890, 37)
 scale = Vector2(3, 3)
 texture = ExtResource("3_u001w")
 
+[node name="MoneyChangeLabel" type="Label" parent="Money"]
+visible = false
+z_index = 20
+offset_left = 1810.0
+offset_top = 54.0
+offset_right = 1866.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_rns2u")
+theme_override_font_sizes/font_size = 32
+text = "+0"
+
 [node name="DebugButtons" type="HBoxContainer" parent="."]
-offset_left = 1541.0
+offset_left = 1536.0
 offset_top = 24.0
-offset_right = 1635.0
+offset_right = 1630.0
 offset_bottom = 55.0
 
 [node name="DebugAddMoney" type="Button" parent="DebugButtons"]

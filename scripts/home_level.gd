@@ -18,7 +18,7 @@ func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	await black_screen.fade_out()
 	
-	var dialogue = load("res://dialog_test.dialogue")
+	var dialogue = load("res://dialogues/dialogue_jeu_v1.dialogue")
 	
 	# Afficher le dialogue du soir
 	var dialogue_name = "day_" + str(Globals.day_nb) + "_evening"
