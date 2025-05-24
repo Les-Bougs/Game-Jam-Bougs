@@ -1,16 +1,49 @@
-[gd_scene load_steps=7 format=3 uid="uid://cihrhtnvafdvu"]
+[gd_scene load_steps=9 format=3 uid="uid://cihrhtnvafdvu"]
 
-[ext_resource type="Script" uid="uid://ri7tapweokjb" path="res://scripts/home_level.gd" id="1_mr7i8"]
+[ext_resource type="Script" uid="uid://6bi0p568fcvi" path="res://scripts/home_level.gd" id="1_mr7i8"]
 [ext_resource type="PackedScene" uid="uid://oglixf7nir7t" path="res://scenes/game_ui.tscn" id="1_sbm65"]
-[ext_resource type="Texture2D" uid="uid://cplre8pu728ho" path="res://assets/sprites/HomeBackground.png" id="2_urirq"]
-[ext_resource type="FontFile" uid="uid://cdypc0ud6krih" path="res://assets/fonts/PixelOperator8.ttf" id="3_jujlx"]
+[ext_resource type="Shader" uid="uid://b3fhylgpca3t6" path="res://shaders/vhs.gdshader" id="2_p1rl6"]
+[ext_resource type="Texture2D" uid="uid://dbj3qskd1bicn" path="res://assets/sprites/HomeBackground.png" id="2_urirq"]
+[ext_resource type="FontFile" uid="uid://b6lq2fwhnwenq" path="res://assets/fonts/PixelOperator8.ttf" id="3_jujlx"]
 [ext_resource type="PackedScene" uid="uid://c78w6mwil8r3c" path="res://scenes/black_screen.tscn" id="4_v8m2j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jue3m"]
+shader = ExtResource("2_p1rl6")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.84
+shader_parameter/scanlines_width = 0.18
+shader_parameter/grille_opacity = 0.313
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 18.742
+shader_parameter/roll_variation = 0.558
+shader_parameter/distort_intensity = 0.005
+shader_parameter/noise_opacity = 0.17
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.08
+shader_parameter/aberration = 0.01
+shader_parameter/brightness = 1.7
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.05
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mr7i8"]
 size = Vector2(280, 227)
 
 [node name="HomeLevel" type="Node2D"]
 script = ExtResource("1_mr7i8")
+
+[node name="Shaders" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Shaders"]
+material = SubResource("ShaderMaterial_jue3m")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
 
 [node name="GameUI" parent="." instance=ExtResource("1_sbm65")]
 
