@@ -40,8 +40,11 @@ Patron : Continuons avec les commandes du matin
 Camarade : Alors le nouveau, on se plait à l'usine ?
 - Oui c'est super j'adore travailler !
 	Patron : Super ! Aller, retourne bosser
+	set Globals.player_happiness += 20
+	set Globals.union_pressure -= 20
 - Non... Je veux rentrer chez moi :'(
-	set Globals.player_money -= 5
+	set Globals.player_happiness -= 5
+	set Globals.union_pressure += 5
 	Patron : C'est pas la réponse que je veux entendre => day_1_pause_cafe
 => END
 
